@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Program 12 Minggu</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:system-ui,-apple-system,sans-serif;background:#f5f4f0;color:#1a1a18;padding:16px;font-size:14px;line-height:1.5}
+h1{font-size:20px;font-weight:700;margin-bottom:4px}
+.sub{font-size:12px;color:#888;margin-bottom:16px}
+.tabs{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:18px;position:sticky;top:0;background:#f5f4f0;padding:8px 0;z-index:10;border-bottom:1px solid #e5e2dc}
+.tab{padding:6px 12px;border-radius:8px;border:1px solid #ccc;background:#fff;cursor:pointer;font-size:11px;color:#555;font-family:inherit;font-weight:500}
+.tab.on{background:#1a1a18;color:#fff;border-color:#1a1a18}
+.sec{display:none}.sec.vis{display:block}
+.card{background:#fff;border:1px solid #e8e6e0;border-radius:12px;padding:14px 16px;margin-bottom:10px}
+.cw{background:#fffbeb;border-color:#fcd34d}
+.co{background:#f0fdf4;border-color:#86efac}
+.ci{background:#eff6ff;border-color:#93c5fd}
+.cp2{background:#faf5ff;border-color:#c4b5fd}
+.sl{font-size:10px;font-weight:700;color:#999;letter-spacing:.08em;text-transform:uppercase;margin:18px 0 8px}
+.sg{display:grid;grid-template-columns:repeat(auto-fit,minmax(88px,1fr));gap:7px;margin-bottom:14px}
+.st{background:#f8f7f3;border-radius:8px;padding:9px 11px;border:1px solid #e8e6e0}
+.s1{font-size:9px;color:#999;margin-bottom:2px;font-weight:700;text-transform:uppercase;letter-spacing:.04em}
+.s2{font-size:17px;font-weight:700;color:#1a1a18}
+.s2.warn{color:#d97706}.s2.good{color:#059669}.s2.bad{color:#dc2626}.s2.blue{color:#2563eb}
+.s3{font-size:10px;color:#888;margin-top:1px}
+.cr{display:flex;justify-content:space-between;align-items:flex-start;padding:8px 0;border-bottom:1px solid #f0ede8;font-size:13px;gap:8px}
+.cr:last-child{border:none}
+.row{display:flex;gap:8px;align-items:flex-start;margin-bottom:7px}
+.dot{width:7px;height:7px;border-radius:50%;margin-top:6px;flex-shrink:0}
+.txt{font-size:13px;color:#555;line-height:1.6}
+.chip{font-size:10px;padding:2px 8px;border-radius:20px;font-weight:700;white-space:nowrap;flex-shrink:0}
+.cg{background:#dcfce7;color:#14532d}.ca{background:#fef3c7;color:#92400e}
+.cr2{background:#fee2e2;color:#991b1b}.cb{background:#dbeafe;color:#1d4ed8}
+.cpurp{background:#ede9fe;color:#4c1d95}.bw{background:#f3f4f6;color:#374151}
+.corange{background:#ffedd5;color:#9a3412}
+.br{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.bl{font-size:11px;color:#888;width:105px;flex-shrink:0}
+.bt{flex:1;height:8px;background:#e5e2dc;border-radius:4px;overflow:hidden}
+.bf{height:100%;border-radius:4px}
+.bn{font-size:12px;font-weight:700;width:60px;text-align:right;color:#1a1a18}
+.wg{display:grid;grid-template-columns:56px repeat(7,1fr);gap:2px;margin-bottom:3px}
+.wh{font-size:9px;font-weight:700;color:#aaa;text-align:center;padding:3px 0}
+.wl{font-size:10px;color:#888;display:flex;flex-direction:column;justify-content:center;line-height:1.3}
+.wd{border-radius:5px;padding:4px 2px;text-align:center;border:1px solid #e8e6e0;min-height:44px;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer}
+.wd:hover{opacity:.72}
+.wi{font-size:14px}.wt{font-size:8px;line-height:1.2;margin-top:1px}
+.d-work{background:#fee2e2;border-color:#fca5a5}.d-work .wt{color:#991b1b}
+.d-bike{background:#dbeafe;border-color:#93c5fd}.d-bike .wt{color:#1d4ed8}
+.d-gym{background:#ede9fe;border-color:#c4b5fd}.d-gym .wt{color:#4c1d95}
+.d-run{background:#dcfce7;border-color:#86efac}.d-run .wt{color:#14532d}
+.d-rec{background:#fef3c7;border-color:#fcd34d}.d-rec .wt{color:#92400e}
+.d-dl{background:#f0fdf4;border-color:#6ee7b7}.d-dl .wt{color:#065f46}
+.d-rest{background:#f8f7f3;border-color:#e8e6e0}.d-rest .wt{color:#aaa}
+.det{background:#fff;border:1px solid #e8e6e0;border-radius:12px;padding:14px;margin-bottom:10px;display:none}
+.det.show{display:block}
+.ex{background:#f8f7f3;border-radius:8px;padding:10px 12px;margin-bottom:8px;border:1px solid #e8e6e0}
+.en{font-size:13px;font-weight:700;color:#1a1a18;margin-bottom:3px}
+.ed{font-size:12px;color:#555}
+.ep{font-size:11px;color:#059669;margin-top:3px;font-weight:600}
+.bw-ex{background:#f0fdf4;border-color:#86efac}
+.bw-ex .en{color:#065f46}
+table{width:100%;border-collapse:collapse;font-size:12px;margin-bottom:4px}
+th{text-align:left;padding:7px 6px;border-bottom:2px solid #e8e6e0;font-size:10px;font-weight:700;color:#888;text-transform:uppercase;letter-spacing:.04em}
+td{padding:7px 6px;border-bottom:1px solid #f0ede8;color:#374151;vertical-align:top}
+tr:last-child td{border:none}
+.prog-track{height:10px;background:#e5e2dc;border-radius:5px;overflow:hidden;margin-top:4px;margin-bottom:10px}
+.prog-now{height:100%;border-radius:5px;background:#2563eb}
+.prog-target{height:100%;border-radius:5px;background:#059669;opacity:.4}
+.target-card{border-radius:10px;padding:12px 14px;margin-bottom:8px;border:1px solid}
+</style>
+</head>
+<body>
+
+<h1>Program 12 Minggu</h1>
+<div class="sub">64.2 kg · 165 cm · BMR 1.541 kkal · Muscle mass 23.1 kg · Subcut fat 20% · VO2 max 36 · Shift 24 jam</div>
+
+<div class="tabs">
+  <button class="tab on" onclick="show('data')">📊 Data Tubuh</button>
+  <button class="tab" onclick="show('target')">🎯 Target Akhir</button>
+  <button class="tab" onclick="show('gym')">🏋️ Program Gym</button>
+  <button class="tab" onclick="show('bw')">💪 Gerak Iseng</button>
+  <button class="tab" onclick="show('nut')">🍱 Nutrisi</button>
+  <button class="tab" onclick="show('sched')">📅 12 Minggu</button>
+  <button class="tab" onclick="show('con')">🛟 Contingency</button>
+</div>
+
+<!-- ===================== DATA TUBUH ===================== -->
+<div id="data" class="sec vis">
+  <div class="sl">Komposisi tubuh aktual — 13 Mei 2026</div>
+  <div class="sg">
+    <div class="st"><div class="s1">Berat</div><div class="s2 good">64.2 kg</div><div class="s3">Ideal</div></div>
+    <div class="st"><div class="s1">Tinggi</div><div class="s2">165 cm</div></div>
+    <div class="st"><div class="s1">BMI</div><div class="s2 good">23.5</div><div class="s3">Ideal</div></div>
+    <div class="st"><div class="s1">BFR</div><div class="s2 good">18.7%</div><div class="s3">Ideal</div></div>
+    <div class="st"><div class="s1">Subcut fat</div><div class="s2 warn">20.0%</div><div class="s3">High ⚠️</div></div>
+    <div class="st"><div class="s1">Fat mass</div><div class="s2">12.0 kg</div><div class="s3">Ideal</div></div>
+    <div class="st"><div class="s1">Lean mass</div><div class="s2">52.2 kg</div></div>
+    <div class="st"><div class="s1">Muscle mass</div><div class="s2 bad">23.1 kg</div><div class="s3">Low ⚠️</div></div>
+    <div class="st"><div class="s1">Muscle rate</div><div class="s2 bad">36%</div><div class="s3">Low ⚠️</div></div>
+    <div class="st"><div class="s1">BMR</div><div class="s2 warn">1.541</div><div class="s3">kkal</div></div>
+    <div class="st"><div class="s1">Metab. age</div><div class="s2 bad">29</div><div class="s3">Elder ⚠️</div></div>
+    <div class="st"><div class="s1">Visceral fat</div><div class="s2 good">4</div><div class="s3">Ideal ✓</div></div>
+  </div>
+
+  <div class="sl">Data lari baseline — 10 Mei 2026</div>
+  <div class="sg">
+    <div class="st"><div class="s1">Jarak</div><div class="s2">3.08 km</div></div>
+    <div class="st"><div class="s1">Pace avg</div><div class="s2">8'30"</div><div class="s3">/km</div></div>
+    <div class="st"><div class="s1">HR avg</div><div class="s2 bad">174</div><div class="s3">bpm</div></div>
+    <div class="st"><div class="s1">HR max</div><div class="s2 bad">190</div><div class="s3">bpm</div></div>
+    <div class="st"><div class="s1">VO2 max</div><div class="s2 warn">36</div><div class="s3">ml/kg/min</div></div>
+    <div class="st"><div class="s1">Recovery</div><div class="s2">40 jam</div></div>
+    <div class="st"><div class="s1">Cadence</div><div class="s2">167</div><div class="s3">spm</div></div>
+    <div class="st"><div class="s1">GCT</div><div class="s2 good">305 ms</div><div class="s3">Excellent</div></div>
+  </div>
+
+  <div class="sl">Kemampuan bodyweight saat ini</div>
+  <div class="sg">
+    <div class="st"><div class="s1">Push-up</div><div class="s2 blue">25 rep</div><div class="s3">1 set</div></div>
+    <div class="st"><div class="s1">Pull-up</div><div class="s2 warn">3 rep</div><div class="s3">1 set</div></div>
+    <div class="st"><div class="s1">Dead hang</div><div class="s2 good">1 mnt</div><div class="s3">1 set</div></div>
+    <div class="st"><div class="s1">Wall sit</div><div class="s2 good">1 mnt</div><div class="s3">1 set</div></div>
+    <div class="st"><div class="s1">Plank</div><div class="s2 good">1 mnt</div><div class="s3">1 set</div></div>
+  </div>
+
+  <div class="card ci">
+    <div style="font-weight:700;color:#1d4ed8;margin-bottom:6px">Insight penting dari data ini</div>
+    <div class="row"><div class="dot" style="background:#dc2626"></div><span class="txt">Visceral fat 4 sudah ideal — artinya lemak di dalam perut (yang berbahaya untuk jantung) bukan masalah. Yang perlu dikurangi adalah <strong>subcutaneous fat 20%</strong> yaitu lemak di bawah kulit yang membentuk tampilan belly fat.</span></div>
+    <div class="row"><div class="dot" style="background:#d97706"></div><span class="txt">Muscle mass 23.1 kg rendah untuk tinggi 165 cm — ini penyebab BMR rendah dan metabolic age 29. Membangun otot adalah prioritas setara dengan membakar lemak.</span></div>
+    <div class="row"><div class="dot" style="background:#059669"></div><span class="txt">Push-up 25 rep dan dead hang/plank/wall sit 1 menit menunjukkan base strength dan endurance tubuh yang sudah ada. Pull-up 3 rep adalah titik yang paling bisa ditingkatkan cepat.</span></div>
+    <div class="row"><div class="dot" style="background:#2563eb"></div><span class="txt">TDEE aktual ~2.080 kkal (BMR 1.541 × 1.35 rata-rata siklus shift+latihan). Floor minimum kalori: <strong>1.650 kkal</strong> — tidak boleh di bawah ini.</span></div>
+  </div>
+</div>
+
+<!-- ===================== TARGET AKHIR ===================== -->
+<div id="target" class="sec">
+  <div class="sl">Target capaian minggu 12</div>
+
+  <div class="target-card" style="background:#f0fdf4;border-color:#86efac">
+    <div style="font-size:11px;font-weight:700;color:#065f46;letter-spacing:.06em;text-transform:uppercase;margin-bottom:10px">Komposisi Tubuh</div>
+    <div class="br"><div class="bl">Berat badan</div><div class="bt"><div class="bf" style="width:72%;background:#059669"></div></div><div class="bn">~60–62 kg</div></div>
+    <div class="br"><div class="bl">Subcut fat</div><div class="bt"><div class="bf" style="width:65%;background:#059669"></div></div><div class="bn">14–16%</div></div>
+    <div class="br"><div class="bl">Muscle mass</div><div class="bt"><div class="bf" style="width:60%;background:#059669"></div></div><div class="bn">24.5–26 kg</div></div>
+    <div class="br"><div class="bl">Lingkar perut</div><div class="bt"><div class="bf" style="width:78%;background:#059669"></div></div><div class="bn">−4–6 cm</div></div>
+    <div class="br"><div class="bl">Metabolic age</div><div class="bt"><div class="bf" style="width:68%;background:#059669"></div></div><div class="bn">26–27</div></div>
+  </div>
+
+  <div class="target-card" style="background:#eff6ff;border-color:#93c5fd">
+    <div style="font-size:11px;font-weight:700;color:#1d4ed8;letter-spacing:.06em;text-transform:uppercase;margin-bottom:10px">Performa Lari & Kardio</div>
+    <div class="br"><div class="bl">VO2 max</div><div class="bt"><div class="bf" style="width:55%;background:#2563eb"></div></div><div class="bn">39–41</div></div>
+    <div class="br"><div class="bl">Jarak lari</div><div class="bt"><div class="bf" style="width:65%;background:#2563eb"></div></div><div class="bn">5–6 km</div></div>
+    <div class="br"><div class="bl">Pace lari</div><div class="bt"><div class="bf" style="width:72%;background:#2563eb"></div></div><div class="bn">7'30"–7'45"</div></div>
+    <div class="br"><div class="bl">HR avg lari</div><div class="bt"><div class="bf" style="width:68%;background:#2563eb"></div></div><div class="bn">~150 bpm</div></div>
+    <div class="br"><div class="bl">HR recovery</div><div class="bt"><div class="bf" style="width:75%;background:#2563eb"></div></div><div class="bn">&gt;22 bpm/mnt</div></div>
+    <div class="br"><div class="bl">Recovery post-sesi</div><div class="bt"><div class="bf" style="width:62%;background:#2563eb"></div></div><div class="bn">~22 jam</div></div>
+    <div class="br"><div class="bl">Treadmill pace</div><div class="bt"><div class="bf" style="width:68%;background:#2563eb"></div></div><div class="bn">8–9 km/h Z2</div></div>
+  </div>
+
+  <div class="target-card" style="background:#ede9fe;border-color:#c4b5fd">
+    <div style="font-size:11px;font-weight:700;color:#4c1d95;letter-spacing:.06em;text-transform:uppercase;margin-bottom:10px">Kekuatan Gym</div>
+    <div class="br"><div class="bl">Chest Press</div><div class="bt"><div class="bf" style="width:75%;background:#7c3aed"></div></div><div class="bn">55 kg × 8</div></div>
+    <div class="br"><div class="bl">Lat Pulldown</div><div class="bt"><div class="bf" style="width:70%;background:#7c3aed"></div></div><div class="bn">45 kg × 8</div></div>
+    <div class="br"><div class="bl">Seated Row</div><div class="bt"><div class="bf" style="width:68%;background:#7c3aed"></div></div><div class="bn">37.5 kg × 10</div></div>
+    <div class="br"><div class="bl">Romanian DL</div><div class="bt"><div class="bf" style="width:80%;background:#7c3aed"></div></div><div class="bn">50–55 kg × 8</div></div>
+    <div class="br"><div class="bl">Shoulder Press</div><div class="bt"><div class="bf" style="width:65%;background:#7c3aed"></div></div><div class="bn">15 kg × 10</div></div>
+    <div class="br"><div class="bl">Treadmill incline</div><div class="bt"><div class="bf" style="width:70%;background:#7c3aed"></div></div><div class="bn">30 mnt Z2</div></div>
+  </div>
+
+  <div class="target-card" style="background:#faf5ff;border-color:#c4b5fd">
+    <div style="font-size:11px;font-weight:700;color:#4c1d95;letter-spacing:.06em;text-transform:uppercase;margin-bottom:10px">Bodyweight (Gerak Iseng)</div>
+    <div class="br"><div class="bl">Push-up</div><div class="bt"><div class="bf" style="width:70%;background:#7c3aed"></div></div><div class="bn">40–45 rep</div></div>
+    <div class="br"><div class="bl">Pull-up</div><div class="bt"><div class="bf" style="width:65%;background:#7c3aed"></div></div><div class="bn">8–10 rep</div></div>
+    <div class="br"><div class="bl">Dead hang</div><div class="bt"><div class="bf" style="width:72%;background:#7c3aed"></div></div><div class="bn">90 detik</div></div>
+    <div class="br"><div class="bl">Wall sit</div><div class="bt"><div class="bf" style="width:75%;background:#7c3aed"></div></div><div class="bn">90 detik</div></div>
+    <div class="br"><div class="bl">Plank</div><div class="bt"><div class="bf" style="width:78%;background:#7c3aed"></div></div><div class="bn">90 detik</div></div>
+  </div>
+
+  <div class="target-card" style="background:#fef3c7;border-color:#fcd34d">
+    <div style="font-size:11px;font-weight:700;color:#78350f;letter-spacing:.06em;text-transform:uppercase;margin-bottom:10px">Nutrisi & Kebiasaan</div>
+    <div class="cr"><span>Target kalori harian (maintenance)</span><span class="chip ca">~2.000 kkal</span></div>
+    <div class="cr"><span>Protein harian</span><span class="chip cg">115–120 g/hari</span></div>
+    <div class="cr"><span>Craving post-makan</span><span class="chip cg">Berhasil dilewati &gt;5 dari 7 hari</span></div>
+    <div class="cr"><span>Munchys/snack terencana</span><span class="chip bw">3× seminggu (bukan setiap hari)</span></div>
+    <div class="cr"><span>Stop makan jam 20.30</span><span class="chip cg">Konsisten tanpa pengecualian</span></div>
+  </div>
+
+  <div class="card" style="margin-top:4px">
+    <div style="font-weight:700;margin-bottom:8px">Checkpoint Evaluasi</div>
+    <div class="cr"><span><strong>Minggu 4</strong> — Deload & test lari 3 km</span><span class="chip ca">HR avg target &lt;165 bpm</span></div>
+    <div class="cr"><span><strong>Minggu 8</strong> — Lari 5 km pertama</span><span class="chip cb">Selesaikan di zona 2</span></div>
+    <div class="cr"><span><strong>Minggu 12</strong> — Final benchmark</span><span class="chip cg">Semua metrik dibandingkan baseline</span></div>
+  </div>
+</div>
+
+<!-- ===================== GYM ===================== -->
+<div id="gym" class="sec">
+
+  <div class="card ci" style="margin-bottom:10px">
+    <div style="font-weight:700;color:#1d4ed8;margin-bottom:5px">Struktur sesi gym</div>
+    <div class="txt">Push / Pull / Legs bergantian tiap sesi gym. Setiap sesi ditutup dengan <strong>Treadmill 15–20 mnt</strong> sebagai finisher kardio dan pembantu fat burning tanpa mengorbankan recovery. Treadmill incline 3–5° lebih efektif dari flat karena memaksa kerja lebih tanpa impact tinggi.</div>
+  </div>
+
+  <div class="sl">Push Day — Dada, Bahu, Triceps + Treadmill</div>
+  <div class="card">
+    <div class="ex">
+      <div class="en">Chest Press Machine</div>
+      <div class="ed">4×8 @ 40 kg · rest 90 detik antar set</div>
+      <div class="ep">Mgg 4: 45 kg · Mgg 8: 50 kg · Mgg 12: 55 kg</div>
+    </div>
+    <div class="ex">
+      <div class="en">Incline Bench Press Dumbbell</div>
+      <div class="ed">3×10 @ 8 kg</div>
+      <div class="ep">Naikkan 1 kg setiap 2 minggu bila rep terakhir masih mudah</div>
+    </div>
+    <div class="ex">
+      <div class="en">Seated Shoulder Press Machine</div>
+      <div class="ed">4×10 @ 10 kg · rest 90 detik</div>
+      <div class="ep">Mgg 6: 12.5 kg · Mgg 12: 15 kg</div>
+    </div>
+    <div class="ex">
+      <div class="en">Lateral Raise Cable</div>
+      <div class="ed">3×12 @ 8 kg</div>
+      <div class="ep">Naikkan ke 10 kg di minggu 6</div>
+    </div>
+    <div class="ex">
+      <div class="en">Triceps Pushdown</div>
+      <div class="ed">3×12 @ 12 kg</div>
+      <div class="ep">Naikkan ke 14 kg di minggu 5</div>
+    </div>
+    <div class="ex">
+      <div class="en">Plank (Core Finisher)</div>
+      <div class="ed">3×30 detik → naik 10 detik setiap 2 minggu</div>
+      <div class="ep">Target minggu 12: 3×60 detik</div>
+    </div>
+    <div class="ex bw-ex">
+      <div class="en">🚶 Treadmill Incline — PENUTUP SESI</div>
+      <div class="ed">15–20 mnt · incline 3–5° · speed 5.5–6.5 km/h · HR target zona 2 (&lt;136 bpm)</div>
+      <div class="ep">Fase 3: naikkan ke 25 mnt. Tidak perlu lari — jalan cepat incline sudah cukup efektif untuk fat burning.</div>
+    </div>
+  </div>
+
+  <div class="sl">Pull Day — Punggung, Biceps + Treadmill</div>
+  <div class="card">
+    <div class="ex">
+      <div class="en">Lat Pulldown Cable ⭐</div>
+      <div class="ed">4×8 @ 32.5 kg · rest 90 detik</div>
+      <div class="ep">Mgg 4: 35 kg · Mgg 8: 40 kg · Mgg 12: 45 kg</div>
+    </div>
+    <div class="ex">
+      <div class="en">Seated Row Machine</div>
+      <div class="ed">4×10 @ 27.5 kg</div>
+      <div class="ep">Target: 37.5 kg di minggu 12</div>
+    </div>
+    <div class="ex">
+      <div class="en">Rear Delt Reverse Fly Machine</div>
+      <div class="ed">3×12 @ 8 kg</div>
+      <div class="ep">Naik ke 10 kg di minggu 5 · Penting untuk postur</div>
+    </div>
+    <div class="ex">
+      <div class="en">Back Extension (Hyperextension)</div>
+      <div class="ed">3×15 bodyweight → + 5 kg plate mulai minggu 5</div>
+    </div>
+    <div class="ex">
+      <div class="en">Hammer Curl Dumbbell</div>
+      <div class="ed">3×12 @ 8 kg (naik dari 6 kg)</div>
+      <div class="ep">Naik ke 10 kg di minggu 6</div>
+    </div>
+    <div class="ex">
+      <div class="en">Straight Arm Lat Pulldown Cable</div>
+      <div class="ed">3×12 · mulai beban yang bisa dikontrol penuh</div>
+    </div>
+    <div class="ex">
+      <div class="en">Dead Bug (Core Finisher)</div>
+      <div class="ed">3×10 setiap sisi · perlahan, kontrol penuh</div>
+      <div class="ep">Target minggu 12: 3×15 setiap sisi</div>
+    </div>
+    <div class="ex bw-ex">
+      <div class="en">🚶 Treadmill Incline — PENUTUP SESI</div>
+      <div class="ed">15–20 mnt · incline 4–6° · speed 5.5–6 km/h · HR zona 2</div>
+      <div class="ep">Incline lebih tinggi di Pull Day karena beban sesi lebih ringan dari Push</div>
+    </div>
+  </div>
+
+  <div class="sl">Legs Day — Tungkai, Core + Treadmill</div>
+  <div class="card">
+    <div class="ex" style="border-color:#fcd34d;background:#fffbeb">
+      <div class="en">⭐ Romanian Deadlift Barbell — Prioritas Utama</div>
+      <div class="ed">Mgg 1–2: 4×8 @ barbel kosong (20 kg) · form dulu</div>
+      <div class="ep">Mgg 3: 25 kg · Mgg 6: 35 kg · Mgg 10: 45 kg · Mgg 12: 50–55 kg</div>
+    </div>
+    <div class="ex">
+      <div class="en">Goblet Squat → Barbell Back Squat (target mulai mgg 5)</div>
+      <div class="ed">Mgg 1–4: 4×10 @ 12 kg dumbbell</div>
+      <div class="ep">Minggu 5: evaluasi pindah ke barbell jika form sudah stabil</div>
+    </div>
+    <div class="ex">
+      <div class="en">Leg Press Machine</div>
+      <div class="ed">3×12 · full range of motion · mulai beban sedang</div>
+    </div>
+    <div class="ex">
+      <div class="en">Single Leg Calf Raise Machine</div>
+      <div class="ed">3×15 setiap kaki</div>
+    </div>
+    <div class="ex">
+      <div class="en">Farmer's Carry (Core + Full Body)</div>
+      <div class="ed">3×20 meter @ 12 kg per tangan</div>
+      <div class="ep">Mgg 6: 14 kg · Mgg 10: 16 kg · Melatih core, grip, dan metabolisme sekaligus</div>
+    </div>
+    <div class="ex bw-ex">
+      <div class="en">🏃 Treadmill Lari — PENUTUP SESI (Legs Day berbeda)</div>
+      <div class="ed">15 mnt · incline 1° · speed 7–8 km/h · HR zona 2–3</div>
+      <div class="ep">Di Legs Day treadmill lebih ringan karena tungkai sudah lelah dari squat dan RDL. Jangan push terlalu keras.</div>
+    </div>
+  </div>
+
+  <div class="sl">Progressive overload — panduan wajib</div>
+  <div class="card">
+    <div class="cr"><span>Semua rep selesai dengan form baik?</span><span class="chip cg">Naikkan 2.5–5 kg minggu depan</span></div>
+    <div class="cr"><span>Rep terakhir berat tapi selesai?</span><span class="chip ca">Pertahankan beban, perbaiki form</span></div>
+    <div class="cr"><span>Tidak bisa capai rep target?</span><span class="chip cr2">Turunkan beban 5%</span></div>
+    <div class="cr"><span>Minggu deload (4, 8, 12)?</span><span class="chip bw">Semua beban turun 40%, reps tetap</span></div>
+    <div style="margin-top:8px;font-size:12px;background:#fef3c7;padding:8px 10px;border-radius:8px;color:#78350f">Catat beban setiap sesi. Beban yang sama setiap minggu tidak memberikan stimulus pertumbuhan otot.</div>
+  </div>
+</div>
+
+<!-- ===================== GERAK ISENG ===================== -->
+<div id="bw" class="sec">
+
+  <div class="card ci" style="margin-bottom:10px">
+    <div style="font-weight:700;color:#1d4ed8;margin-bottom:6px">Gerak iseng = aset besar yang sudah ada</div>
+    <div class="txt">Kebiasaan spontan ini bukan sekadar "iseng" — ini volume training gratis yang tidak butuh gym, tidak butuh jadwal, dan tidak menguras recovery. Yang perlu dilakukan adalah memberikan sedikit struktur supaya progresnya bisa diukur dan terus naik.</div>
+  </div>
+
+  <div class="sl">Baseline kemampuan & target 12 minggu</div>
+  <div class="card">
+    <table>
+      <tr><th>Gerakan</th><th>Sekarang</th><th>Target 4 mgg</th><th>Target 8 mgg</th><th>Target 12 mgg</th></tr>
+      <tr><td><strong>Push-up</strong></td><td>25 rep/set</td><td>30–32 rep</td><td>36–38 rep</td><td>40–45 rep</td></tr>
+      <tr><td><strong>Pull-up</strong></td><td>3 rep/set</td><td>5–6 rep</td><td>7–8 rep</td><td>9–10 rep</td></tr>
+      <tr><td><strong>Dead hang</strong></td><td>60 detik</td><td>75 detik</td><td>85 detik</td><td>90+ detik</td></tr>
+      <tr><td><strong>Wall sit</strong></td><td>60 detik</td><td>75 detik</td><td>85 detik</td><td>90+ detik</td></tr>
+      <tr><td><strong>Plank</strong></td><td>60 detik</td><td>75 detik</td><td>85 detik</td><td>90+ detik</td></tr>
+    </table>
+  </div>
+
+  <div class="sl">Cara memaksimalkan gerak iseng</div>
+
+  <div class="card">
+    <div class="en" style="font-size:14px;margin-bottom:10px">Push-up — dari 25 menuju 45 rep</div>
+    <div class="row"><div class="dot" style="background:#2563eb"></div><span class="txt"><strong>Jangan selalu all-out.</strong> Iseng push-up 15–18 rep (60–70% dari max) beberapa kali sehari lebih efektif membangun volume daripada 1 kali sampai failure.</span></div>
+    <div class="row"><div class="dot" style="background:#2563eb"></div><span class="txt"><strong>Grease the groove:</strong> setiap kali lewat pintu kamar atau sebelum mandi, lakukan 10–15 push-up. Tidak perlu schweat, tidak perlu warm-up.</span></div>
+    <div class="row"><div class="dot" style="background:#2563eb"></div><span class="txt"><strong>Variasi saat iseng:</strong> push-up biasa → wide grip → diamond → incline (tangan di meja). Ini melatih sudut berbeda tanpa harus ke gym.</span></div>
+    <div class="row"><div class="dot" style="background:#059669"></div><span class="txt"><strong>Di shift kerja:</strong> push-up adalah teman terbaik. 3–4 kali @ 15 rep selama shift = 45–60 push-up total tanpa terasa berat.</span></div>
+  </div>
+
+  <div class="card">
+    <div class="en" style="font-size:14px;margin-bottom:10px">Pull-up — dari 3 menuju 10 rep (ini yang paling bisa naik cepat)</div>
+    <div class="row"><div class="dot" style="background:#d97706"></div><span class="txt"><strong>Pull-up 3 rep adalah angka yang akan berubah paling dramatis</strong> dalam 12 minggu jika dilatih dengan benar. Lat pulldown di gym langsung mendukung ini.</span></div>
+    <div class="row"><div class="dot" style="background:#d97706"></div><span class="txt"><strong>Strategi submaximal:</strong> jika ada bar, lakukan 2 rep (bukan 3 sampai failure). Frekuensi lebih penting dari intensitas untuk pull-up pemula.</span></div>
+    <div class="row"><div class="dot" style="background:#d97706"></div><span class="txt"><strong>Dead hang setelah pull-up:</strong> langsung hang 30–60 detik setelah pull-up. Ini meregangkan lat dan mempercepat adaptasi.</span></div>
+    <div class="row"><div class="dot" style="background:#059669"></div><span class="txt"><strong>Prediksi:</strong> dengan lat pulldown naik dari 30 ke 45 kg dan frekuensi iseng, pull-up 8–10 rep di minggu 12 sangat realistis.</span></div>
+  </div>
+
+  <div class="card">
+    <div class="en" style="font-size:14px;margin-bottom:10px">Dead hang, Wall sit, Plank — dari 60 menuju 90 detik</div>
+    <div class="row"><div class="dot" style="background:#059669"></div><span class="txt"><strong>Dead hang:</strong> sangat bagus untuk dekompresi tulang belakang setelah shift duduk atau berdiri lama. Iseng kapan saja. Tambah 5 detik setiap minggu.</span></div>
+    <div class="row"><div class="dot" style="background:#059669"></div><span class="txt"><strong>Wall sit:</strong> ideal saat menonton HP atau menunggu sesuatu. Tidak butuh ruang, tidak butuh alat. Target naik 10 detik setiap 2 minggu.</span></div>
+    <div class="row"><div class="dot" style="background:#059669"></div><span class="txt"><strong>Plank:</strong> sudah masuk program gym sebagai core finisher. Iseng plank di rumah = bonus. Jaga posisi — pinggul tidak boleh naik atau turun.</span></div>
+    <div class="row"><div class="dot" style="background:#7c3aed"></div><span class="txt"><strong>Kombinasi iseng yang efektif:</strong> Dead hang 60 detik → langsung wall sit 60 detik → istirahat 2 menit → ulang. Ini full body isometric circuit yang sangat efektif untuk core dan grip.</span></div>
+  </div>
+
+  <div class="sl">Aturan gerak iseng</div>
+  <div class="card co">
+    <div class="row"><div class="dot" style="background:#059669"></div><span class="txt"><strong>Jangan sampai failure saat iseng</strong> — stop 2–3 rep sebelum batas. Kelelahan dari iseng jangan sampai mengorbankan kualitas sesi gym terjadwal.</span></div>
+    <div class="row"><div class="dot" style="background:#059669"></div><span class="txt"><strong>Tidak perlu warm-up untuk iseng</strong> — tapi untuk pull-up, lakukan dead hang 15 detik dulu sebelum pull.</span></div>
+    <div class="row"><div class="dot" style="background:#059669"></div><span class="txt"><strong>Hari setelah gym legs</strong> (paha paling lelah) — skip push-up dan pull-up iseng. Fokus recovery. Wall sit dan plank masih boleh.</span></div>
+    <div class="row"><div class="dot" style="background:#059669"></div><span class="txt"><strong>Selama shift kerja</strong> — push-up dan wall sit paling mudah dilakukan. Dead hang jika ada pintu frame atau bar yang bisa dipakai.</span></div>
+  </div>
+</div>
+
+<!-- ===================== NUTRISI ===================== -->
+<div id="nut" class="sec">
+  <div class="sl">Target kalori per fase (TDEE aktual ~2.080 kkal)</div>
+  <table>
+    <tr><th>Fase</th><th>Minggu</th><th>Kalori/hari</th><th>Protein</th><th>Defisit</th><th>BB turun</th></tr>
+    <tr><td><span class="chip cg">Fase 1</span></td><td>1–3</td><td><strong>1.900 kkal</strong></td><td>105 g</td><td>~180 kkal</td><td>~0.2 kg/mgg</td></tr>
+    <tr><td><span class="chip bw">Deload</span></td><td>4</td><td><strong>1.950 kkal</strong></td><td>105 g</td><td>~130 kkal</td><td>Maintenance</td></tr>
+    <tr><td><span class="chip ca">Fase 2</span></td><td>5–7</td><td><strong>1.750 kkal</strong></td><td>115 g</td><td>~330 kkal</td><td>~0.4 kg/mgg</td></tr>
+    <tr><td><span class="chip bw">Deload</span></td><td>8</td><td><strong>1.850 kkal</strong></td><td>110 g</td><td>~230 kkal</td><td>Maintenance</td></tr>
+    <tr><td><span class="chip cr2">Fase 3</span></td><td>9–11</td><td><strong>1.650 kkal</strong></td><td>120 g</td><td>~430 kkal</td><td>~0.5 kg/mgg</td></tr>
+    <tr><td><span class="chip bw">Final</span></td><td>12</td><td><strong>1.800 kkal</strong></td><td>115 g</td><td>~280 kkal</td><td>Benchmark</td></tr>
+  </table>
+  <div style="font-size:11px;color:#991b1b;margin-top:6px;padding:8px 10px;background:#fee2e2;border-radius:8px;margin-bottom:14px">Floor minimum absolut: <strong>1.650 kkal</strong>. Tidak boleh di bawah ini, bahkan di hari tanpa latihan.</div>
+
+  <div class="sl">Pola makan harian</div>
+  <div class="card">
+    <div class="cr"><div><strong>🌅 Sarapan 07.00</strong><br><span class="txt">Overnight oats 50 g + susu skim 150 ml + whey 1 scoop + cocoa + almond 15 g</span></div><span class="chip bw">~420 kkal · 32 g pro</span></div>
+    <div class="cr"><div><strong>☀️ Makan siang 12.00</strong><br><span class="txt">Nasi 100 g + ayam dada/ikan 150 g + tahu/tempe 100 g + telur 1 butir</span></div><span class="chip bw">~480 kkal · 38 g pro</span></div>
+    <div class="cr"><div><strong>🍪 Snack 15.00</strong><br><span class="txt">Munchys Oat Krunch 1 sachet + susu plain 200 ml</span></div><span class="chip bw">~230 kkal · 10 g pro</span></div>
+    <div class="cr"><div><strong>🌙 Makan malam 19.00</strong><br><span class="txt">Nasi 60–80 g + protein 150 g + tahu + sup bening</span></div><span class="chip bw">~420 kkal · 35 g pro</span></div>
+    <div class="cr"><span style="font-weight:700">Total basis + fleksibel</span><span class="chip cg">~1.550 + 150–400 kkal</span></div>
+  </div>
+
+  <div class="sl">Hari shift 24 jam</div>
+  <div class="card">
+    <div class="cr"><div><strong>11.30 — Pre-shift (makan terbesar)</strong><br><span class="txt">Nasi 130 g + protein 180 g + tahu/tempe</span></div><span class="chip bw">~550 kkal</span></div>
+    <div class="cr"><div><strong>17.00–18.00 — Makan sore (bawa bekal)</strong><br><span class="txt">Nasi 100 g + lauk protein + kuah bening</span></div><span class="chip bw">~450 kkal</span></div>
+    <div class="cr"><div><strong>22.00 — Snack malam terjadwal</strong><br><span class="txt">1 sachet Munchys + teh tawar hangat</span></div><span class="chip bw">~120 kkal</span></div>
+    <div class="cr"><div><strong>02.00 — Jika lapar (opsional)</strong><br><span class="txt">2 butir telur rebus yang sudah dibawa</span></div><span class="chip bw">~150 kkal</span></div>
+    <div class="cr"><div><strong>13.00 — Setelah shift selesai</strong><br><span class="txt">Overnight oats siap → makan → tidur</span></div><span class="chip bw">~350 kkal</span></div>
+    <div class="cr"><span style="font-weight:700">Total hari shift</span><span class="chip ca">~1.620 kkal · ~100 g pro</span></div>
+  </div>
+
+  <div class="sl">Craving manis setelah makan — 4 lapis</div>
+  <div class="card">
+    <div class="cr"><span><strong>Lapis 1</strong> — Tunda 20 menit (set timer)</span><span class="chip cb">0 kkal</span></div>
+    <div class="cr"><span><strong>Lapis 2</strong> — Minum teh tawar / air putih hangat</span><span class="chip cg">0–5 kkal</span></div>
+    <div class="cr"><span><strong>Lapis 3</strong> — Push-up atau wall sit 2 menit</span><span class="chip cg">0 kkal · sambil latih bodyweight</span></div>
+    <div class="cr"><span><strong>Lapis 4</strong> — Greek yogurt + cocoa / Munchys 1 sachet</span><span class="chip ca">80–120 kkal</span></div>
+    <div style="margin-top:8px;font-size:12px;background:#f0fdf4;padding:8px 10px;border-radius:8px;color:#065f46">Lapis 3 sekarang bisa diisi push-up atau wall sit iseng — dua manfaat sekaligus: putus craving loop dan latihan bodyweight.</div>
+  </div>
+</div>
+
+<!-- ===================== JADWAL ===================== -->
+<div id="sched" class="sec">
+  <div class="card ci" style="margin-bottom:12px">
+    <div style="font-size:12px;color:#1d4ed8"><strong>Pola shift:</strong> 2 hari kerja (24 jam) → 3 hari libur · <strong>Deload:</strong> minggu 4, 8, 12 · <strong>Norwegian 4×4:</strong> mulai minggu 5 · Tap baris minggu untuk detail sesi.</div>
+  </div>
+  <div style="display:flex;gap:7px;flex-wrap:wrap;margin-bottom:12px">
+    <div style="display:flex;align-items:center;gap:4px;font-size:10px"><div style="width:9px;height:9px;border-radius:2px;background:#fee2e2"></div>Shift</div>
+    <div style="display:flex;align-items:center;gap:4px;font-size:10px"><div style="width:9px;height:9px;border-radius:2px;background:#fef3c7"></div>Recovery</div>
+    <div style="display:flex;align-items:center;gap:4px;font-size:10px"><div style="width:9px;height:9px;border-radius:2px;background:#dbeafe"></div>Sepeda</div>
+    <div style="display:flex;align-items:center;gap:4px;font-size:10px"><div style="width:9px;height:9px;border-radius:2px;background:#ede9fe"></div>Gym+Treadmill</div>
+    <div style="display:flex;align-items:center;gap:4px;font-size:10px"><div style="width:9px;height:9px;border-radius:2px;background:#dcfce7"></div>Lari Z2</div>
+    <div style="display:flex;align-items:center;gap:4px;font-size:10px"><div style="width:9px;height:9px;border-radius:2px;background:#f0fdf4;border:1px solid #6ee7b7"></div>Deload</div>
+  </div>
+  <div id="det" class="det"></div>
+  <div id="sg"></div>
+</div>
+
+<!-- ===================== CONTINGENCY ===================== -->
+<div id="con" class="sec">
+  <div class="sl">Skenario 1 — Sakit (flu/demam)</div>
+  <div class="card">
+    <div class="row"><div class="dot" style="background:#dc2626"></div><span class="txt"><strong>Stop semua latihan</strong> termasuk gerak iseng. Kalori naik ke TDEE (~2.080 kkal) saat sakit.</span></div>
+    <div class="row"><div class="dot" style="background:#059669"></div><span class="txt">Kembali latihan setelah 24 jam bebas demam — mulai 50% volume. Jangan mengejar sesi yang terlewat.</span></div>
+  </div>
+
+  <div class="sl">Skenario 2 — Shift berubah mendadak</div>
+  <div class="card">
+    <div class="row"><div class="dot" style="background:#7c3aed"></div><span class="txt"><strong>Skip gym</strong> — prioritas tidur. Gerak iseng (push-up ringan, wall sit) masih boleh di sela shift.</span></div>
+    <div class="row"><div class="dot" style="background:#059669"></div><span class="txt">Meal prep tidak boleh diabaikan — justru saat shift tak terduga, makanan yang sudah disiapkan adalah penentu apakah makan sehat atau impulsif.</span></div>
+  </div>
+
+  <div class="sl">Skenario 3 — Craving menang 3+ hari berturut</div>
+  <div class="card">
+    <div class="row"><div class="dot" style="background:#d97706"></div><span class="txt"><strong>Jangan puasa kompensasi.</strong> Hitung kerugian aktual (~300–600 kkal surplus total) dan kompensasi perlahan selama 5–7 hari ke depan.</span></div>
+    <div class="row"><div class="dot" style="background:#059669"></div><span class="txt">Identifikasi trigger — biasanya kurang tidur ekstrem, stres shift, atau makan siang terlalu sedikit. Reset dari makan berikutnya, bukan "Senin depan".</span></div>
+  </div>
+
+  <div class="sl">Skenario 4 — Plateau &gt;3 minggu</div>
+  <div class="card">
+    <div class="row"><div class="dot" style="background:#2563eb"></div><span class="txt"><strong>Cek tracking dulu</strong> — snack iseng sering tidak terhitung. Jika tracking sudah ketat: turunkan 100 kkal dan tambah 1 sesi jalan kaki 30 menit.</span></div>
+    <div class="row"><div class="dot" style="background:#2563eb"></div><span class="txt"><strong>Berat stagnan tapi lingkar pinggang turun?</strong> Itu bukan plateau — itu body recomposition yang berjalan.</span></div>
+    <div class="row"><div class="dot" style="background:#059669"></div><span class="txt"><strong>Refeed week:</strong> naikkan kalori ke TDEE (~2.080) selama 5 hari, latihan tetap jalan. Ini mereset leptin dan sering memecah plateau.</span></div>
+  </div>
+
+  <div class="sl">Skenario 5 — Kurang tidur ekstrem post-shift</div>
+  <div class="card">
+    <div class="row"><div class="dot" style="background:#dc2626"></div><span class="txt"><strong>Tidur &lt;4 jam setelah shift: skip semua latihan</strong> termasuk iseng. Urutan hari itu: Tidur → Makan → Jalan ringan (opsional).</span></div>
+    <div class="row"><div class="dot" style="background:#d97706"></div><span class="txt">Craving akan sangat tinggi setelah kurang tidur — ini biokimia. Siapkan makanan terjadwal sebelum tidur.</span></div>
+  </div>
+
+  <div class="sl">Aturan reset universal</div>
+  <div class="card co">
+    <div class="row"><div class="dot" style="background:#059669"></div><span class="txt">Program terganggu 1–2 minggu: kembali ke fase terakhir yang masih dijalani.</span></div>
+    <div class="row"><div class="dot" style="background:#059669"></div><span class="txt">Program berhenti &gt;3 minggu: mulai dari Fase 1 lagi. Ini bukan hukuman — otot butuh re-adaptasi.</span></div>
+    <div class="row"><div class="dot" style="background:#059669"></div><span class="txt">Satu hal yang tidak boleh berhenti bahkan saat program terganggu: <strong>ukur lingkar pinggang setiap Senin pagi.</strong></span></div>
+  </div>
+</div>
+
+<script>
+function show(id,btn){
+  document.querySelectorAll('.sec').forEach(s=>s.classList.remove('vis'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));
+  document.getElementById(id).classList.add('vis');
+  btn.classList.add('on');
+}
+
+const wdata=[
+  {ph:1,fc:'#059669',bg:'#d1fae5',nm:'Fase 1',kk:1900,pr:'105g',dl:false,
+   la:'Jalan cepat atau lari SANGAT pelan (pace ~10-11\'/km) · HR harus &lt;136 bpm · 25–30 mnt · Fokus konsistensi, bukan kecepatan',
+   bi:'Sepeda zona 2 stabil 30 mnt + 2×4 interval ringan @ 85% HR max · Bukan Norwegian penuh',
+   gy:'Push Day: 4×8 Chest Press 40kg · 3×10 Incline 8kg · 4×10 Shoulder Press 10kg · Plank 3×30 dtk → Treadmill incline 3° × 15 mnt zona 2',
+   cr:'Lapis 1+2: tunda 20 mnt + minum teh hangat. Lapis 3 baru: push-up atau wall sit 2 mnt saat craving muncul.',
+   no:'Minggu pertama: kenali batas tubuh. Form RDL hanya barbel kosong. Gerak iseng: push-up 10–15 rep × 3x sehari cukup.'},
+  {ph:1,fc:'#059669',bg:'#d1fae5',nm:'Fase 1',kk:1900,pr:'105g',dl:false,
+   la:'Lari zona 2 murni 30 mnt · HR &lt;136 bpm sepanjang waktu — jika lebih, langsung pelan · Tidak ada kompromi',
+   bi:'Sepeda zona 2 35 mnt + 2×4 interval @ 88% HR max',
+   gy:'Pull Day: 4×8 Lat Pulldown 32.5kg · 4×10 Seated Row 27.5kg · 3×12 Rear Delt 8kg · Dead Bug 3×10 → Treadmill incline 4° × 15 mnt',
+   cr:'Lapis 1–3. Greek yogurt coklat sebagai cadangan jika 3 lapis belum cukup.',
+   no:'Ukur lingkar pinggang Senin pagi — ini baseline resmi. Pull-up iseng: lakukan 2 rep (bukan sampai failure) beberapa kali sehari.'},
+  {ph:1,fc:'#059669',bg:'#d1fae5',nm:'Fase 1',kk:1900,pr:'105g',dl:false,
+   la:'Lari zona 2 30 mnt · Catat pace dan HR setiap sesi untuk tracking progres',
+   bi:'Sepeda zona 2 40 mnt + 3×4 interval @ 88% HR max',
+   gy:'Legs Day: RDL 4×8 @ 20kg · Goblet Squat 4×10 @ 12kg · Leg Press 3×12 · Farmer\'s Carry 3×20m @ 12kg → Treadmill 1° × 15 mnt ringan',
+   cr:'Sudah terasa lebih terkontrol? Catat frekuensi craving berhasil dilewati vs tidak.',
+   no:'RDL form: hinge di pinggul, punggung lurus, turun sampai terasa hamstring stretch. Jangan bungkuk.'},
+  {ph:0,fc:'#065f46',bg:'#d1fae5',nm:'DELOAD',kk:1950,pr:'105g',dl:true,
+   la:'Jalan kaki 30 mnt santai · Zona 1 · Tidak ada target pace atau HR',
+   bi:'Sepeda zona 1–2 santai 25 mnt · Tidak ada interval sama sekali',
+   gy:'SEMUA beban turun 40% · Reps sama · Fokus mobilitas · Tambah 10 mnt stretching post-gym → Treadmill flat 10 mnt sangat ringan',
+   cr:'Minggu paling fleksibel. Tetap 1.950 kkal tapi tidak perlu kaku.',
+   no:'EVALUASI: Ukur lingkar pinggang. Bandingkan HR lari vs minggu 1. Bodyweight: test push-up dan pull-up max untuk catat progres.'},
+  {ph:2,fc:'#d97706',bg:'#fef3c7',nm:'Fase 2',kk:1750,pr:'115g',dl:false,
+   la:'Lari zona 2 35 mnt + 5 mnt tempo (zona 3) · Pace mulai bisa sedikit naik',
+   bi:'NORWEGIAN 4×4 PERTAMA 🎯 · 10 mnt WU → 4×(4 mnt @ 90% HR + 3 mnt recovery aktif) → 10 mnt CD · Total ~48 mnt',
+   gy:'Push Day: naikkan semua beban 2.5–5 kg dari fase 1 · Plank 3×40 dtk → Treadmill incline 4° × 20 mnt',
+   cr:'Munchys 4–5×/minggu. Hari gym pakai Greek yogurt coklat.',
+   no:'Kalori turun 150 kkal dari fase 1. Protein NAIK ke 115 g — jangan biarkan protein ikut turun.'},
+  {ph:2,fc:'#d97706',bg:'#fef3c7',nm:'Fase 2',kk:1750,pr:'115g',dl:false,
+   la:'Lari zona 2 murni 40 mnt · HR target &lt;140 bpm · Catat pace',
+   bi:'Norwegian 4×4 · HR 90–92% · Resistance lebih berat dari minggu 5',
+   gy:'Pull Day: naikkan semua beban 2.5 kg · Lat Pulldown push ke 35 kg · Dead Bug 3×12 → Treadmill incline 5° × 20 mnt',
+   cr:'Amati: sudah berkurang berapa kali craving muncul dibanding minggu 1–2?',
+   no:'BENCHMARK: Ukur lingkar pinggang. Harus sudah turun 1–2 cm dari awal. Pull-up iseng target sudah 5–6 rep sekarang.'},
+  {ph:2,fc:'#d97706',bg:'#fef3c7',nm:'Fase 2',kk:1750,pr:'115g',dl:false,
+   la:'Lari zona 2 40 mnt · Test naikkan pace pelan sambil jaga HR &lt;142 bpm',
+   bi:'Norwegian 4×4 + 5 mnt tempo zona 3 setelah cool-down',
+   gy:'Legs Day: RDL naik ke 30–35 kg · Goblet Squat evaluasi pindah ke Barbell · Farmer\'s Carry 14 kg → Treadmill 1° × 15 mnt',
+   cr:'Lapis 3 sudah jadi refleks? (push-up/wall sit saat craving)',
+   no:'HR lari di pace 8\'30" harus sudah turun ke ~162–165 bpm dari baseline 174 bpm.'},
+  {ph:0,fc:'#065f46',bg:'#d1fae5',nm:'DELOAD',kk:1850,pr:'110g',dl:true,
+   la:'Jalan cepat atau lari ringan 30 mnt zona 1 · Tidak ada tekanan pace',
+   bi:'Sepeda zona 2 santai 25 mnt · Tidak ada interval',
+   gy:'Semua beban turun 40% · Fokus mobilitas · Stretching 10 mnt post-gym → Treadmill flat ringan 10 mnt',
+   cr:'Minggu lebih fleksibel. Tetap jaga jadwal makan tapi tidak perlu kaku.',
+   no:'EVALUASI FASE 2: Test lari 3 km — bandingkan HR dan pace dengan 10 Mei. Test max push-up dan pull-up.'},
+  {ph:3,fc:'#dc2626',bg:'#fee2e2',nm:'Fase 3',kk:1650,pr:'120g',dl:false,
+   la:'Lari zona 2 · 45 mnt · Target HR &lt;148 bpm · Pace pasti sudah lebih cepat dari baseline',
+   bi:'Norwegian 5×4 (tambah 1 set dari fase 2) · HR 92–95%',
+   gy:'Push Day: progressive overload lanjut · Plank 3×50 dtk → Treadmill incline 5° × 20 mnt zona 2',
+   cr:'Craving sudah jauh berkurang setelah 8 minggu konsisten.',
+   no:'Fase terberat: kalori paling rendah, protein paling tinggi. Tidur 7+ jam wajib — tidak bisa dikompromikan.'},
+  {ph:3,fc:'#dc2626',bg:'#fee2e2',nm:'Fase 3',kk:1650,pr:'120g',dl:false,
+   la:'FIRST 5KM 🏃🎯 Lari 5 km zona 2 pertama. Catat waktu, HR, dan pace. Milestone besar.',
+   bi:'Norwegian 5×4 · HR 93–95% · Interval upgrade ke 5 mnt (dari 4 mnt)',
+   gy:'Pull Day: Lat Pulldown target 42 kg · Seated Row target 35 kg · Dead Bug 3×15 → Treadmill incline 5° × 20 mnt',
+   cr:'Munchys hanya 3×/minggu · Hari lain: teh stevia atau Greek yogurt coklat',
+   no:'5 km pertama. Pace dan HR tidak sepenting menyelesaikannya. Pull-up iseng seharusnya sudah 7–8 rep sekarang.'},
+  {ph:3,fc:'#dc2626',bg:'#fee2e2',nm:'Fase 3',kk:1650,pr:'120g',dl:false,
+   la:'5 km · Target pace &lt;8\'00" · HR target &lt;155 bpm',
+   bi:'Norwegian 5×4 full protokol · HR 93–95%',
+   gy:'Legs Day: RDL target 50 kg · Barbell Back Squat (jika form solid) · Farmer\'s Carry 16 kg → Treadmill 1° × 15 mnt',
+   cr:'Evaluasi total: berapa kali/minggu craving berhasil dilewati tanpa makan manis?',
+   no:'HR saat lari harus sudah turun signifikan dari baseline 174 bpm → target &lt;155–158 bpm di pace yang sama.'},
+  {ph:0,fc:'#4b5563',bg:'#f3f4f6',nm:'FINAL',kk:1800,pr:'115g',dl:true,
+   la:'TEST FINAL 3 KM 🏁 Pace terbaik yang bisa kamu lakukan. Bandingkan langsung dengan data 10 Mei 2026.',
+   bi:'Norwegian 4×4 · Lebih ringan (taper) · 1 sesi saja',
+   gy:'Maintenance · Beban turun 20% · Catat semua PR yang dicapai → Treadmill 15 mnt santai',
+   cr:'EVALUASI: Berapa kali/minggu craving berhasil dilewati vs menyerah?',
+   no:'BENCHMARK FINAL: Ukur lingkar pinggang · Timbang badan · Screenshot data app · Test max push-up & pull-up · Bandingkan semua dengan awal.'},
+];
+
+const pats=[
+  ['work','work','rec','bike','gym','rest','rest'],
+  ['rest','rest','work','work','rec','run','gym'],
+  ['rest','rest','rest','work','work','rec','bike'],
+  ['gym','rest','rest','rest','work','work','rec'],
+  ['run','gym','rest','rest','rest','work','work'],
+  ['rec','bike','gym','rest','rest','rest','work'],
+  ['work','rec','run','gym','rest','rest','rest'],
+  ['rest','work','work','rec','bike','gym','rest'],
+  ['rest','rest','work','work','rec','run','gym'],
+  ['rest','rest','rest','work','work','rec','bike'],
+  ['gym','rest','rest','rest','work','work','rec'],
+  ['run','gym','rest','rest','rest','work','work'],
+];
+
+const deloadWks=[3,7,11];
+const tm={
+  work:{c:'d-work',i:'💼',l:'Shift'},
+  rec:{c:'d-rec',i:'🚶',l:'Recover'},
+  bike:{c:'d-bike',i:'🚴',l:'Sepeda'},
+  gym:{c:'d-gym',i:'🏋️',l:'Gym+TM'},
+  run:{c:'d-run',i:'🏃',l:'Lari Z2'},
+  rest:{c:'d-rest',i:'🌙',l:'Libur'},
+};
+const days=['Sen','Sel','Rab','Kam','Jum','Sab','Min'];
+
+function buildSched(){
+  const g=document.getElementById('sg');
+  let h='<div class="wg" style="margin-bottom:8px"><div></div>';
+  days.forEach(d=>h+=`<div class="wh">${d}</div>`);
+  h+='</div>';
+  pats.forEach((pat,wi)=>{
+    const w=wdata[wi];
+    const isDL=deloadWks.includes(wi)||wi===11;
+    h+=`<div class="wg">`;
+    h+=`<div class="wl"><strong style="font-size:11px;color:${w.fc}">${wi+1}</strong><span style="font-size:8px;color:${w.fc}">${isDL?(wi===11?'FINAL':w.nm):w.nm}</span></div>`;
+    pat.forEach(t=>{
+      const tp=tm[t];
+      const cls=(isDL&&(t==='gym'||t==='bike'||t==='run'||t==='rec'))?'d-dl':tp.c;
+      h+=`<div class="wd ${cls}" onclick="showW(${wi})"><div class="wi">${tp.i}</div><div class="wt">${tp.l}</div></div>`;
+    });
+    h+='</div>';
+  });
+  g.innerHTML=h;
+}
+buildSched();
+
+let ow=-1;
+function showW(wi){
+  const det=document.getElementById('det');
+  if(ow===wi&&det.classList.contains('show')){det.classList.remove('show');ow=-1;return;}
+  ow=wi;
+  const w=wdata[wi];
+  det.innerHTML=`
+    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:12px">
+      <div style="font-size:16px;font-weight:800">Minggu ${wi+1}</div>
+      <span style="font-size:11px;padding:4px 12px;border-radius:20px;font-weight:700;background:${w.bg};color:${w.fc}">${w.nm}</span>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px">
+      <div style="background:#f8f7f3;padding:8px 10px;border-radius:8px;border:1px solid #e8e6e0"><div style="font-size:9px;color:#999;font-weight:700;text-transform:uppercase">Kalori/hari</div><div style="font-size:18px;font-weight:800">${w.kk} kkal</div></div>
+      <div style="background:#f8f7f3;padding:8px 10px;border-radius:8px;border:1px solid #e8e6e0"><div style="font-size:9px;color:#999;font-weight:700;text-transform:uppercase">Protein</div><div style="font-size:18px;font-weight:800">${w.pr}/hari</div></div>
+    </div>
+    <div style="font-size:9px;font-weight:800;color:#999;text-transform:uppercase;margin-bottom:4px">🏃 Lari / Outdoor</div>
+    <div style="font-size:13px;padding:8px 10px;background:#dcfce7;border-radius:8px;margin-bottom:10px;color:#065f46;border:1px solid #86efac">${w.la}</div>
+    <div style="font-size:9px;font-weight:800;color:#999;text-transform:uppercase;margin-bottom:4px">🚴 Sepeda / Norwegian 4×4</div>
+    <div style="font-size:13px;padding:8px 10px;background:#dbeafe;border-radius:8px;margin-bottom:10px;color:#1d4ed8;border:1px solid #93c5fd">${w.bi}</div>
+    <div style="font-size:9px;font-weight:800;color:#999;text-transform:uppercase;margin-bottom:4px">🏋️ Gym + Treadmill (Push/Pull/Legs bergantian)</div>
+    <div style="font-size:13px;padding:8px 10px;background:#ede9fe;border-radius:8px;margin-bottom:10px;color:#4c1d95;border:1px solid #c4b5fd">${w.gy}</div>
+    <div style="font-size:9px;font-weight:800;color:#999;text-transform:uppercase;margin-bottom:4px">🍪 Craving & Snack</div>
+    <div style="font-size:13px;padding:8px 10px;background:#fef3c7;border-radius:8px;margin-bottom:10px;color:#92400e;border:1px solid #fcd34d">${w.cr}</div>
+    <div style="font-size:9px;font-weight:800;color:${w.fc};text-transform:uppercase;margin-bottom:4px">📌 Catatan Kunci</div>
+    <div style="font-size:13px;padding:8px 10px;background:${w.bg};border-radius:8px;color:${w.fc};font-weight:600;border:1px solid ${w.fc}30">${w.no}</div>
+  `;
+  det.classList.add('show');
+  det.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+</script>
+</body>
+</html>
