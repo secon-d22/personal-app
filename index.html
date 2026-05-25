@@ -1101,4 +1101,2212 @@ label{font-size:12px;font-weight:600;color:var(--mu2);display:block;margin-botto
       <div class="st"><div class="s1">BFR</div><div class="s2 g">18.7%</div><div class="s3">Ideal</div></div>
       <div class="st"><div class="s1">Subcut fat</div><div class="s2 a">20.0%</div><div class="s3">High ⚠️</div></div>
       <div class="st"><div class="s1">Lean mass</div><div class="s2">52.2 kg</div></div>
-      <div class=
+      <div class="st"><div class="s1">Muscle mass</div><div class="s2 r">23.1 kg</div><div class="s3">Low ⚠️</div></div>
+      <div class="st"><div class="s1">BMR</div><div class="s2 a">1.541</div><div class="s3">kkal</div></div>
+      <div class="st"><div class="s1">Metab. age</div><div class="s2 r">29</div><div class="s3">Elder ⚠️</div></div>
+      <div class="st"><div class="s1">Visceral fat</div><div class="s2 g">4</div><div class="s3">Ideal ✓</div></div>
+    </div>
+    <div class="sl">Baseline lari — 10 Mei 2026</div>
+    <div class="sg">
+      <div class="st"><div class="s1">Jarak</div><div class="s2">3.08 km</div></div>
+      <div class="st"><div class="s1">Pace avg</div><div class="s2">8'30"</div><div class="s3">/km</div></div>
+      <div class="st"><div class="s1">HR avg</div><div class="s2 r">174 bpm</div></div>
+      <div class="st"><div class="s1">VO2 max</div><div class="s2 a">36</div><div class="s3">ml/kg/min</div></div>
+      <div class="st"><div class="s1">GCT</div><div class="s2 g">305 ms</div><div class="s3">Excellent</div></div>
+      <div class="st"><div class="s1">Recovery</div><div class="s2">40 jam</div></div>
+    </div>
+    <div class="sl">Update data terkini</div>
+    <div class="card">
+      <div class="hl-grid2" style="margin-bottom:8px">
+        <div class="hl-field"><label>Tanggal</label><input type="date" id="fd-date" style="width:100%;padding:8px;border:1px solid var(--bd);border-radius:8px;font-size:13px;font-family:inherit"></div>
+        <div class="hl-field"><label>Berat (kg)</label><input type="number" id="fd-weight" placeholder="64.2" step="0.1" style="width:100%;padding:8px;border:1px solid var(--bd);border-radius:8px;font-size:13px;font-family:inherit"></div>
+        <div class="hl-field"><label>Lingkar pinggang (cm)</label><input type="number" id="fd-waist" placeholder="80" step="0.5" style="width:100%;padding:8px;border:1px solid var(--bd);border-radius:8px;font-size:13px;font-family:inherit"></div>
+        <div class="hl-field"><label>% Lemak tubuh</label><input type="number" id="fd-bfr" placeholder="18.7" step="0.1" style="width:100%;padding:8px;border:1px solid var(--bd);border-radius:8px;font-size:13px;font-family:inherit"></div>
+        <div class="hl-field"><label>Push-up max (rep)</label><input type="number" id="fd-pushup" placeholder="25" style="width:100%;padding:8px;border:1px solid var(--bd);border-radius:8px;font-size:13px;font-family:inherit"></div>
+        <div class="hl-field"><label>Pull-up max (rep)</label><input type="number" id="fd-pullup" placeholder="3" style="width:100%;padding:8px;border:1px solid var(--bd);border-radius:8px;font-size:13px;font-family:inherit"></div>
+      </div>
+      <input id="fd-notes" type="text" placeholder="Catatan (kondisi, notes khusus...)" style="width:100%;padding:8px;border:1px solid var(--bd);border-radius:8px;font-size:13px;font-family:inherit;margin-bottom:8px">
+      <button class="btn" style="background:#1d4ed8;color:#fff;width:100%;padding:10px;border-radius:9px;border:none;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit" onclick="saveFitData()">💾 Simpan Data</button>
+    </div>
+    <div class="sl">Grafik progres</div>
+    <div class="card" style="padding:10px">
+      <div style="display:flex;gap:6px;margin-bottom:8px;flex-wrap:wrap">
+        <button class="btn btn-o btn-sm" onclick="renderFitChart('weight')" id="fc-btn-weight">⚖️ Berat</button>
+        <button class="btn btn-o btn-sm" onclick="renderFitChart('waist')" id="fc-btn-waist">📏 Pinggang</button>
+        <button class="btn btn-o btn-sm" onclick="renderFitChart('bfr')" id="fc-btn-bfr">💪 % Lemak</button>
+        <button class="btn btn-o btn-sm" onclick="renderFitChart('pushup')" id="fc-btn-pushup">🏋️ Push-up</button>
+      </div>
+      <div id="fit-chart-area" style="overflow-x:auto"></div>
+    </div>
+    <div class="sl">Riwayat pengukuran</div>
+    <div id="fit-data-hist"></div>
+  </div>
+</div><!-- end page-fit -->
+
+<!-- ============================== PMO & PE ============================== -->
+<div id="page-pmo" class="page">
+  <div class="tabs">
+    <button class="tab on" onclick="showSec('pmo','pdash',this)">📊 Stats</button>
+    <button class="tab" onclick="showSec('pmo','pcheckin',this)">✅ Check-in</button>
+    <button class="tab" onclick="showSec('pmo','prog',this)">📋 Program</button>
+    <button class="tab" onclick="showSec('pmo','purge',this)">🌊 Urge</button>
+    <button class="tab" onclick="showSec('pmo','plog',this)">📋 Log</button>
+  </div>
+
+  <!-- STATS -->
+  <div id="pmo-pdash" class="sec vis">
+    <div id="pmo-streak-container"></div>
+    <div class="sg" id="pmo-stats-grid"></div>
+    <div class="sl">28 Hari Terakhir</div>
+    <div class="card" style="padding:12px">
+      <div class="wk-grid"><div class="wkday">Sen</div><div class="wkday">Sel</div><div class="wkday">Rab</div><div class="wkday">Kam</div><div class="wkday">Jum</div><div class="wkday">Sab</div><div class="wkday">Min</div></div>
+      <div class="wk-grid" id="pmo-cal-grid"></div>
+    </div>
+    <div class="sl">Trigger paling sering</div>
+    <div class="card" id="pmo-trigger-stats"><div style="font-size:12px;color:var(--mu)">Belum ada trigger dilog.</div></div>
+    <div class="sl">Progress PE</div>
+    <div class="card" id="pmo-pe-progress"></div>
+    <div class="alert alert-p">💡 Tujuan bukan kesempurnaan, tapi membangun kontrol. Relapse adalah data, bukan kegagalan.</div>
+  </div>
+
+  <!-- CHECK-IN -->
+  <div id="pmo-pcheckin" class="sec">
+    <div class="alert alert-a" id="pmo-today-status">Belum check-in hari ini.</div>
+    <div class="sl" id="pmo-checkin-lbl">Hari ini saya...</div>
+    <div class="btn-row">
+      <button class="btn btn-g" onclick="logClean()">✅ Hari Bersih</button>
+      <button class="btn btn-r" onclick="openRelapse()">⚠️ Ada Relapse</button>
+    </div>
+    <div class="divider"></div>
+    <!-- PE CONDITIONAL LOG -->
+    <div id="pe-day-banner"></div>
+    <div id="pe-log-section">
+      <div class="sl" id="pmo-pe-lbl">Log Latihan PE</div>
+      <div class="card" style="background:var(--pmo-l);border-color:var(--pmo-b)">
+        <label>Latihan yang dilakukan</label>
+        <select id="pe-done" style="width:100%;padding:9px;border:1px solid var(--pmo-b);border-radius:8px;font-size:13px;font-family:inherit;margin-bottom:8px;background:#fff">
+          <option value="">— pilih latihan —</option>
+          <option value="Mindful tanpa porn">Mindful tanpa porn</option>
+          <option value="Stop-Start 3 siklus">Stop-Start 3 siklus</option>
+          <option value="Stop-Start 5 siklus">Stop-Start 5 siklus</option>
+          <option value="Kegel 3 set">Kegel 3 set/hari</option>
+          <option value="Box breathing">Box breathing</option>
+          <option value="Tidak latihan">Tidak latihan hari ini</option>
+        </select>
+        <label>Durasi aktual (menit)</label>
+        <input type="number" id="pe-dur" placeholder="contoh: 12" min="1" max="60"
+          style="width:100%;padding:9px;border:1px solid var(--pmo-b);border-radius:8px;font-size:13px;font-family:inherit;margin-bottom:8px;background:#fff">
+        <label>Catatan (opsional)</label>
+        <textarea id="pe-note" rows="2" placeholder="Durasi, pengamatan, kemajuan..."
+          style="width:100%;padding:9px;border:1px solid var(--pmo-b);border-radius:8px;font-size:13px;font-family:inherit;resize:none;margin-bottom:8px"></textarea>
+        <button class="btn btn-p" style="width:100%" onclick="logPE()">💾 Simpan Latihan PE</button>
+      </div>
+    </div>
+    <div class="divider"></div>
+    <div class="sl">Mood & Energi</div>
+    <div class="card">
+      <label>Mood</label>
+      <div class="trig-grid" id="mood-grid">
+        <div class="trig" onclick="selMood(this,'😊 Baik')">😊 Baik</div>
+        <div class="trig" onclick="selMood(this,'😐 Netral')">😐 Netral</div>
+        <div class="trig" onclick="selMood(this,'😤 Stres')">😤 Stres</div>
+        <div class="trig" onclick="selMood(this,'😴 Pasca-shift')">😴 Pasca-shift</div>
+      </div>
+      <label>Energi</label>
+      <div class="trig-grid" id="energy-grid">
+        <div class="trig" onclick="selEnergy(this,'⚡ Tinggi')">⚡ Tinggi</div>
+        <div class="trig" onclick="selEnergy(this,'🔋 Sedang')">🔋 Sedang</div>
+        <div class="trig" onclick="selEnergy(this,'🪫 Rendah')">🪫 Rendah</div>
+        <div class="trig" onclick="selEnergy(this,'🛏 Kelelahan')">🛏 Kelelahan</div>
+      </div>
+      <button class="btn btn-o btn-sm" onclick="saveMoodEnergy()" style="margin-top:6px">Simpan Mood</button>
+    </div>
+  </div>
+
+  <!-- PROGRAM 12 MINGGU -->
+  <div id="pmo-prog" class="sec">
+    <div id="pmo-prog-content"></div>
+  </div>
+
+  <!-- URGE SURFING -->
+  <div id="pmo-purge" class="sec">
+    <div class="surf-box">
+      <div class="surf-wave">🌊</div>
+      <div style="font-weight:700;font-size:16px;margin-top:8px">Urge Surfing</div>
+      <div style="font-size:12px;opacity:.75;line-height:1.6;margin-top:5px">Urge seperti ombak — naik, puncak, turun sendiri.<br>Rata-rata melemah dalam <strong>15–20 menit</strong>.</div>
+      <button class="btn btn-sm" style="background:rgba(121,184,255,.2);color:#93c5fd;font-weight:700;margin-top:12px;border:1px solid rgba(121,184,255,.3)" onclick="startUrgeSurf()">▶ Timer 20 Menit</button>
+    </div>
+    <div id="urge-timer-box" style="background:linear-gradient(135deg,#0f1730,#1a2a5e);border:1px solid rgba(121,184,255,.2);border-radius:14px;padding:16px;text-align:center;margin-bottom:10px;display:none">
+      <div style="font-size:10px;color:rgba(121,184,255,.6);font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin-bottom:5px">Tahan sampai selesai</div>
+      <div class="timer-num" id="ut-num" style="color:#93c5fd">20:00</div>
+      <div class="timer-row"><button class="btn btn-o btn-sm" onclick="stopUrgeSurf()">■ Stop</button></div>
+    </div>
+
+    <div class="sl">Protokol Darurat</div>
+    <div class="card">
+      <div class="cr"><div style="flex:1"><strong>1. Timer 20 menit</strong><div style="font-size:11px;color:var(--mu)">Tidak ada keputusan sebelum selesai</div></div><span class="chip cb">Waktu</span></div>
+      <div class="cr"><div style="flex:1"><strong>2. Pindah lokasi fisik</strong><div style="font-size:11px;color:var(--mu)">Keluar kamar — wajib</div></div><span class="chip cg">Fisik</span></div>
+      <div class="cr"><div style="flex:1"><strong>3. Minum air dingin berdiri</strong><div style="font-size:11px;color:var(--mu)">Grounding</div></div><span class="chip cg">Ground</span></div>
+      <div class="cr"><div style="flex:1"><strong>4. Push-up atau plank 2 menit</strong><div style="font-size:11px;color:var(--mu)">Redirect energi</div></div><span class="chip ca">Latihan</span></div>
+      <div class="cr"><div style="flex:1"><strong>5. Box breathing 2 menit</strong><div style="font-size:11px;color:var(--mu)">4 hitungan masuk – tahan 4 – keluar 4 – tahan 4</div></div><span class="chip cp">Napas</span></div>
+      <div class="cr"><div style="flex:1"><strong>6. Log trigger sekarang</strong><div style="font-size:11px;color:var(--mu)">Sadar = kontrol</div></div><span class="chip cp">Awareness</span></div>
+    </div>
+
+    <div class="sl">Log Trigger Sekarang</div>
+    <div class="card">
+      <label>Apa yang memicu?</label>
+      <div class="trig-grid" id="trigger-sel">
+        <div class="trig" onclick="selTrig(this,'😴 Bosan')">😴 Bosan</div>
+        <div class="trig" onclick="selTrig(this,'😤 Stres')">😤 Stres</div>
+        <div class="trig" onclick="selTrig(this,'🌙 Larut malam')">🌙 Larut malam</div>
+        <div class="trig" onclick="selTrig(this,'🛏 Pasca-shift')">🛏 Pasca-shift</div>
+        <div class="trig" onclick="selTrig(this,'😔 Kesepian')">😔 Kesepian</div>
+        <div class="trig" onclick="selTrig(this,'📱 Scroll medsos')">📱 Scroll medsos</div>
+        <div class="trig" onclick="selTrig(this,'👁 Foto/video')">👁 Foto/video</div>
+        <div class="trig" onclick="selTrig(this,'😡 Frustrasi')">😡 Frustrasi</div>
+      </div>
+      <label>Apa yang kamu lakukan?</label>
+      <div class="trig-grid" id="action-sel">
+        <div class="trig" onclick="selAct(this,'Tahan — hari bersih')">✅ Tahan</div>
+        <div class="trig" onclick="selAct(this,'Push-up / plank')">💪 Push-up</div>
+        <div class="trig" onclick="selAct(this,'Keluar ruangan')">🚶 Keluar</div>
+        <div class="trig" onclick="selAct(this,'Relapse')">⚠️ Relapse</div>
+      </div>
+      <button class="btn btn-p" style="width:100%;margin-top:8px" onclick="saveTrigger()">Simpan Trigger Log</button>
+    </div>
+  </div>
+
+  <!-- LOG -->
+  <div id="pmo-plog" class="sec">
+    <div class="tabs" style="margin-bottom:8px">
+      <button class="tab on" onclick="showLog('ld',this)">Check-in</button>
+      <button class="tab" onclick="showLog('lt',this)">Trigger</button>
+      <button class="tab" onclick="showLog('lp',this)">PE</button>
+    </div>
+    <div id="ld" class="sec vis">
+      <div id="pmo-log-list"></div>
+    </div>
+    <div id="lt" class="sec">
+      <div id="pmo-trigger-log"></div>
+    </div>
+    <div id="lp" class="sec">
+      <div id="pmo-pe-log"></div>
+    </div>
+    <div style="margin-top:12px;text-align:center">
+      <button class="btn btn-o btn-sm" onclick="if(confirm('Reset semua data PMO?'))clearPMO()">🗑 Reset data PMO</button>
+    </div>
+  </div>
+</div><!-- end page-pmo -->
+
+<!-- RELAPSE MODAL -->
+<!-- ============================== KESEHATAN ============================== -->
+<div id="page-health" class="page">
+  <div class="tabs">
+    <button class="tab on" onclick="showSec('hl','input',this)">📝 Input</button>
+    <button class="tab" onclick="showSec('hl','hist',this)">📊 Riwayat</button>
+    <button class="tab" onclick="showSec('hl','pe',this)">🎯 Latihan PE</button>
+    <button class="tab" onclick="showSec('hl','ref',this)">📖 Referensi</button>
+  </div>
+
+  <!-- INPUT -->
+  <div id="hl-input" class="sec vis">
+    <div id="hl-last-info"></div>
+
+    <div class="sl">Tanggal Pengukuran</div>
+    <input type="date" id="hl-date" class="hl-date-input">
+
+    <div class="sl">🩺 Tekanan Darah</div>
+    <div class="card">
+      <div class="hl-grid3">
+        <div class="hl-field"><label>Sistolik (mmHg)</label><input type="number" id="hl-sys" placeholder="120" min="60" max="250"><div style="font-size:9px;color:var(--mu);margin-top:2px">Normal: &lt;120</div></div>
+        <div class="hl-field"><label>Diastolik (mmHg)</label><input type="number" id="hl-dia" placeholder="80" min="40" max="150"><div style="font-size:9px;color:var(--mu);margin-top:2px">Normal: &lt;80</div></div>
+        <div class="hl-field"><label>Nadi (/mnt)</label><input type="number" id="hl-pulse" placeholder="72" min="30" max="200"><div style="font-size:9px;color:var(--mu);margin-top:2px">Normal: 60–100</div></div>
+      </div>
+      <div id="hl-bp-status" class="hl-status-tag"></div>
+    </div>
+
+    <div class="sl">🔬 Profil Lipid</div>
+    <div class="card">
+      <div class="hl-grid2">
+        <div class="hl-field">
+          <label>Kolesterol Total (mg/dL)</label>
+          <input type="number" id="hl-chol" placeholder="200" min="50" max="500" oninput="liveStatus('hl-chol-st',+this.value,'chol')">
+          <div id="hl-chol-st" class="hl-live-st"></div>
+          <div style="font-size:9px;color:var(--mu);margin-top:2px">Normal: &lt;200 · Batas: 200–239 · Tinggi: ≥240</div>
+        </div>
+        <div class="hl-field">
+          <label>Trigliserida (mg/dL)</label>
+          <input type="number" id="hl-trig" placeholder="150" min="10" max="1000" oninput="liveStatus('hl-trig-st',+this.value,'trig')">
+          <div id="hl-trig-st" class="hl-live-st"></div>
+          <div style="font-size:9px;color:var(--mu);margin-top:2px">Normal: &lt;150 · Batas: 150–199</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sl">🧬 Asam Urat (mg/dL)</div>
+    <div class="card">
+      <div class="hl-grid2">
+        <div class="hl-field"><label>Nilai</label><input type="number" id="hl-uric" placeholder="5.5" step="0.1" min="1" max="20" oninput="liveStatus('hl-uric-st',+this.value,'uric')"><div id="hl-uric-st" class="hl-live-st"></div></div>
+        <div class="hl-field" style="justify-content:flex-end;padding-top:20px">
+          <div class="hl-info-box">Normal pria: 3.4–7.0<br>Normal wanita: 2.4–6.0</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sl">🩸 Gula Darah (mg/dL)</div>
+    <div class="card">
+      <div class="hl-grid2">
+        <div class="hl-field"><label>GDP — Puasa</label><input type="number" id="hl-gdp" placeholder="90" min="20" max="600" oninput="liveStatus('hl-gdp-st',+this.value,'gdp')"><div id="hl-gdp-st" class="hl-live-st"></div><div style="font-size:9px;color:var(--mu);margin-top:2px">Normal: &lt;100 · Pra-DM: 100–125</div></div>
+        <div class="hl-field"><label>GDS — Sewaktu</label><input type="number" id="hl-gds" placeholder="110" min="20" max="600" oninput="liveStatus('hl-gds-st',+this.value,'gds')"><div id="hl-gds-st" class="hl-live-st"></div><div style="font-size:9px;color:var(--mu);margin-top:2px">Normal: &lt;140 · Pra-DM: 140–199</div></div>
+      </div>
+    </div>
+
+    <div class="sl">Catatan</div>
+    <div class="card">
+      <textarea id="hl-notes" rows="2" placeholder="Kondisi saat tes, obat yang dikonsumsi, hasil dari RS/klinik..." style="width:100%;padding:9px 11px;border:1px solid var(--bd);border-radius:8px;font-size:13px;font-family:inherit;resize:none"></textarea>
+    </div>
+
+    <button class="btn" style="background:#e11d48;color:#fff;width:100%;padding:12px;border-radius:10px;border:none;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;margin-bottom:16px" onclick="saveHealth()">💾 Simpan Pengukuran</button>
+  </div>
+
+  <!-- RIWAYAT -->
+  <div id="hl-hist" class="sec">
+    <div id="hl-hist-list"></div>
+  </div>
+
+  <!-- REFERENSI -->
+  <div id="hl-ref" class="sec">
+    <div class="alert" style="background:#fff0f6;border:1px solid #fbcfe8;color:#9d174d;font-size:12px;border-radius:10px;padding:10px 12px;margin-bottom:10px">
+      Nilai referensi umum di bawah ini. Konsultasikan hasil aktual dengan dokter untuk interpretasi personal.
+    </div>
+    <div class="sl">Tekanan Darah</div>
+    <div class="card">
+      <div class="hl-ref-row"><span class="chip cg">Normal</span><span>Sistolik &lt;120 · Diastolik &lt;80</span></div>
+      <div class="hl-ref-row"><span class="chip ca">Elevated</span><span>Sistolik 120–129 · Diastolik &lt;80</span></div>
+      <div class="hl-ref-row"><span class="chip ca">High 1</span><span>Sistolik 130–139 · Diastolik 80–89</span></div>
+      <div class="hl-ref-row"><span class="chip cr2">High 2</span><span>Sistolik ≥140 · Diastolik ≥90</span></div>
+    </div>
+    <div class="sl">Profil Lipid (mg/dL)</div>
+    <div class="card">
+      <div class="hl-ref-row"><strong>Total Kolesterol</strong><span style="font-size:11px;color:var(--mu)">Normal &lt;200 · Batas 200–239 · Tinggi ≥240</span></div>
+      <div class="hl-ref-row"><strong>LDL</strong><span style="font-size:11px;color:var(--mu)">Normal &lt;130 · Batas 130–159 · Tinggi ≥160</span></div>
+      <div class="hl-ref-row"><strong>HDL</strong><span style="font-size:11px;color:var(--mu)">Rendah &lt;40 · Cukup 40–59 · Optimal ≥60</span></div>
+      <div class="hl-ref-row"><strong>Trigliserida</strong><span style="font-size:11px;color:var(--mu)">Normal &lt;150 · Batas 150–199 · Tinggi ≥200</span></div>
+    </div>
+    <div class="sl">Asam Urat (mg/dL)</div>
+    <div class="card">
+      <div class="hl-ref-row"><strong>Pria</strong><span style="font-size:12px;color:var(--mu)">Normal 3.4–7.0 · Tinggi &gt;7.0</span></div>
+      <div class="hl-ref-row"><strong>Wanita</strong><span style="font-size:12px;color:var(--mu)">Normal 2.4–6.0 · Tinggi &gt;6.0</span></div>
+    </div>
+    <div class="sl">Gula Darah (mg/dL)</div>
+    <div class="card">
+      <div class="hl-ref-row"><strong>GDP (Puasa)</strong><span style="font-size:11px;color:var(--mu)">Normal &lt;100 · Pra-DM 100–125 · DM ≥126</span></div>
+      <div class="hl-ref-row"><strong>GDS (Sewaktu)</strong><span style="font-size:11px;color:var(--mu)">Normal &lt;140 · Pra-DM 140–199 · DM ≥200</span></div>
+    </div>
+  </div>
+</div>
+
+  <!-- LATIHAN PE (moved from PMO) -->
+  <div id="hl-pe" class="sec">
+    <div class="alert" style="background:var(--pmo-l);border:1px solid var(--pmo-b);border-radius:10px;padding:10px 12px;margin-bottom:10px;font-size:12px;color:#4c1d95">
+      PE (Premature Ejaculation) adalah kondisi fisiologis/neuromuskular — <strong>bukan masalah moral.</strong> Latihan di bawah adalah teknik medis yang terbukti. Tracking PE dan PMO dibuat terpisah karena keduanya berbeda secara fundamental.
+    </div>
+    <div class="sl">Log latihan PE hari ini</div>
+    <div class="card" style="background:var(--pmo-l);border-color:var(--pmo-b)">
+      <label>Latihan yang dilakukan</label>
+      <select id="pe-done" style="width:100%;padding:9px;border:1px solid var(--pmo-b);border-radius:8px;font-size:13px;font-family:inherit;margin-bottom:8px">
+        <option value="">— pilih latihan —</option>
+        <option value="Mindful tanpa porn">Fase 1 — Mindful (≥10 mnt)</option>
+        <option value="Stop-Start 3×">Fase 2 — Stop-Start 3× siklus</option>
+        <option value="Stop-Start 5×">Fase 2 — Stop-Start 5× siklus</option>
+        <option value="Kegel 3 set">Fase 3 — Kegel 3 set</option>
+        <option value="Pernapasan dalam">Latihan pernapasan dalam</option>
+        <option value="Tidak latihan">Tidak latihan hari ini</option>
+      </select>
+      <label>Catatan (opsional)</label>
+      <textarea id="pe-note" rows="2" placeholder="Durasi, observasi, kemajuan..." style="width:100%;padding:9px;border:1px solid var(--pmo-b);border-radius:8px;font-size:13px;font-family:inherit;resize:none;margin-bottom:8px"></textarea>
+      <button class="btn btn-p" style="width:100%" onclick="logPE()">Simpan Latihan PE</button>
+    </div>
+    <div class="tcard2" style="background:var(--grn-l);border-color:var(--grn-b);margin-top:10px">
+      <div class="tc-header"><div class="tc-title">🌱 Fase 1 — Mindful (Mgg 1–4)</div><div class="tc-week" style="background:#dcfce7;color:#14532d">Minggu 1–4</div></div>
+      <div class="tc-desc">Bangun kembali koneksi tubuh–sensasi. Tanpa pornografi. Fokus sensasi fisik murni.</div>
+      <div class="step"><div class="step-n">1</div><span><strong>Zero visual eksternal.</strong> Hanya imajinasi atau sensasi tubuh.</span></div>
+      <div class="step"><div class="step-n">2</div><span><strong>Target durasi ≥10 menit.</strong> Saat arousal 7/10 → jeda → turun ke 5/10 → lanjut.</span></div>
+      <div class="step"><div class="step-n">3</div><span><strong>Napas perut:</strong> inhale 4 hitung, tahan 2, exhale 6. Ini mengaktifkan parasimpatis.</span></div>
+      <div class="step"><div class="step-n">4</div><span><strong>Frekuensi:</strong> 1–2× seminggu. Kualitas > kuantitas.</span></div>
+      <div class="timer-box"><div class="timer-num" id="t1-num">10:00</div><div class="timer-label">Target durasi minimum</div><div class="timer-row"><button class="btn btn-p btn-sm" onclick="startTimer('t1',600)">▶ Mulai</button><button class="btn btn-o btn-sm" onclick="resetTimer('t1',600)">↺ Reset</button></div></div>
+    </div>
+    <div class="tcard2" style="background:#fff0f9;border-color:#f0abfc;margin-top:8px">
+      <div class="tc-header"><div class="tc-title">🎯 Fase 2 — Stop-Start (Mgg 5–8)</div><div class="tc-week" style="background:#fae8ff;color:#6b21a8">Minggu 5–8</div></div>
+      <div class="tc-desc">Teknik Semans (1956): melatih sistem saraf mengenali dan menahan titik "no return".</div>
+      <div class="step"><div class="step-n">1</div><span><strong>Tanpa porn.</strong> Stimulasi sampai arousal 7–8/10, lalu <strong>STOP</strong> total.</span></div>
+      <div class="step"><div class="step-n">2</div><span>Tunggu arousal turun ke 4–5/10. Ulangi. <strong>3× siklus</strong> mgg 5–6, <strong>5× siklus</strong> mgg 7–8.</span></div>
+      <div class="step"><div class="step-n">3</div><span><strong>Kegel aktif saat stop:</strong> kencangkan otot dasar panggul saat menahan. Ini melatih kontrol neuromuskular.</span></div>
+      <div class="timer-box" style="background:#fae8ff;border-color:#f0abfc"><div class="timer-num" id="t2-num" style="color:#7c3aed">15:00</div><div class="timer-label">Target durasi sesi</div><div class="timer-row"><button class="btn btn-sm" style="background:#7c3aed;color:#fff" onclick="startTimer('t2',900)">▶ Mulai</button><button class="btn btn-o btn-sm" onclick="resetTimer('t2',900)">↺ Reset</button></div></div>
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-top:10px;padding:8px 0;border-top:1px solid #f0abfc">
+        <span style="font-size:12px;font-weight:600">Siklus stop-start hari ini:</span>
+        <div style="display:flex;align-items:center;gap:8px">
+          <button class="btn btn-o btn-sm" onclick="this.previousElementSibling.previousElementSibling.textContent=Math.max(0,+this.previousElementSibling.previousElementSibling.textContent-1)">−</button>
+          <span id="pe-cycles" style="font-size:18px;font-weight:800;min-width:24px;text-align:center">0</span>
+          <button class="btn btn-o btn-sm" onclick="document.getElementById('pe-cycles').textContent=+document.getElementById('pe-cycles').textContent+1">+</button>
+          <span style="font-size:12px;color:var(--mu)">siklus</span>
+        </div>
+      </div>
+    </div>
+    <div class="tcard2" style="margin-top:8px">
+      <div class="tc-header"><div class="tc-title">💪 Fase 3 — Integrasi & Kegel (Mgg 9–12)</div><div class="tc-week">Minggu 9–12</div></div>
+      <div class="tc-desc">Gabungkan kontrol stop-start dengan penguatan otot dasar panggul.</div>
+      <div class="step"><div class="step-n">1</div><span><strong>Kegel identification:</strong> otot yang menghentikan aliran urine di tengah.</span></div>
+      <div class="step"><div class="step-n">2</div><span><strong>Rutin:</strong> kencang 3 dtk, lepas 3 dtk. 10 rep = 1 set. 3 set/hari. Bisa kapan saja.</span></div>
+      <div class="step"><div class="step-n">3</div><span><strong>Stop-Start 5× siklus,</strong> aktifkan kegel saat arousal tinggi. Target total sesi ≥20 mnt.</span></div>
+      <div class="timer-box"><div class="timer-num" id="t3-num">03:00</div><div class="timer-label">Kegel — 10 rep (3dtk×2)</div><div class="timer-row"><button class="btn btn-p btn-sm" onclick="startTimer('t3',180)">▶ Mulai</button><button class="btn btn-o btn-sm" onclick="resetTimer('t3',180)">↺</button></div></div>
+    </div>
+    <div class="card" style="background:#fff0f6;border-color:#fbcfe8;margin-top:10px">
+      <div style="font-size:11px;font-weight:700;color:#9d174d;margin-bottom:6px">🚫 YANG DIHINDARI</div>
+      <div class="dot-row"><div class="dot" style="background:#e11d48"></div><span class="txt">Masturbasi dengan pornografi — counter-productive.</span></div>
+      <div class="dot-row"><div class="dot" style="background:#e11d48"></div><span class="txt">Masturbasi tergesa-gesa — melatih sistem saraf yang salah.</span></div>
+      <div class="dot-row"><div class="dot" style="background:#e11d48"></div><span class="txt">Lebih dari 2× seminggu di fase awal — over-stimulasi.</span></div>
+      <div class="dot-row"><div class="dot" style="background:#e11d48"></div><span class="txt">Menahan napas — memperburuk PE dan tidak aman untuk asma.</span></div>
+    </div>
+    <div id="pe-log-list" style="margin-top:10px"></div>
+  </div>
+</div><!-- end page-health -->
+
+<!-- ============================== SETTINGS / EXPORT MODAL ============================== -->
+<div class="overlay" id="settings-overlay" style="align-items:center" onclick="if(event.target===this)closeSettings()">
+  <div style="background:#fff;border-radius:16px;padding:20px;margin:20px;width:100%;max-width:400px;max-height:80vh;overflow-y:auto">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
+      <strong style="font-size:16px">⚙️ Pengaturan</strong>
+      <button onclick="closeSettings()" style="background:none;border:none;font-size:20px;cursor:pointer;color:var(--mu)">×</button>
+    </div>
+    <div class="sl">Tanggal mulai program</div>
+    <div style="display:flex;gap:8px;margin-bottom:14px;align-items:center">
+      <input type="date" id="settings-start" style="flex:1;padding:9px;border:1px solid var(--bd);border-radius:8px;font-size:13px;font-family:inherit">
+      <button class="btn" style="background:#1d4ed8;color:#fff;border:none;padding:9px 14px;border-radius:8px;cursor:pointer;font-family:inherit;font-size:13px;font-weight:700" onclick="applyStartDate()">Simpan</button>
+    </div>
+    <div class="sl">HR Maksimum (untuk zona sepeda)</div>
+    <div style="display:flex;gap:8px;margin-bottom:14px;align-items:center">
+      <input type="number" id="settings-hrmax" placeholder="186" min="140" max="220" style="flex:1;padding:9px;border:1px solid var(--bd);border-radius:8px;font-size:13px;font-family:inherit">
+      <button class="btn" style="background:#1d4ed8;color:#fff;border:none;padding:9px 14px;border-radius:8px;cursor:pointer;font-family:inherit;font-size:13px;font-weight:700" onclick="applyHRMax()">Simpan</button>
+    </div>
+    <div class="sl">Backup & Restore data</div>
+    <div style="font-size:11px;color:var(--mu);margin-bottom:8px">Semua data tersimpan di browser (localStorage). Export ke file JSON untuk backup. Import untuk restore atau pindah device.</div>
+    <div style="display:flex;flex-direction:column;gap:7px">
+      <button class="btn" style="background:#059669;color:#fff;border:none;padding:11px;border-radius:10px;cursor:pointer;font-family:inherit;font-size:13px;font-weight:700" onclick="exportData()">⬇️ Export semua data ke JSON</button>
+      <label class="btn" style="background:#2563eb;color:#fff;border:none;padding:11px;border-radius:10px;cursor:pointer;font-family:inherit;font-size:13px;font-weight:700;text-align:center;display:block">
+        ⬆️ Import data dari JSON
+        <input type="file" accept=".json" style="display:none" onchange="importData(event)">
+      </label>
+      <button class="btn" style="background:#dc2626;color:#fff;border:none;padding:11px;border-radius:10px;cursor:pointer;font-family:inherit;font-size:13px;font-weight:700" onclick="resetAllData()">🗑 Reset semua data</button>
+    </div>
+  </div>
+</div>
+
+
+<div id="page-nut" class="page">
+  <div class="tabs">
+    <button class="tab on" onclick="showSec('nut','today',this)">📅 Hari Ini</button>
+    <button class="tab" onclick="showSec('nut','hist',this)">📋 Riwayat</button>
+    <button class="tab" onclick="showSec('nut','guide',this)">📖 Panduan</button>
+  </div>
+
+  <!-- HARI INI -->
+  <div id="nut-today" class="sec vis">
+    <div id="nut-hero-card"></div>
+
+    <div class="sl">Tambah makanan / minuman</div>
+    <div class="card">
+      <div class="food-search-wrap">
+        <input class="food-search-input" id="food-search" type="text" placeholder="🔍 Cari makanan... (nasi, ayam, telur...)" oninput="searchFood(this.value)" autocomplete="off">
+        <div class="food-dropdown" id="food-dropdown" style="display:none"></div>
+      </div>
+      <div class="nut-form">
+        <div class="nut-form-col" style="grid-column:1/-1">
+          <label>Nama makanan / minuman</label>
+          <input type="text" id="food-name" placeholder="Nama makanan..." oninput="clearFoodSearch()">
+        </div>
+        <div class="nut-form-col">
+          <label>Kalori (kkal)</label>
+          <input type="number" id="food-cal" placeholder="0" min="0" max="9999">
+        </div>
+        <div class="nut-form-col">
+          <label>Protein (g)</label>
+          <input type="number" id="food-pro" placeholder="0" step="0.1" min="0" max="999">
+        </div>
+      </div>
+      <button class="btn btn-g" onclick="addFood()" style="background:var(--grn2)">+ Tambah</button>
+    </div>
+
+    <div class="sl">Log hari ini</div>
+    <div class="card" id="nut-food-list">
+      <div style="font-size:12px;color:var(--mu);text-align:center;padding:12px 0">Belum ada makanan dicatat.</div>
+    </div>
+
+    <div class="sl">🍫 Konsumsi Coklat</div>
+    <div class="card" style="margin-bottom:8px">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
+        <div class="qhc" id="nut-cocoa-cb" onclick="toggleCocoaNut()" style="width:22px;height:22px;flex-shrink:0;cursor:pointer"></div>
+        <label onclick="toggleCocoaNut()" style="font-size:13px;font-weight:600;cursor:pointer">Konsumsi coklat hari ini</label>
+      </div>
+      <div id="nut-cocoa-detail" style="display:none">
+        <input type="text" id="nut-cocoa-type" placeholder="Jenis: dark chocolate 70%, cocoa powder, susu coklat..."
+          style="width:100%;padding:8px 10px;border:1px solid var(--bd);border-radius:8px;font-size:12px;font-family:inherit"
+          oninput="saveCocoaType(this.value)">
+      </div>
+      <div id="nut-cocoa-hist" style="margin-top:6px;font-size:10px;color:var(--mu)"></div>
+    </div>
+    <div class="sl">Catatan harian</div>
+    <div class="card">
+      <textarea id="nut-notes" rows="2" placeholder="Air putih, mood makan, catatan khusus hari ini..." style="width:100%;padding:9px 11px;border:1px solid var(--bd);border-radius:8px;font-size:13px;font-family:inherit;resize:none;margin-bottom:6px" oninput="saveNutNotes()"></textarea>
+    </div>
+  </div>
+
+  <!-- RIWAYAT -->
+  <div id="nut-hist" class="sec">
+    <div id="nut-hist-list"></div>
+  </div>
+
+  <!-- PANDUAN -->
+  <div id="nut-guide" class="sec">
+    <div class="card" style="background:var(--grn2-l);border-color:var(--grn2-b);margin-bottom:10px">
+      <div style="font-size:12px;color:#065f46"><strong>Target kalori per fase</strong> menyesuaikan minggu program. Ketuk tanggal di atas untuk melihat target fase spesifik.</div>
+    </div>
+    <div class="sl">Target per fase</div>
+    <div class="card">
+      <div class="nut-phase-row"><span><strong>Fase 1</strong> (Mgg 1–3)</span><span class="chip cg">1.900 kkal · 105g protein</span></div>
+      <div class="nut-phase-row"><span><strong>Deload</strong> (Mgg 4)</span><span class="chip cw2">1.950 kkal · 105g protein</span></div>
+      <div class="nut-phase-row"><span><strong>Fase 2</strong> (Mgg 5–7)</span><span class="chip ca">1.750 kkal · 115g protein</span></div>
+      <div class="nut-phase-row"><span><strong>Deload</strong> (Mgg 8)</span><span class="chip cw2">1.850 kkal · 110g protein</span></div>
+      <div class="nut-phase-row"><span><strong>Fase 3</strong> (Mgg 9–11)</span><span class="chip cr2">1.650 kkal · 120g protein</span></div>
+      <div class="nut-phase-row"><span><strong>Final</strong> (Mgg 12)</span><span class="chip cw2">1.800 kkal · 115g protein</span></div>
+    </div>
+    <div class="sl">Jadwal makan harian</div>
+    <div class="card">
+      <div class="nut-phase-row"><span>🌅 Sarapan 07.00</span><span style="font-size:12px;color:var(--mu2)">~420 kkal · 32g protein</span></div>
+      <div class="nut-phase-row"><span>☀️ Makan siang 12.00</span><span style="font-size:12px;color:var(--mu2)">~480 kkal · 38g protein</span></div>
+      <div class="nut-phase-row"><span>🍪 Snack 15.00</span><span style="font-size:12px;color:var(--mu2)">~230 kkal · 10g protein</span></div>
+      <div class="nut-phase-row"><span>🌙 Makan malam 19.00</span><span style="font-size:12px;color:var(--mu2)">~420 kkal · 35g protein</span></div>
+      <div style="margin-top:8px;font-size:11px;background:var(--amb-l);border:1px solid var(--amb-b);border-radius:8px;padding:8px 10px;color:#78350f">⏰ Stop makan jam 20.30. Floor kalori minimum: <strong>1.650 kkal</strong> — tidak boleh di bawah ini.</div>
+    </div>
+    <div class="sl">Tips protein tinggi</div>
+    <div class="card">
+      <div class="nut-phase-row"><span>Dada ayam rebus (100g)</span><span class="chip cg">31g protein</span></div>
+      <div class="nut-phase-row"><span>Whey 1 scoop</span><span class="chip cg">25g protein</span></div>
+      <div class="nut-phase-row"><span>Telur rebus (1 butir)</span><span class="chip cg">6g protein</span></div>
+      <div class="nut-phase-row"><span>Tempe goreng (50g)</span><span class="chip cg">8g protein</span></div>
+      <div class="nut-phase-row"><span>Greek yogurt (150g)</span><span class="chip cg">10g protein</span></div>
+      <div class="nut-phase-row"><span>Tahu goreng (50g)</span><span class="chip cg">6g protein</span></div>
+    </div>
+  </div>
+</div>
+
+
+<div class="overlay" id="relapse-overlay" onclick="if(event.target===this)closeRelapse()">
+  <div class="modal">
+    <div class="modal-title">⚠️ Log Relapse PMO</div>
+    <div style="font-size:11px;color:var(--mu);margin-bottom:10px">Ini adalah log khusus untuk relapse PMO (pornografi / masturbasi kompulsif). Bukan untuk hal lain.</div>
+    <label>Pemicu utama</label>
+    <div class="trig-grid" id="r-trigger-sel">
+      <div class="trig" onclick="selRTrig(this,'😴 Bosan')">😴 Bosan</div>
+      <div class="trig" onclick="selRTrig(this,'😤 Stres')">😤 Stres</div>
+      <div class="trig" onclick="selRTrig(this,'🌙 Larut malam')">🌙 Larut malam</div>
+      <div class="trig" onclick="selRTrig(this,'🛏 Pasca-shift')">🛏 Pasca-shift</div>
+      <div class="trig" onclick="selRTrig(this,'😔 Kesepian')">😔 Kesepian</div>
+      <div class="trig" onclick="selRTrig(this,'📱 Scroll medsos')">📱 Scroll medsos</div>
+    </div>
+    <label>Catatan (apa yang bisa berbeda?)</label>
+    <textarea id="relapse-note" rows="3" placeholder="Tulis apa yang bisa dilakukan berbeda lain kali..."></textarea>
+    <div class="btn-row">
+      <button class="btn btn-o" onclick="closeRelapse()">Batal</button>
+      <button class="btn btn-r" onclick="logRelapse()">💾 Simpan</button>
+    </div>
+    <div class="alert alert-p" style="margin-bottom:0;margin-top:8px">Relapse adalah data, bukan kegagalan. Setiap log membantu memahami pola PMO-mu.</div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ─── CONSTANTS ───────────────────────────────────────────────────────────────
+const HABITS=[
+  {id:'med',icon:'🧘',name:'Meditasi Pagi',time:'07.00',dur:'15 mnt',color:'#7c3aed',bg:'#fdf4ff',bd:'#d8b4fe'},
+  {id:'read',icon:'📖',name:'Membaca',time:'07.20',dur:'30 mnt',color:'#2563eb',bg:'#eff6ff',bd:'#93c5fd'},
+  {id:'quran',icon:'📿',name:'Baca Quran',time:'Maghrib',dur:'30 mnt',color:'#059669',bg:'#f0fdf4',bd:'#86efac'},
+  {id:'journal',icon:'📔',name:'Journaling',time:'21.00',dur:'10–15 mnt',color:'#d97706',bg:'#fffbeb',bd:'#fcd34d'},
+  {id:'sport',icon:'💪',name:'Olahraga',time:'Terjadwal',dur:'Sesuai jadwal',color:'#dc2626',bg:'#fff1f2',bd:'#fca5a5'},
+];
+const DAY_TYPES=[
+  {id:'shift',label:'Shift 24 Jam',icon:'💼',color:'#dc2626',bg:'#fee2e2'},
+  {id:'rec',label:'Recovery',icon:'🚶',color:'#d97706',bg:'#fef3c7'},
+  {id:'gym',label:'Gym + TM',icon:'🏋️',color:'#7c3aed',bg:'#ede9fe'},
+  {id:'run',label:'Lari Z2',icon:'🏃',color:'#059669',bg:'#dcfce7'},
+  {id:'bike',label:'Sepeda',icon:'🚴',color:'#2563eb',bg:'#dbeafe'},
+  {id:'rest',label:'Libur',icon:'🌙',color:'#6b7280',bg:'#f3f4f6'},
+];
+const SPORT_TIPS={
+  shift:'Iseng: push-up 10–15 rep beberapa kali · wall sit 2 mnt saat craving · plank aman kapan saja',
+  rec:'Rutin skoliosis penuh 15–20 mnt · jalan santai 20–30 mnt jika energi cukup',
+  gym:'Gym session terjadwal (Push/Pull/Legs) + treadmill incline penutup · rutin skoliosis sebagai warm-up',
+  run:'Lari zona 2 sesuai durasi fase + stretch skoliosis penuh 7 mnt setelah lari',
+  bike:'Sepeda zona 2 + Norwegian 4×4 sesuai fase minggu ini',
+  rest:'Gerak iseng: pull-up 2 rep, dead hang 60 dtk, wall sit, plank · rutin skoliosis opsional',
+};
+const JOURNAL_PROMPTS=['Satu hal baik yang terjadi hari ini?','Apa yang bisa lebih baik besok?','Level energi & mood hari ini (1–10)?','Apakah aku konsisten dengan kebiasaanku?','Satu hal yang aku syukuri hari ini.','Bagaimana kualitas tidurku semalam?','Apakah pola makanku sesuai target?'];
+const PATS=[
+  ['work','work','rec','bike','gym','rest','rest'],
+  ['rest','rest','work','work','rec','run','gym'],
+  ['rest','rest','rest','work','work','rec','bike'],
+  ['gym','rest','rest','rest','work','work','rec'],
+  ['run','gym','rest','rest','rest','work','work'],
+  ['rec','bike','gym','rest','rest','rest','work'],
+  ['work','rec','run','gym','rest','rest','rest'],
+  ['rest','work','work','rec','bike','gym','rest'],
+  ['rest','rest','work','work','rec','run','gym'],
+  ['rest','rest','rest','work','work','rec','bike'],
+  ['gym','rest','rest','rest','work','work','rec'],
+  ['run','gym','rest','rest','rest','work','work'],
+];
+const DELOAD_WKS=[3,9]; // Deload minggu 4 dan 10 (0-indexed)
+const TM={work:{c:'d-work',i:'💼',l:'Shift'},rec:{c:'d-rec',i:'🚶',l:'Recover'},bike:{c:'d-bike',i:'🚴',l:'Sepeda'},gym:{c:'d-gym',i:'🏋️',l:'Gym+TM'},run:{c:'d-run',i:'🏃',l:'Lari Z2'},rest:{c:'d-rest',i:'🌙',l:'Libur'}};
+const DAYS=['Sen','Sel','Rab','Kam','Jum','Sab','Min'];
+const WDATA=[
+  // ── FASE 1A (Mgg 1-2): Z2 Base, tanpa interval ──────────────────────────────
+  {ph:1,fc:'#059669',bg:'#d1fae5',nm:'Fase 1A — Base Z2',kk:1900,pr:'105g',
+   la:'WU 5 mnt jalan → Lari/jalan Z2 25 mnt → CD 5 mnt · HR <130 bpm · Bisa bicara penuh',
+   bi:'WU 5 mnt pelan → Sepeda Z2 MURNI 30 mnt · TANPA INTERVAL · HR 112–130 bpm → CD 5 mnt',
+   gy:'Push Day · Teknik fokus, beban 70% max · WU 7 mnt → Chest Press 35kg · Incline DB 6kg · Shoulder Press 8kg · Plank 3×20dtk → Treadmill 3°×15mnt → CD 6 mnt',
+   cr:'Craving: (1) Keluar ruangan sekarang (2) 20 push-up paksa (3) Air dingin ke muka (4) Telpon/chat seseorang. Bukan makanan.',
+   sk:'Rutin skoliosis setiap hari recovery. Setelah gym: child\'s pose 45 dtk + lat stretch kanan 60 dtk.',
+   no:'Mgg 1: hadir > performa. Jika post-shift tidur <6 jam, ganti dengan jalan 30 mnt saja. Catat semua beban gym di Gym Log.'},
+  {ph:1,fc:'#059669',bg:'#d1fae5',nm:'Fase 1A — Base Z2',kk:1900,pr:'105g',
+   la:'WU 5 mnt → Lari/jalan Z2 30 mnt → CD 5 mnt · Catat pace dan HR. Tidak ada target pace.',
+   bi:'WU 5 mnt → Sepeda Z2 MURNI 35 mnt · TANPA INTERVAL · HR tetap 112–130 bpm → CD 5 mnt',
+   gy:'Pull Day · WU 7 mnt → Lat Pulldown 27.5kg · Seated Row 25kg · Rear Delt 6kg · Dead Bug 3×8 → Treadmill 4°×15mnt → CD 7 mnt',
+   cr:'Identifikasi 3 trigger utama minggu ini. Catat di tab Urge.',
+   sk:'Ukur lingkar pinggang Senin pagi — baseline program. Rutin skoliosis 5×/mgg.',
+   no:'Grease the groove: push-up 10 rep beberapa kali sehari. Tidur 7+ jam prioritas utama.'},
+  // ── FASE 1B (Mgg 3): Z2 + Interval Ringan ───────────────────────────────────
+  {ph:1,fc:'#0891b2',bg:'#e0f2fe',nm:'Fase 1B — Interval Ringan',kk:1900,pr:'108g',
+   la:'WU 5 mnt → Lari/jalan Z2 30 mnt → CD 5 mnt · HR masih <136 bpm',
+   bi:'WU 5 mnt → Z2 25 mnt + 2×(4 mnt@85%HR + 3 mnt rec pelan) → CD 5 mnt · Total ~50 mnt',
+   gy:'Legs Day · WU 10 mnt → RDL 4×8@20kg · Goblet 4×10@12kg · Leg Press 3×12 · Farmer\'s Carry 3×20m@12kg → Treadmill 1°×15mnt → CD 8 mnt',
+   cr:'Lapis 1 (tunda 20 mnt) + Lapis 2 (teh/air). Jika belum cukup: push-up atau wall sit 2 mnt penuh.',
+   sk:'RDL: punggung lurus, bahu simetris. Berat 20kg adalah maksimum sampai fisioterapis menyetujui kenaikan beban.',
+   no:'Tubuh mulai adaptasi. Cek: HR lari di pace sama sudah mulai turun? Ini tanda aerobik base berkembang.'},
+  // ── DELOAD 1 (Mgg 4) ────────────────────────────────────────────────────────
+  {ph:0,fc:'#065f46',bg:'#d1fae5',nm:'DELOAD 1',kk:1950,pr:'105g',
+   la:'Jalan kaki Z1 30 mnt santai. Bukan lari. Nikmati.',
+   bi:'WU 3 mnt → Sepeda Z1-2 santai 25 mnt · Tanpa interval apapun → CD 3 mnt',
+   gy:'DELOAD — beban turun 40% · Reps sama · WU+CD tetap · Fokus mobilitas · Treadmill flat 10 mnt',
+   cr:'Minggu fleksibel. Tetap dalam 1.950 kkal. Catat bagaimana mood vs minggu sebelumnya.',
+   sk:'EVALUASI: Nyeri punggung berkurang? Postur lebih simetris saat berdiri? Rutin skoliosis penuh.',
+   no:'EVALUASI 4 Mgg: Ukur lingkar pinggang. Test max push-up & pull-up. Catat HR lari vs mgg 1.'},
+  // ── FASE 1B lanjut (Mgg 5-6) ────────────────────────────────────────────────
+  {ph:1,fc:'#0891b2',bg:'#e0f2fe',nm:'Fase 1B — Interval Lanjut',kk:1850,pr:'110g',
+   la:'WU 5 mnt → Z2 30 mnt + 5 mnt tempo Z3 → CD 5 mnt · HR <136 bpm di Z2',
+   bi:'WU 5 mnt → Z2 25 mnt + 3×(4 mnt@85-88%HR + 3 mnt rec) → CD 5 mnt · Total ~67 mnt',
+   gy:'Push Day · WU 7 mnt → naik 2.5kg dari mgg 1-2 · Plank 3×30dtk → Treadmill 4°×15mnt → CD 6 mnt',
+   cr:'3 lapis craving: tunda → fisik → koneksi sosial. Catat berapa kali berhasil vs menyerah.',
+   sk:'Setelah interval sepeda: child\'s pose + Cat-Cow wajib. Napas jangan ditahan saat kayuh keras.',
+   no:'Protein naik ke 110g. Jika kelelahan berlebih di awal minggu: cek apakah post-shift cukup tidur.'},
+  {ph:1,fc:'#0891b2',bg:'#e0f2fe',nm:'Fase 1B — Konsolidasi',kk:1850,pr:'112g',
+   la:'WU 5 mnt → Z2 35 mnt → CD 5 mnt · Test: HR di pace yg sama harus lebih rendah dari mgg 1',
+   bi:'WU 5 mnt → Z2 25 mnt + 3×(4 mnt@88%HR + 3 mnt rec) → CD 5 mnt',
+   gy:'Pull Day · WU 7 mnt → Lat Pulldown 32.5kg · Dead Bug 3×12 → Treadmill 5°×15mnt → CD 7 mnt',
+   cr:'EVALUASI: Frekuensi craving sudah berkurang dari mgg 1-2? Catat secara jujur.',
+   sk:'Benchmark: side plank kanan 30 dtk konsisten? Child\'s pose sudah terasa lebih dalam?',
+   no:'BENCHMARK: Ukur lingkar pinggang. 6 mgg latihan harus sudah ada perubahan terasa.'},
+  // ── FASE 2 — Norwegian 4×4 (Mgg 7-9) ───────────────────────────────────────
+  {ph:2,fc:'#d97706',bg:'#fef3c7',nm:'Fase 2 — Norwegian 4×4',kk:1850,pr:'115g',
+   la:'WU 5 mnt → Z2 35 mnt → CD 5 mnt · HR <140 bpm · Pace lebih cepat dari mgg 1',
+   bi:'NORWEGIAN 4×4 🎯 · WU 10 mnt → 4×(4mnt@90%HR + 3mnt recovery aktif) → CD 10 mnt · Total ~54 mnt',
+   gy:'Push Day · WU 7 mnt → naik 2.5–5kg dari fase 1B · Plank 3×40dtk → Treadmill 4°×20mnt → CD 6 mnt',
+   cr:'Lapis fisik jadi refleks belum? Push-up pertama saat craving = sinyal tubuh sudah mulai terkondisi.',
+   sk:'Norwegian: napas tidak pernah ditahan. Saat lelah di set 3-4, perhatikan bahu tidak ikut condong.',
+   no:'Kalori tetap 1.850 kkal (tidak turun dari fase 1). Protein naik 115g. Ini bukan kalori cutting ekstrem.'},
+  {ph:2,fc:'#d97706',bg:'#fef3c7',nm:'Fase 2 — Norwegian 4×4',kk:1850,pr:'115g',
+   la:'WU 5 mnt → Z2 40 mnt → CD 5 mnt · HR <142 bpm',
+   bi:'Norwegian 4×4 · WU 10 mnt → HR target 90–92% → CD 10 mnt · Resistance lebih berat dari mgg 7',
+   gy:'Pull Day · WU 7 mnt → Lat Pulldown 35kg · Dead Bug 3×12 → Treadmill 5°×20mnt → CD 7 mnt',
+   sk:'BENCHMARK: side plank kanan sudah 45 dtk? Dead Bug 3×10 lancar? Catat di Gym Log.',
+   cr:'Frekuensi relapse vs hari bersih PMO — tren harus membaik setelah 7 mgg.',
+   no:'BENCHMARK lingkar pinggang. Jika tidak ada perubahan 6 mgg: review nutrisi, bukan tambah latihan.'},
+  {ph:2,fc:'#d97706',bg:'#fef3c7',nm:'Fase 2 — Norwegian 4×4',kk:1850,pr:'115g',
+   la:'WU 5 mnt → Z2 40 mnt + test naikkan pace 1 mnt → CD 5 mnt · HR max <145 bpm saat test',
+   bi:'Norwegian 4×4 · WU 10 mnt → HR 92% · Set 4: push ke batas → CD 10 mnt',
+   gy:'Legs Day · WU 10 mnt → RDL 4×8@25–30kg · BATAS RDL: JANGAN NAIK DI ATAS 30kg TANPA CLEARANCE FISIOTERAPIS · Goblet 4×10@14kg · Farmer\'s Carry 14kg → Treadmill 1°×15mnt → CD 8 mnt',
+   cr:'9 mgg program. Craving pola: apakah ada pola waktu/kondisi tertentu yang masih berulang?',
+   sk:'⚠️ RDL 30kg di atas adalah batas sampai ada evaluasi fisioterapis. Skoliosis struktural + beban aksial berat = risiko permanen. Ini bukan kehatian berlebihan.',
+   no:'HR lari di pace 8\'30" harus sudah lebih rendah dari baseline. Jika belum ada perubahan, konsultasi pelatih.'},
+  // ── DELOAD 2 (Mgg 10) ───────────────────────────────────────────────────────
+  {ph:0,fc:'#065f46',bg:'#d1fae5',nm:'DELOAD 2',kk:1950,pr:'110g',
+   la:'Jalan kaki Z1 30 mnt atau libur total. Tidak ada lari.',
+   bi:'WU 3 mnt → Sepeda Z2 santai 25 mnt · Tanpa interval → CD 3 mnt',
+   gy:'DELOAD — beban turun 40% · Fokus mobilitas dan skoliosis · Treadmill flat 10 mnt ringan',
+   cr:'Review 10 mgg: berapa total hari bersih PMO? Jujur. Ini datamu, bukan penilaian.',
+   sk:'EVALUASI FASE 2: Dead Bug 3×12 sudah lancar? Side plank kanan 45 dtk konsisten?',
+   no:'EVALUASI 10 Mgg: Ukur lingkar pinggang. Test max push-up & pull-up. Tidur jadi fokus minggu ini.'},
+  // ── FASE 3 (Mgg 11) ─────────────────────────────────────────────────────────
+  {ph:3,fc:'#dc2626',bg:'#fee2e2',nm:'Fase 3 — Peak',kk:1800,pr:'115g',
+   la:'WU 5 mnt → Z2 45 mnt · Target 5km pertama · CD 7 mnt (skoliosis stretch penuh)',
+   bi:'Norwegian 4×4 · WU 10 mnt → HR 92–95% · Resistance paling berat sampai hari ini → CD 10 mnt',
+   gy:'Push Day · WU 7 mnt → beban maks yang bisa dilakukan dengan form bagus · Plank 3×50dtk → Treadmill 5°×20mnt → CD 6 mnt',
+   cr:'11 mgg. Pola craving harus jauh lebih mudah ditangani. Jika tidak, evaluasi trigger eksternal.',
+   sk:'Skoliosis: rutin 6× mgg ini. Setelah 5km: child\'s pose + Cat-Cow + lat stretch kanan WAJIB. TIDAK ADA RDL DI ATAS 30kg.',
+   no:'Floor kalori 1.800 kkal — ini SUDAH naik dari versi sebelumnya. Tidur 7+ jam wajib. Kalori tidak boleh turun lebih.'},
+  // ── FINAL (Mgg 12) ──────────────────────────────────────────────────────────
+  {ph:0,fc:'#4b5563',bg:'#f3f4f6',nm:'FINAL — Taper & Evaluasi',kk:1850,pr:'115g',
+   la:'TEST FINAL 🏁 Lari 5km pace terbaik · WU 5 mnt + CD 7 mnt penuh · Catat HR dan pace',
+   bi:'Norwegian 4×4 RINGAN (taper) · HR hanya 85% · 1 sesi minggu ini · WU 10 mnt → 4×(4mnt@85%+3mnt rec) → CD 10 mnt',
+   gy:'Maintenance · Beban turun 20% · Catat SEMUA personal record di Gym Log · Treadmill 15 mnt santai',
+   cr:'EVALUASI TOTAL: berapa % hari bersih dalam 12 mgg? Jujur tanpa menghakimi diri.',
+   sk:'EVALUASI SKOLIOSIS FINAL: Dead Bug 3×15? Side plank kanan 60 dtk? Rutin konsisten?',
+   no:'BENCHMARK FINAL: Ukur lingkar pinggang · Timbang · Screenshot Gym Log · Test max push-up & pull-up · Bandingkan dengan baseline.'},
+];
+var PROGRAM_START = new Date(2026, 5, 1); // 1 Juni 2026 — dapat diubah via Settings
+const SHIFT_CYCLE_BASE = new Date(2026, 4, 28); // 28 Mei 2026 — anchor siklus shift (pos 0 = shift)
+// Siklus 5 hari: pos 0-1 = shift, pos 2 = recovery, pos 3-4 = latihan bergilir
+function getShiftType(date){
+  const d=new Date(date.getFullYear(),date.getMonth(),date.getDate());
+  const off=Math.floor((d-SHIFT_CYCLE_BASE)/86400000);
+  const pos=((off%5)+5)%5; // 0-4
+  const cyc=Math.floor(off/5);
+  if(pos===0||pos===1)return'work';
+  if(pos===2)return'rec';
+  // pos 3 dan 4: latihan bergilir per siklus
+  const rot=[['bike','gym'],['run','gym'],['gym','run']];
+  const r=rot[((cyc%3)+3)%3];
+  return pos===3?r[0]:r[1];
+}
+
+// ─── HELPERS ─────────────────────────────────────────────────────────────────
+let selectedDate=new Date(); // Tanggal yang sedang dipilih (default = today)
+function todayKey(){const d=new Date();return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`}
+function dateKey(d){return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`}
+function selKey(){return dateKey(selectedDate)}
+function isSelToday(){return selKey()===todayKey()}
+function daysAgo(n){const d=new Date();d.setDate(d.getDate()-n);return dateKey(d)}
+function dateStr(k){const[y,m,d]=k.split('-');const dt=new Date(y,m-1,d);const dn=['Minggu','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'];const mn=['Jan','Feb','Mar','Apr','Mei','Jun','Jul','Agu','Sep','Okt','Nov','Des'];return `${dn[dt.getDay()]}, ${d} ${mn[dt.getMonth()]} ${y}`}
+function dateStrShort(k){const[y,m,d]=k.split('-');const dt=new Date(y,m-1,d);const dn=['Min','Sen','Sel','Rab','Kam','Jum','Sab'];const mn=['Jan','Feb','Mar','Apr','Mei','Jun','Jul','Agu','Sep','Okt','Nov','Des'];return `${dn[dt.getDay()]}, ${d} ${mn[dt.getMonth()]}`}
+function getProgramWeek(d){
+  const ref=d||selectedDate;
+  const refDay=new Date(ref.getFullYear(),ref.getMonth(),ref.getDate());
+  const ms=refDay-PROGRAM_START;
+  const day=Math.floor(ms/86400000);
+  if(day<0)return{week:0,dayOfWeek:0,calDow:(refDay.getDay()+6)%7,dayNum:0};
+  const week=Math.floor(day/7);
+  const dow=day%7; // rolling (for display "Hari X/7")
+  const calDow=(refDay.getDay()+6)%7; // calendar Mon=0…Sun=6, for PATS lookup
+  return{week:Math.min(week,11),dayOfWeek:dow,calDow,dayNum:day+1};
+}
+function getTodayTrainingType(){
+  const{week}=getProgramWeek();
+  if(week>=12)return'rest';
+  return getShiftType(selectedDate);
+}
+function changeDate(delta){const d=new Date(selectedDate);d.setDate(d.getDate()+delta);selectedDate=d;rerenderAll()}
+function goToday(){selectedDate=new Date();rerenderAll()}
+function jumpToDate(ds){const[y,m,d]=ds.split('-');selectedDate=new Date(+y,+m-1,+d);rerenderAll();showToast('📅 '+dateStrShort(ds))}
+function rerenderAll(){renderDateBar();renderReminders();renderDash();renderHabitToday();initSleepUI();renderHabStats();renderPMODash();updatePMOTodayStatus();renderPMOLog();buildFitSched();renderNutToday();renderNutHist();renderHLLastInfo();renderNutCocoa();renderDashSkoliosis();}
+function renderDateBar(){
+  const el=document.getElementById('date-bar');if(!el)return;
+  const k=selKey();const isToday=isSelToday();
+  const todayD=new Date();todayD.setHours(0,0,0,0);
+  const selD=new Date(selectedDate);selD.setHours(0,0,0,0);
+  const isFuture=selD>todayD;
+  const isPast=selD<todayD;
+  el.className='date-bar'+(isToday?'':(isFuture?' future':' off'));
+  const subText=isToday?dateStrShort(k):(isFuture?'Ketuk untuk kembali ke hari ini':'Ketuk untuk kembali ke hari ini');
+  const mainText=isToday?'Hari ini':dateStrShort(k);
+  const tag=isFuture?'<span class="db-tag">Akan datang</span>':(isPast?'<span class="db-tag">Lampau</span>':'');
+  el.innerHTML=`
+    <button class="db-arr" onclick="changeDate(-1)" aria-label="Hari sebelumnya">‹</button>
+    <div class="db-mid" onclick="goToday()">
+      <div class="db-d">${mainText} ${tag}</div>
+      <div class="db-sub">${subText}</div>
+    </div>
+    <button class="db-arr" onclick="changeDate(1)" aria-label="Hari berikutnya">›</button>`;
+}
+
+// ─── NAVIGATION ──────────────────────────────────────────────────────────────
+let curPage='dash',curSecs={};
+function showPage(id,btn){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('vis'));
+  document.querySelectorAll('.nb').forEach(b=>b.classList.remove('on'));
+  document.getElementById('page-'+id).classList.add('vis');
+  btn.classList.add('on');
+  curPage=id;
+  if(id==='dash')renderDash();
+  if(id==='habit')renderHabit();
+  if(id==='pmo'){renderPMODash();updatePMOTodayStatus()}
+  if(id==='nut'){renderNutToday();renderNutHist();renderNutCocoa()}
+  if(id==='health'){renderHLInput();renderHLHist()}
+  if(id==='fit'){buildFitSched()}
+}
+function showSec(ns,id,btn){
+  const prefix={'hab':'hab-','fit':'fit-','gym':'gym-','pmo':'pmo-','nut':'nut-','hl':'hl-'}[ns]||ns+'-';  document.querySelectorAll('.sec[id^="'+prefix+'"]').forEach(s=>s.classList.remove('vis'));
+  document.querySelectorAll(`[onclick*="showSec('${ns}'"]`).forEach(b=>b.classList.remove('on'));
+  const target=document.getElementById(prefix+id);
+  if(target)target.classList.add('vis');
+  btn.classList.add('on');
+  // Auto-render data on tab switch
+  if(ns==='pmo'){
+    if(id==='pdash')renderPMODash();
+    if(id==='pcheckin')updatePMOTodayStatus();
+    if(id==='prog')renderPMOProgram();
+    if(id==='plog')renderPMOLog();
+  }
+  if(ns==='fit'&&id==='bike')initBikeTab();
+  if(ns==='fit'&&id==='gymlog')initGymLog();
+  if(ns==='fit'&&id==='data')initFitData();
+  if(ns==='hab'&&id==='today')initSleepUI();
+  if(ns==='hab'){
+    if(id==='today')renderHabitToday();
+    if(id==='stats')renderHabStats();
+  }
+}
+
+// ─── STORAGE ─────────────────────────────────────────────────────────────────
+function loadHabits(){try{return JSON.parse(localStorage.getItem('tracker_habits_v1'))||{}}catch{return{}}}
+function saveHabits(d){localStorage.setItem('tracker_habits_v1',JSON.stringify(d))}
+function loadPMO(){try{return JSON.parse(localStorage.getItem('tracker_pmo_v1'))||{days:{},triggers:[],peLog:[]}}catch{return{days:{},triggers:[],peLog:[]}}}
+function savePMO(d){localStorage.setItem('tracker_pmo_v1',JSON.stringify(d))}
+
+// ─── HABIT STATE ─────────────────────────────────────────────────────────────
+function getHabitDay(key){return loadHabits()[key]||{completed:[],dayType:null}}
+function setHabitDay(key,data){const h=loadHabits();h[key]=data;saveHabits(h)}
+function toggleHabit(id){const k=selKey();const day=getHabitDay(k);const c=day.completed||[];day.completed=c.includes(id)?c.filter(h=>h!==id):[...c,id];setHabitDay(k,day);renderHabitToday();renderDashHabits();renderHabStats();renderReminders()}
+function setDayType(typeId,src){const k=selKey();const day=getHabitDay(k);day.dayType=typeId;setHabitDay(k,day);if(src==='dash'){renderDash();}else renderHabitToday();updateSportTip(typeId,src)}
+function updateSportTip(typeId,src){const tip=SPORT_TIPS[typeId]||'';const el=document.getElementById(src==='dash'?'dash-sport-tip':'hab-sport-tip');if(el)el.textContent=tip?'💡 '+tip:''}
+
+// ─── RENDER DASHBOARD ────────────────────────────────────────────────────────
+// ─── PMO 12-WEEK PROGRAM ─────────────────────────────────────────────────────
+const PMO_WDATA=[
+  // Exact WEEKS data from pmo_program.html with tracker fields added
+  {w:1,ph:1,fc:'#6fcf97',bg:'rgba(111,207,151,.12)',nm:'Fase 1',
+   pmo:'Logging baseline — catat setiap PMO: jam, trigger, durasi, mood. Belum ada target penurunan. Intervensi lingkungan mulai hari ini: SafeSearch aktif · audit medsos · HP tidak di kasur · app timer medsos 30 mnt/sesi.',
+   pe:'Mindful tanpa porn · 1× sesi · target ≥8 mnt · napas 4–2–6 · pause saat 7/10 · inhaler dalam jangkauan.',
+   no:'Kenali pola dulu. Observasi lebih penting dari kontrol di minggu ini.',
+   goal:'Logging baseline — kenali pola sebelum intervensi'},
+  {w:2,ph:1,fc:'#6fcf97',bg:'rgba(111,207,151,.12)',nm:'Fase 1',
+   pmo:'Lanjut logging. Perhatikan apakah intervensi lingkungan sudah kurangi trigger. Protokol pasca-shift wajib: mandi → makan → tidur.',
+   pe:'Mindful tanpa porn · 1× sesi · target ≥8 mnt · catat durasi aktual · kegel: identifikasi PC muscle saja.',
+   no:'Grease the groove: push-up beberapa kali sehari membantu redirect urge.',
+   goal:'Intervensi lingkungan aktif — audit trigger'},
+  {w:3,ph:1,fc:'#6fcf97',bg:'rgba(111,207,151,.12)',nm:'Fase 1',
+   pmo:'Mulai protokol 5 menit: setiap urge → timer 5 mnt + 1 tindakan fisik sebelum memutuskan. Rencana tertulis 3 jam pasca-shift sebelum berangkat.',
+   pe:'Mindful tanpa porn · 1–2× sesi · target ≥10 mnt · box breathing saat pause · evaluasi: 10 mnt tercapai? Jika belum → perpanjang fase 1.',
+   no:'Protokol 5 menit memutus respons otomatis antara trigger dan tindakan.',
+   goal:'Protokol 5 menit — putus respons otomatis'},
+  {w:4,ph:0,fc:'#79b8ff',bg:'rgba(121,184,255,.1)',nm:'Deload 1',
+   pmo:'EVALUASI: frekuensi turun? Trigger terpetakan? Protokol pasca-shift berjalan? Intervensi lingkungan masih aktif?',
+   pe:'1 sesi mindful evaluasi — catat durasi sebagai benchmark. Evaluasi: ada gejala asma saat latihan mgg 1–3?',
+   no:'Deload = evaluasi dan penyesuaian. Log tetap jalan.',
+   goal:'Evaluasi 3 minggu pertama'},
+  {w:5,ph:2,fc:'#fbbf24',bg:'rgba(251,191,36,.1)',nm:'Fase 2',
+   pmo:'Urge surfing 15 mnt: timer → pindah → air → push-up → box breathing → putuskan. Syarat mutlak: semua PMO tanpa pornografi.',
+   pe:'Stop-Start 3 siklus · target 12–15 mnt · JANGAN tahan napas saat pause · kegel: 3 set/hari 3 dtk · 1–2× sesi.',
+   no:'Set timer fisik untuk urge surfing, bukan di HP yang bisa distract.',
+   goal:'Urge surfing 15 menit + tanpa pornografi'},
+  {w:6,ph:2,fc:'#fbbf24',bg:'rgba(251,191,36,.1)',nm:'Fase 2',
+   pmo:'Lanjut urge surfing 15 mnt. Evaluasi: PMO minggu ini tanpa pornografi? Hitung % urge surfing yang berhasil.',
+   pe:'Stop-Start 3 siklus · push durasi ke 15 mnt · kegel 3 set/hari · aktifkan kegel ringan saat pause · catat durasi aktual.',
+   no:'Jika 3 siklus masih sulit di mgg 6 → tetap 3 siklus. Kualitas lebih penting dari jumlah.',
+   goal:'Konsistensi tanpa pornografi + evaluasi % berhasil'},
+  {w:7,ph:2,fc:'#fbbf24',bg:'rgba(251,191,36,.1)',nm:'Fase 2',
+   pmo:'Amati apakah frekuensi turun alami dari baseline 3×/mgg. Jika masih 3×/mgg tanpa perubahan → audit jalur trigger.',
+   pe:'Stop-Start naik ke 5 siklus · target 15–18 mnt · kegel + box breathing bersamaan saat pause · relaksasi bahu.',
+   no:'5 siklus pertama akan terasa berbeda dari 3. Bagus — sistem saraf sedang belajar.',
+   goal:'Stop-Start 5 siklus — sistem saraf sedang belajar'},
+  {w:8,ph:0,fc:'#79b8ff',bg:'rgba(121,184,255,.1)',nm:'Deload 2',
+   pmo:'BENCHMARK: frekuensi mgg 5–7 vs mgg 1–3 · % urge surfing berhasil · PMO tanpa porn konsisten? · trigger terkontrol?',
+   pe:'BENCHMARK PE: 1 sesi stop-start · catat durasi vs benchmark mgg 4 · evaluasi asma saat latihan fase 2.',
+   no:'Jika durasi belum naik dari mgg 4 → evaluasi apakah ada yang dilakukan berbeda dari panduan.',
+   goal:'Benchmark tengah — ukur kemajuan nyata'},
+  {w:9,ph:3,fc:'#f28b82',bg:'rgba(242,139,130,.1)',nm:'Fase 3',
+   pmo:'Urge surfing naik ke 20 mnt. Setiap PMO: tanya "keputusan atau respons otomatis?" Protokol pasca-shift diperketat.',
+   pe:'Stop-Start 5 siklus + Kegel terintegrasi · target 18–20 mnt · pause: kegel + box breathing bersamaan · kegel 3 set 3 dtk.',
+   no:'Fase terberat. Tidur 7+ jam wajib — kurang tidur langsung melemahkan kontrol impuls.',
+   goal:'Urge surfing 20 menit — intentional vs reaktif'},
+  {w:10,ph:3,fc:'#f28b82',bg:'rgba(242,139,130,.1)',nm:'Fase 3',
+   pmo:'Lanjut urge surfing 20 mnt. Catat minggu ini: berapa PMO reaktif vs intentional? Ini metrik kunci fase 3.',
+   pe:'Stop-Start 5 siklus · kegel naik ke 5 dtk kencang · napas sadar penuh sepanjang sesi · target 18–20 mnt.',
+   no:'PMO intentional berbeda fundamental dari PMO reaktif. Pergeseran ini adalah tujuan akhir program.',
+   goal:'PMO intentional vs reaktif — metrik kunci'},
+  {w:11,ph:3,fc:'#f28b82',bg:'rgba(242,139,130,.1)',nm:'Fase 3',
+   pmo:'Evaluasi mingguan protokol pasca-shift. PMO intentional vs reaktif — apakah mayoritas sudah intentional?',
+   pe:'Stop-Start 5 siklus · napas tidak ditahan sepanjang sesi · kegel 5 dtk · relaksasi bahu sadar · target ≥20 mnt.',
+   no:'Napas sadar penuh di momen 7/10 adalah skill — tidak datang otomatis.',
+   goal:'Mayoritas PMO sudah intentional — integrasi'},
+  {w:12,ph:0,fc:'#bb86fc',bg:'rgba(187,134,252,.1)',nm:'Final',
+   pmo:'BENCHMARK FINAL: frekuensi vs baseline 3×/mgg · reaktif vs intentional · maintenance: urge surfing tetap + intervensi lingkungan permanen.',
+   pe:'BENCHMARK: 1 sesi penuh · catat durasi vs baseline 2–3 mnt · maintenance: stop-start 1×/mgg + kegel 2 set/hari.',
+   no:'PE belum 10+ mnt setelah 12 mgg + 3 bln maintenance → diskusi opsi CBT+SSRI ke dokter.',
+   goal:'Benchmark final + rencana maintenance'},
+];
+
+// Skoliosis daily tracking
+const SK_KEY='tracker_sk_v1';
+function loadSK(){try{return JSON.parse(localStorage.getItem(SK_KEY))||{};}catch{return{};}}
+function saveSK(d){localStorage.setItem(SK_KEY,JSON.stringify(d));}
+function toggleSkoliosisToday(){
+  const k=selKey();const d=loadSK();d[k]=!d[k];saveSK(d);
+  renderDashSkoliosis();
+}
+function renderDashSkoliosis(){
+  const k=selKey();const d=loadSK();const done=d[k];
+  const btn=document.getElementById('dash-sk-btn');
+  const str=document.getElementById('dash-sk-streak');
+  if(btn){btn.textContent=done?'✅ Selesai':'Belum';btn.style.background=done?'#059669':'';btn.style.color=done?'#fff':'';}
+  // Count streak
+  let streak=0;for(let i=0;i<30;i++){const s=loadSK()[daysAgo(i)];if(s)streak++;else if(i>0)break;}
+  if(str)str.textContent=`Streak: ${streak} hari · Minggu ini: ${[0,1,2,3,4,5,6].filter(i=>loadSK()[daysAgo(i)]).length}/7`;
+}
+
+// Chocolate/cocoa tracking - checkbox approach
+function loadCocoa(){const n=loadNut();return (n.days[selKey()]||{}).cocoa||{checked:false,type:''};}
+function saveCocoa(data){const n=loadNut();const k=selKey();if(!n.days[k])n.days[k]={foods:[],notes:''};n.days[k].cocoa=data;saveNut(n);}
+function toggleCocoaDash(){
+  const d=loadCocoa();const newChecked=!(d.checked);
+  saveCocoa({...d,checked:newChecked});
+  renderDashCocoa();renderNutToday();
+}
+function toggleCocoaNut(){
+  const d=loadCocoa();const newChecked=!(d.checked);
+  saveCocoa({...d,checked:newChecked});
+  renderDashCocoa();renderNutCocoa();
+}
+function saveCocoaType(type){
+  const d=loadCocoa();saveCocoa({...d,type});
+}
+function renderDashCocoa(){
+  const d=loadCocoa();const checked=d.checked||false;
+  const cb=document.getElementById('dash-cocoa-cb');
+  const detail=document.getElementById('dash-cocoa-detail');
+  const typeInput=document.getElementById('dash-cocoa-type');
+  if(cb){cb.classList.toggle('on',checked);cb.textContent=checked?'✓':'';}
+  if(detail)detail.style.display=checked?'block':'none';
+  if(typeInput&&d.type)typeInput.value=d.type;
+  // also update nut tab
+  const nutCb=document.getElementById('nut-cocoa-cb');
+  if(nutCb){nutCb.classList.toggle('on',checked);nutCb.textContent=checked?'✓':'';}
+  const nutDetail=document.getElementById('nut-cocoa-detail');
+  if(nutDetail)nutDetail.style.display=checked?'block':'none';
+  const nutType=document.getElementById('nut-cocoa-type');
+  if(nutType&&d.type)nutType.value=d.type;
+}
+
+// Dashboard PMO week info
+function renderDashPMOWeek(){
+  const el=document.getElementById('dash-pmo-week-info');if(!el)return;
+  const{week}=getProgramWeek();
+  const w=PMO_WDATA[week];if(!w)return;
+  el.innerHTML=`<strong>Mgg ${week+1} — ${w.nm}:</strong> ${w.goal}`;
+}
+
+// ─── RENDER DASHBOARD ────────────────────────────────────────────────────────
+function renderDash(){
+  renderReminders();
+  const{week,dayOfWeek}=getProgramWeek();
+  const trainType=getTodayTrainingType();
+  const tm2=TM[trainType]||TM.rest;
+  const isDL=DELOAD_WKS.includes(week);
+  const lbl=isSelToday()?'Hari ini':dateStrShort(selKey());
+  const yesterday=new Date(selectedDate.getFullYear(),selectedDate.getMonth(),selectedDate.getDate()-1);
+  const prevType=getShiftType(yesterday);
+  const isPostShift=isSelToday()&&prevType==='work'&&trainType!=='work';
+
+  // Day type card
+  const dtCard=document.getElementById('dash-daytype-card');
+  if(dtCard){
+    const w=WDATA[week];
+    dtCard.innerHTML=`
+      ${isPostShift?`<div style="background:#7c2d12;border-radius:10px;padding:10px 12px;margin-bottom:8px;color:#fff;font-size:12px">
+        ⚠️ <strong>Hari pertama pasca-shift.</strong> Jika tidur &lt;6 jam: ganti sesi hari ini dengan jalan 30 mnt saja.
+      </div>`:''}
+      <div class="daytype-auto-card" style="background:${tm2.c==='d-work'?'#fee2e2':tm2.c==='d-rec'?'#fef3c7':tm2.c==='d-bike'||tm2.c==='d-run'||tm2.c==='d-gym'?'#eff6ff':'#f3f4f6'}">
+        <div class="daytype-icon-lg">${tm2.i}</div>
+        <div class="daytype-info">
+          <div class="daytype-name">${lbl}: ${tm2.l}</div>
+          <div class="daytype-sub">Minggu ${week+1}${isDL?' · DELOAD':''} · ${w?w.nm:''}</div>
+          ${w?`<div style="font-size:10px;color:var(--mu);margin-top:2px">${w.kk} kkal · ${w.pr}</div>`:''}
+        </div>
+      </div>
+      <div class="daytype-btns">
+        <button class="btn btn-o btn-sm" onclick="showPage('fit',document.querySelectorAll('.nb')[2])">→ Jadwal Fitness</button>
+        <button class="btn btn-o btn-sm" onclick="showPage('pmo',document.querySelectorAll('.nb')[5])">→ Program PMO</button>
+      </div>`;
+  }
+  renderDashHabits();
+  renderDashNutSummary();
+  renderDashCocoa();
+  renderDashPMO();
+  renderDashPMOWeek();
+  renderDashFit(WDATA[week],trainType);
+  renderDashSkoliosis();
+}
+
+function renderDashHabits(){
+  const k=selKey();const day=getHabitDay(k);const done=day.completed||[];
+  let h='';
+  HABITS.forEach(hb=>{
+    const on=done.includes(hb.id);
+    h+=`<div class="qh" onclick="toggleHabit('${hb.id}')">
+      <div class="qhc ${on?'on':''}">${on?'✓':''}</div>
+      <div class="qhl">${hb.icon} ${hb.name}</div>
+      <div class="qht">${hb.time}</div>
+    </div>`;
+  });
+  const el=document.getElementById('dash-habits');if(el)el.innerHTML=h;
+  const pct=Math.round(done.length/HABITS.length*100);
+  const prog=document.getElementById('dash-habit-prog');
+  if(prog)prog.textContent=`${done.length}/5 selesai · ${pct}%`;
+}
+
+function renderDashNutSummary(){
+  const el=document.getElementById('dash-nut-summary');if(!el)return;
+  const k=selKey();const day=getNutDay(k);
+  const tot=nutTotals(day.foods||[]);
+  const{week}=getProgramWeek();const tgt=nutTarget(week);
+  const calPct=Math.round(tot.cal/tgt.cal*100);
+  el.innerHTML=`<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+    <span style="font-size:12px"><strong>${tot.cal}</strong> / ${tgt.cal} kkal</span>
+    <span style="font-size:12px"><strong>${tot.pro.toFixed(0)}g</strong> / ${tgt.pro}g protein</span>
+  </div>
+  <div style="height:6px;background:#e5e2dc;border-radius:3px;overflow:hidden">
+    <div style="height:100%;border-radius:3px;background:${calPct>105?'#dc2626':'#059669'};width:${Math.min(100,calPct)}%;transition:width .4s"></div>
+  </div>
+  <div style="margin-top:5px;display:flex;justify-content:space-between">
+    <span style="font-size:10px;color:var(--mu)">${(day.foods||[]).length} item dicatat</span>
+    <button class="btn btn-o btn-sm" onclick="showPage('nut',document.querySelectorAll('.nb')[3])">+ Tambah →</button>
+  </div>`;
+}
+
+function renderDashPMO(){
+  const pmo=loadPMO();const k=selKey();const d=pmo.days[k];
+  const el=document.getElementById('dash-pmo-status');if(!el)return;
+  const dayLbl=isSelToday()?'hari ini':dateStrShort(k);
+  if(!d){el.className='alert alert-a';el.textContent='Belum check-in PMO '+dayLbl+'.';}
+  else if(d.type==='clean'){el.className='alert alert-g';el.innerHTML=`✅ PMO ${dayLbl}: <strong>Hari Bersih</strong>`;}
+  else{el.className='alert alert-r';el.innerHTML=`⚠️ PMO ${dayLbl}: relapse tercatat.`;}
+}
+
+function renderDashFit(w,trainType){
+  const el=document.getElementById('dash-fit-card');if(!el)return;
+  const{week}=getProgramWeek();
+  if(!w){el.innerHTML='<div style="color:var(--mu);font-size:13px">Program belum dimulai.</div>';return;}
+  let content='';
+  if(trainType==='run')content=`<div style="font-size:11px;font-weight:700;color:var(--mu);margin-bottom:4px">🏃 SESI LARI</div><div style="font-size:12px;color:#065f46;background:var(--grn-l);border:1px solid var(--grn-b);border-radius:8px;padding:8px 10px">${w.la}</div>`;
+  else if(trainType==='bike')content=`<div style="font-size:11px;font-weight:700;color:var(--mu);margin-bottom:4px">🚴 SESI SEPEDA</div><div style="font-size:12px;color:#1d4ed8;background:var(--blu-l);border:1px solid var(--blu-b);border-radius:8px;padding:8px 10px">${w.bi}</div>`;
+  else if(trainType==='gym')content=`<div style="font-size:11px;font-weight:700;color:var(--mu);margin-bottom:4px">🏋️ SESI GYM</div><div style="font-size:12px;color:#4c1d95;background:var(--pmo-l);border:1px solid var(--pmo-b);border-radius:8px;padding:8px 10px">${w.gy}</div>`;
+  else if(trainType==='rec')content=`<div style="font-size:12px;color:#92400e;background:var(--amb-l);border:1px solid var(--amb-b);border-radius:8px;padding:8px 10px">🚶 Recovery — rutin skoliosis penuh · ${w.sk}</div>`;
+  else if(trainType==='work')content=`<div style="font-size:12px;color:#991b1b;background:var(--red-l);border:1px solid var(--red-b);border-radius:8px;padding:8px 10px">💼 Hari shift — gerak iseng kapan sempat: push-up, plank, wall sit.</div>`;
+  else content=`<div style="font-size:12px;color:var(--mu);background:var(--bg);border:1px solid var(--bd);border-radius:8px;padding:8px 10px">🌙 Libur — aktif santai. Dead hang, jalan kaki, stretching skoliosis.</div>`;
+  el.innerHTML=content+`<div style="margin-top:6px;font-size:11px;color:var(--mu)">${w.no}</div>`;
+}
+
+function quickClean(){logClean();renderDashPMO();}
+// ─── RENDER HABITS ────────────────────────────────────────────────────────────
+function renderHabit(){renderHabitToday();renderHabStats();}
+function renderHabitToday(){
+  const k=selKey();const day=getHabitDay(k);const done=day.completed||[];
+  const pct=Math.round(done.length/HABITS.length*100);
+  const prompt=JOURNAL_PROMPTS[new Date().getDay()%JOURNAL_PROMPTS.length];
+  const lbl=isSelToday()?'Hari Ini':'Tanggal';
+  document.getElementById('hab-today-header').innerHTML=`
+    <div class="card" style="margin-bottom:10px">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px">
+        <div><div style="font-weight:700;font-size:15px">${lbl}</div><div style="font-size:11px;color:var(--mu)">${dateStr(k)}</div></div>
+        <div style="text-align:right"><div style="font-size:26px;font-weight:800;color:${pct===100?'#059669':pct>=60?'#d97706':'#dc2626'}">${done.length}/${HABITS.length}</div><div style="font-size:10px;color:var(--mu)">selesai</div></div>
+      </div>
+      <div style="height:8px;background:#e5e2dc;border-radius:4px;overflow:hidden"><div style="height:100%;border-radius:4px;background:${pct===100?'#059669':pct>=60?'#d97706':'#2563eb'};width:${pct}%;transition:width .4s"></div></div>
+      ${pct===100?'<div style="margin-top:8px;text-align:center;font-size:13px;color:#059669;font-weight:700">🎉 Semua kebiasaan selesai!</div>':''}
+    </div>`;
+  // day type
+  let dtH='';
+  DAY_TYPES.forEach(dt=>{const on=day.dayType===dt.id;dtH+=`<button class="dt-btn" style="background:${on?dt.bg:'#fff'};border-color:${on?dt.color:'#e8e6e0'};color:${on?dt.color:'#666'}" onclick="setDayType('${dt.id}','hab')">${dt.icon} ${dt.label}</button>`;});
+  document.getElementById('hab-dt-grid').innerHTML=dtH;
+  if(day.dayType)document.getElementById('hab-sport-tip').textContent='💡 '+SPORT_TIPS[day.dayType];
+  // checklist
+  let cl='';
+  HABITS.forEach(hb=>{
+    const on=done.includes(hb.id);
+    cl+=`<div class="habit-item ${on?'done':''}" style="${on?`background:${hb.bg};border-color:${hb.bd}`:'background:#fff'}" onclick="toggleHabit('${hb.id}')">
+      <div class="hcheck ${on?'on':''}" style="${on?`background:${hb.color};border-color:${hb.color}`:''}">
+        ${on?'✓':''}
+      </div>
+      <div style="flex:1">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px">
+          <div style="font-weight:700;font-size:13px">${hb.icon} ${hb.name}</div>
+          <div style="font-size:10px;color:var(--mu);flex-shrink:0;margin-top:1px">${hb.time} · ${hb.dur}</div>
+        </div>
+        ${hb.id==='sport'&&day.dayType?`<div style="font-size:11px;color:var(--mu2);margin-top:4px;padding-top:4px;border-top:1px solid ${hb.bd}">${SPORT_TIPS[day.dayType]}</div>`:''}
+        ${hb.id==='journal'?`<div style="font-size:11px;color:${hb.color};margin-top:3px;font-style:italic">💡 "${prompt}"</div>`:''}
+      </div>
+    </div>`;
+  });
+  document.getElementById('hab-checklist').innerHTML=cl;
+}
+
+function renderHabStats(){
+  const hdata=loadHabits();const keys=Object.keys(hdata).sort();const total=keys.length;
+  const streak=calcHabStreak(hdata);
+  const overall=total?Math.round(keys.reduce((a,k)=>a+(hdata[k].completed?.length||0),0)/(total*HABITS.length)*100):0;
+  document.getElementById('hab-stat-grid').innerHTML=`
+    <div class="st"><div class="s1">Hari tracking</div><div class="s2 b">${total}</div><div class="s3">hari</div></div>
+    <div class="st"><div class="s1">Streak aktif</div><div class="s2" style="color:${streak>=7?'#059669':streak>=3?'#d97706':'#dc2626'}">${streak}</div><div class="s3">hari</div></div>
+    <div class="st"><div class="s1">Konsistensi</div><div class="s2" style="color:${overall>=80?'#059669':overall>=60?'#d97706':'#dc2626'}">${overall}%</div><div class="s3">keseluruhan</div></div>`;
+  // 14 day header
+  const dayNames=['Min','Sen','Sel','Rab','Kam','Jum','Sab'];
+  let hdr='',grid='';
+  for(let i=13;i>=0;i--){
+    const d=new Date();d.setDate(d.getDate()-i);
+    const dk=`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+    const dd=hdata[dk];
+    const cnt=dd?.completed?.length||0;
+    const pct=cnt/HABITS.length;
+    const bg=!dd?'var(--bg)':pct===1?'#dcfce7':pct>=0.6?'#fef3c7':pct>0?'#fee2e2':'var(--bg)';
+    const bd=!dd?'var(--bd)':pct===1?'#86efac':pct>=0.6?'#fcd34d':pct>0?'#fca5a5':'var(--bd)';
+    const tc=!dd?'#ccc':pct===1?'#059669':pct>=0.6?'#d97706':pct>0?'#dc2626':'#aaa';
+    if(i===13){for(let j=0;j<14;j++){const nd=new Date();nd.setDate(nd.getDate()-(13-j));hdr+=`<div class="h14-day">${dayNames[nd.getDay()]}</div>`;}}
+    grid+=`<div class="h14-cell" style="background:${bg};border-color:${bd}"><div class="h14-d" style="color:${tc}">${d.getDate()}</div><div class="h14-n" style="color:${tc}">${dd?cnt+'/5':'—'}</div></div>`;
+  }
+  document.getElementById('hab-14-hdr').innerHTML=hdr;
+  document.getElementById('hab-14-grid').innerHTML=grid;
+  // per habit
+  let ph='';
+  if(!total){ph='<div style="text-align:center;color:var(--mu);font-size:13px;padding:16px 0">Belum ada data. Mulai check-off di Hari Ini.</div>';}
+  else{HABITS.forEach(hb=>{const p=total?Math.round(keys.filter(k=>(hdata[k].completed||[]).includes(hb.id)).length/total*100):0;ph+=`<div class="br"><div class="bl">${hb.icon} ${hb.name}</div><div class="bt"><div class="bf" style="width:${p}%;background:${hb.color}"></div></div><div class="bn" style="color:${hb.color}">${p}%</div></div>`;});}
+  document.getElementById('hab-per-habit').innerHTML=ph;
+}
+
+function renderHabGuidePerType(){
+  let h='';
+  DAY_TYPES.forEach(dt=>{
+    h+=`<div class="card" style="margin-bottom:8px">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px"><span style="font-size:16px">${dt.icon}</span><span style="font-weight:700;color:${dt.color};font-size:13px">${dt.label}</span></div>`;
+    HABITS.forEach((hb,i)=>{
+      const sportLabel=hb.id==='sport'?(dt.id==='shift'||dt.id==='rest'?'Iseng saja':dt.id==='rec'?'Skoliosis+jalan':'Sesi penuh'):`${hb.time}·${hb.dur}`;
+      const chipBg=hb.id==='sport'&&(dt.id==='shift'||dt.id==='rest')?'#fef3c7':hb.bg;
+      const chipColor=hb.id==='sport'&&(dt.id==='shift'||dt.id==='rest')?'#92400e':hb.color;
+      h+=`<div style="display:flex;justify-content:space-between;align-items:center;padding:5px 0;border-bottom:${i<HABITS.length-1?'1px solid var(--bd2)':'none'};font-size:12px;gap:8px"><span>${hb.icon} ${hb.name}</span><span style="background:${chipBg};color:${chipColor};font-size:10px;padding:2px 8px;border-radius:20px;font-weight:700;white-space:nowrap">${sportLabel}</span></div>`;
+    });
+    if(dt.id==='shift')h+=`<div style="margin-top:8px;font-size:11px;color:#78350f;background:#fef3c7;padding:7px 10px;border-radius:8px">⚠️ Prioritas utama: Quran maghrib & journaling malam.</div>`;
+    h+='</div>';
+  });
+  document.getElementById('hab-guide-per-type').innerHTML=h;
+}
+
+function calcHabStreak(hdata){
+  let s=0,i=0;
+  while(true){const k=daysAgo(i);const d=hdata[k];if(!d){if(i===0){i++;continue;}break;}if((d.completed?.length||0)>=3){s++;i++;}else break;}
+  return s;
+}
+
+// ─── FITNESS SCHEDULE ─────────────────────────────────────────────────────────
+function buildFitSched(){
+  const{week:curWk}=getProgramWeek();
+  const todayStr=todayKey();
+  const DN=['Sen','Sel','Rab','Kam','Jum','Sab','Min'];
+  const startDow=(PROGRAM_START.getDay()+6)%7;
+  const rotDN=Array.from({length:7},(_,i)=>DN[(startDow+i)%7]);
+  let h=`<div class="wg" style="margin-bottom:8px"><div></div>`;
+  rotDN.forEach(d=>h+=`<div class="wgh">${d}</div>`);
+  h+='</div>';
+  for(let wi=0;wi<12;wi++){
+    const w=WDATA[wi];const isDL=DELOAD_WKS.includes(wi);
+    const weekStart=new Date(PROGRAM_START.getTime()+wi*7*86400000);
+    h+=`<div class="wg"><div class="wgl"><strong style="font-size:10px;color:${w.fc}">${wi+1}</strong><span style="font-size:8px;color:${w.fc}">${w.nm}</span></div>`;
+    for(let di=0;di<7;di++){
+      const cellDate=new Date(weekStart.getTime()+di*86400000);
+      const cellStr=`${cellDate.getFullYear()}-${String(cellDate.getMonth()+1).padStart(2,'0')}-${String(cellDate.getDate()).padStart(2,'0')}`;
+      const t=getShiftType(cellDate);
+      const tp=TM[t]||TM.rest;
+      const dlType=isDL&&(t==='gym'||t==='bike'||t==='run');
+      const cls=(dlType?'d-dl':tp.c)+' wgd';
+      const isToday=cellStr===todayStr;
+      h+=`<div class="${cls}${isToday?' d-today':''}" onclick="showFitWeek(${wi})"><div class="wgi">${tp.i}</div><div class="wgt">${tp.l}</div></div>`;
+    }
+    h+='</div>';
+  }
+  document.getElementById('fit-sched-grid').innerHTML=h;
+}
+let openWk=-1;
+function showFitWeek(wi){
+  const det=document.getElementById('fit-det');
+  if(openWk===wi&&det.classList.contains('show')){det.classList.remove('show');openWk=-1;return;}
+  openWk=wi;const w=WDATA[wi];
+  det.innerHTML=`<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:12px"><div style="font-size:16px;font-weight:800">Minggu ${wi+1}</div><span style="font-size:11px;padding:4px 12px;border-radius:20px;font-weight:700;background:${w.bg};color:${w.fc}">${w.nm}</span></div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px">
+    <div style="background:var(--bg);padding:8px 10px;border-radius:8px;border:1px solid var(--bd)"><div style="font-size:8px;color:var(--mu);font-weight:700;text-transform:uppercase">Kalori/hari</div><div style="font-size:18px;font-weight:800">${w.kk} kkal</div></div>
+    <div style="background:var(--bg);padding:8px 10px;border-radius:8px;border:1px solid var(--bd)"><div style="font-size:8px;color:var(--mu);font-weight:700;text-transform:uppercase">Protein</div><div style="font-size:18px;font-weight:800">${w.pr}/hari</div></div>
+  </div>
+  <div style="font-size:9px;font-weight:800;color:var(--mu);text-transform:uppercase;margin-bottom:4px">🏃 Lari</div><div style="font-size:12px;padding:8px 10px;background:#dcfce7;border-radius:8px;margin-bottom:10px;color:#065f46;border:1px solid #86efac">${w.la}</div>
+  <div style="font-size:9px;font-weight:800;color:var(--mu);text-transform:uppercase;margin-bottom:4px">🚴 Sepeda / Norwegian</div><div style="font-size:12px;padding:8px 10px;background:var(--blu-l);border-radius:8px;margin-bottom:10px;color:#1d4ed8;border:1px solid var(--blu-b)">${w.bi}</div>
+  <div style="font-size:9px;font-weight:800;color:var(--mu);text-transform:uppercase;margin-bottom:4px">🏋️ Gym + Treadmill</div><div style="font-size:12px;padding:8px 10px;background:var(--pmo-l);border-radius:8px;margin-bottom:10px;color:#4c1d95;border:1px solid var(--pmo-b)">${w.gy}</div>
+  <div style="font-size:9px;font-weight:800;color:var(--mu);text-transform:uppercase;margin-bottom:4px">🍪 Craving</div><div style="font-size:12px;padding:8px 10px;background:var(--amb-l);border-radius:8px;margin-bottom:10px;color:#92400e;border:1px solid var(--amb-b)">${w.cr}</div>
+  <div style="font-size:9px;font-weight:800;color:#6b21a8;text-transform:uppercase;margin-bottom:4px">🦴 Skoliosis minggu ini</div><div style="font-size:12px;padding:8px 10px;background:var(--pmo-l);border-radius:8px;margin-bottom:10px;color:#6b21a8;border:1px solid var(--pmo-b)">${w.sk}</div>
+  <div style="font-size:9px;font-weight:800;color:${w.fc};text-transform:uppercase;margin-bottom:4px">📌 Catatan Kunci</div><div style="font-size:12px;padding:8px 10px;background:${w.bg};border-radius:8px;color:${w.fc};font-weight:600;border:1px solid ${w.fc}33">${w.no}</div>`;
+  det.classList.add('show');det.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+
+// ─── PMO ──────────────────────────────────────────────────────────────────────
+function calcPMOStreak(pmo){let s=0,i=0;while(true){const k=daysAgo(i);const d=pmo.days[k];if(!d){if(i===0){i++;continue;}break;}if(d.type==='clean'){s++;i++;}else break;}return s;}
+function calcPMOLongest(pmo){let l=0,c=0;Object.keys(pmo.days).sort().forEach(k=>{if(pmo.days[k].type==='clean'){c++;l=Math.max(l,c);}else c=0;});return l;}
+function updatePMOTodayStatus(){
+  const pmo=loadPMO();const k=selKey();const d=pmo.days[k];
+  const el=document.getElementById('pmo-today-status');
+  const lbl=document.getElementById('pmo-checkin-lbl');
+  const peLbl=document.getElementById('pmo-pe-lbl');
+  if(!el)return;
+  const isToday=isSelToday();
+  const dayLbl=isToday?'hari ini':dateStrShort(k);
+  const dayTitle=isToday?'Hari ini':'Tanggal '+dateStrShort(k);
+  if(lbl)lbl.textContent=dayTitle+' saya...';
+  if(peLbl)peLbl.textContent='Log Latihan PE — '+(isToday?'Hari Ini':dateStrShort(k));
+  if(!d){el.className='alert alert-a';el.textContent='Belum check-in '+dayLbl+' — tandai status harianmu.';}
+  else if(d.type==='clean'){el.className='alert alert-g';el.innerHTML=`✅ ${dayTitle} sudah dilog sebagai <strong>hari bersih</strong>.`;}
+  else{el.className='alert alert-r';el.innerHTML=`⚠️ ${dayTitle} dilog sebagai relapse. Data tersimpan.`;}
+}
+function renderPMODash(){
+  const pmo=loadPMO();
+  const streak=calcPMOStreak(pmo);
+  const msg=streak===0?'Mulai hari ini 💪':streak<7?'Jaga terus!':streak<14?'Seminggu kuat! 🔥':streak<30?'Luar biasa! 🚀':'1 bulan+ 🏆';
+  document.getElementById('pmo-streak-container').innerHTML=`<div class="pmo-streak-box"><div class="ps-num">${streak}</div><div class="ps-label">hari berturut-turut bersih</div><div class="ps-sub">${msg}</div></div>`;
+  const total=Object.keys(pmo.days).length;
+  const clean=Object.values(pmo.days).filter(d=>d.type==='clean').length;
+  const rate=total?Math.round(clean/total*100):0;
+  document.getElementById('pmo-stats-grid').innerHTML=`
+    <div class="st"><div class="s1">Terpanjang</div><div class="s2 p">${calcPMOLongest(pmo)}</div><div class="s3">hari</div></div>
+    <div class="st"><div class="s1">Total bersih</div><div class="s2 g">${clean}</div><div class="s3">hari</div></div>
+    <div class="st"><div class="s1">Tingkat sukses</div><div class="s2" style="color:${rate>=70?'#059669':rate>=50?'#d97706':'#dc2626'}">${rate}%</div><div class="s3">dari ${total} hari</div></div>`;
+  // calendar
+  const start=new Date();start.setDate(start.getDate()-27);
+  const dow=start.getDay();const offset=dow===0?6:dow-1;start.setDate(start.getDate()-offset);
+  let calH='';
+  const tds=selKey();const realToday=todayKey();
+  for(let i=0;i<28;i++){const d=new Date(start);d.setDate(start.getDate()+i);const ds=`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;const dy=pmo.days[ds];let cls='wkdot empty',ico='';if(dy){cls=dy.type==='clean'?'wkdot clean':'wkdot relapse';ico=dy.type==='clean'?'✓':'×';}if(ds===tds)cls+=' today-dot';calH+=`<div class="${cls}" onclick="jumpToDate('${ds}')">${ico}</div>`;}
+  document.getElementById('pmo-cal-grid').innerHTML=calH;
+  // triggers
+  const tc={};pmo.triggers.forEach(t=>{tc[t.trigger]=(tc[t.trigger]||0)+1;});
+  const sorted=Object.entries(tc).sort((a,b)=>b[1]-a[1]).slice(0,4);
+  const maxT=sorted[0]?.[1]||1;
+  let tH=sorted.length?sorted.map(([k,v])=>`<div class="br"><div class="bl">${k}</div><div class="bt"><div class="bf" style="width:${Math.round(v/maxT*100)}%;background:var(--pmo)"></div></div><div class="bn" style="color:var(--pmo)">${v}×</div></div>`).join(''):'<div style="font-size:12px;color:var(--mu)">Belum ada trigger dilog.</div>';
+  document.getElementById('pmo-trigger-stats').innerHTML=tH;
+  // PE progress
+  const pc=pmo.peLog.length;
+  const phases=[{l:'Fase 1 (Mindful)',t:8,d:pmo.peLog.filter(p=>p.type==='Mindful tanpa porn').length},{l:'Fase 2 (Stop-Start)',t:8,d:pmo.peLog.filter(p=>p.type&&p.type.includes('Stop-Start')).length},{l:'Fase 3 (Kegel)',t:8,d:pmo.peLog.filter(p=>p.type==='Kegel 3 set').length}];
+  let peH=`<div class="cr"><span>Total sesi latihan PE</span><span class="chip cp">${pc} sesi</span></div>`;
+  phases.forEach(ph=>{const p=Math.min(100,Math.round(ph.d/ph.t*100));peH+=`<div class="br" style="margin-top:6px"><div class="bl">${ph.l}</div><div class="bt"><div class="bf" style="width:${p}%;background:var(--pmo)"></div></div><div class="bn" style="color:var(--pmo)">${ph.d}/${ph.t}</div></div>`;});
+  document.getElementById('pmo-pe-progress').innerHTML=peH;
+}
+function renderPMOLog(){
+  const pmo=loadPMO();
+  // Check-in tab
+  const days=Object.keys(pmo.days).sort().reverse().slice(0,30);
+  const logEl=document.getElementById('pmo-log-list');
+  if(logEl){
+    let h=days.map(dk=>{
+      const d=pmo.days[dk];
+      const tc=d.type==='clean'?'<span class="chip cg">✓</span>':d.type==='relapse'?'<span class="chip cr2">⚠</span>':'<span style="color:var(--mu)">—</span>';
+      const moodBadge=d.mood?`<span style="font-size:10px;padding:1px 6px;border-radius:20px;background:var(--pmo-l);color:#6b21a8">${d.mood.split(' ')[0]}</span>`:'';
+      return `<div class="log-entry">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <span class="log-date">${dateStrShort(dk)}</span>
+          <div style="display:flex;gap:5px;align-items:center">${moodBadge}${tc}</div>
+        </div>
+        ${d.note?`<div style="font-size:10px;color:var(--mu);font-style:italic;margin-top:2px">"${d.note}"</div>`:''}
+      </div>`;
+    }).join('');
+    logEl.innerHTML=h||'<div style="font-size:12px;color:var(--mu);text-align:center;padding:8px">Belum ada data.</div>';
+  }
+  // Trigger tab
+  const trigEl=document.getElementById('pmo-trigger-log');
+  if(trigEl){
+    const trigs=[...pmo.triggers].reverse().slice(0,20);
+    trigEl.innerHTML=trigs.map(t=>{
+      const ac=t.action==='Tahan — hari bersih'?'cg':t.action==='Relapse'?'cr2':'ca';
+      return`<div class="log-entry">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <span class="log-date">${dateStrShort(t.date)}</span>
+          <span class="chip ${ac}" style="font-size:10px">${t.action.split(' ')[0]}</span>
+        </div>
+        <div style="font-size:11px;color:var(--mu);margin-top:2px">${t.trigger}</div>
+      </div>`;
+    }).join('')||'<div style="font-size:12px;color:var(--mu);text-align:center;padding:8px">Belum ada trigger dilog.</div>';
+  }
+  // PE tab
+  renderPELog();
+}
+
+// ─── PMO ACTIONS ──────────────────────────────────────────────────────────────
+let selMoodV='',selEnergyV='',selTrigV='',selActV='',selRTrigV='';
+function quickClean(){logClean();renderDashPMO();}
+function logClean(){const pmo=loadPMO();const k=selKey();if(!pmo.days[k])pmo.days[k]={};pmo.days[k].type='clean';savePMO(pmo);updatePMOTodayStatus();renderPMODash();renderDash();renderPMOLog();showToast('✅ Hari bersih dicatat!')}
+function logPE(){
+  const type=document.getElementById('pe-done')?.value;
+  const dur=document.getElementById('pe-dur')?.value;
+  const note=document.getElementById('pe-note')?.value||'';
+  if(!type){showToast('Pilih jenis latihan dulu');return;}
+  const pmo=loadPMO();
+  if(!pmo.peLog)pmo.peLog=[];
+  pmo.peLog.push({date:selKey(),type,dur:dur?+dur:null,note});
+  savePMO(pmo);
+  ['pe-done','pe-dur','pe-note'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
+  renderPMOLog();renderPMODash();
+  showToast('✅ Latihan PE tercatat!');
+}
+
+// Show log sub-tab
+function showLog(id,btn){
+  ['ld','lt','lp'].forEach(s=>{const el=document.getElementById(s);if(el)el.style.display='none';});
+  const el=document.getElementById(id);if(el)el.style.display='block';
+  document.querySelectorAll('#pmo-plog .tab').forEach(b=>b.classList.remove('on'));
+  if(btn)btn.classList.add('on');
+}
+
+function renderPELog(){
+  // Update both locations (Kesehatan tab PE section + PMO log)
+  const pmo=loadPMO();const logs=[...(pmo.peLog||[])].reverse().slice(0,15);
+  // Kesehatan PE log
+  const el=document.getElementById('pe-log-list');
+  if(el){
+    if(!logs.length){el.innerHTML='';return;}
+    el.innerHTML='<div class="sl">Riwayat latihan PE</div>'+logs.map(l=>`
+      <div style="background:#fff;border:1px solid var(--pmo-b);border-radius:8px;padding:9px 12px;margin-bottom:5px">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <div style="font-size:11px;color:var(--mu);font-weight:700">${dateStr(l.date)}</div>
+          ${l.dur?`<span style="font-size:12px;font-weight:700;color:var(--pmo)">${l.dur} mnt</span>`:''}
+        </div>
+        <div style="font-size:13px;margin-top:2px">${l.type}</div>
+        ${l.note?`<div style="font-size:11px;color:var(--mu);margin-top:2px">"${l.note}"</div>`:''}
+      </div>`).join('');
+  }
+  // PMO log PE tab
+  const el2=document.getElementById('pmo-pe-log');
+  if(el2){
+    el2.innerHTML=logs.length?logs.map(l=>`
+      <div class="log-entry">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <span class="log-date">${dateStr(l.date)}</span>
+          ${l.dur?`<span style="font-size:11px;font-weight:700;color:var(--pmo)">${l.dur} mnt</span>`:''}
+        </div>
+        <div style="font-size:12px;margin-top:3px">${l.type}</div>
+        ${l.note?`<div style="font-size:10px;color:var(--mu);font-style:italic">"${l.note}"</div>`:''}
+      </div>`).join(''):'<div style="font-size:12px;color:var(--mu);text-align:center;padding:8px">Belum ada sesi PE.</div>';
+  }
+}
+function selMood(el,v){document.querySelectorAll('#mood-grid .trig').forEach(e=>e.classList.remove('sel'));el.classList.add('sel');selMoodV=v;}
+function selEnergy(el,v){document.querySelectorAll('#energy-grid .trig').forEach(e=>e.classList.remove('sel'));el.classList.add('sel');selEnergyV=v;}
+function saveMoodEnergy(){const pmo=loadPMO();const k=selKey();if(!pmo.days[k])pmo.days[k]={type:'unlogged'};pmo.days[k].mood=selMoodV;pmo.days[k].energy=selEnergyV;savePMO(pmo);showToast('Mood & energi tersimpan!')}
+function openRelapse(){document.getElementById('relapse-overlay').classList.add('open')}
+function closeRelapse(){document.getElementById('relapse-overlay').classList.remove('open');selRTrigV='';document.querySelectorAll('#r-trigger-sel .trig').forEach(e=>e.classList.remove('sel'));document.getElementById('relapse-note').value='';}
+function selRTrig(el,v){document.querySelectorAll('#r-trigger-sel .trig').forEach(e=>e.classList.remove('sel'));el.classList.add('sel');selRTrigV=v;}
+function logRelapse(){const note=document.getElementById('relapse-note').value;const pmo=loadPMO();const k=selKey();pmo.days[k]={type:'relapse',trigger:selRTrigV,note};if(selRTrigV)pmo.triggers.push({date:k,trigger:selRTrigV,action:'Relapse',note});savePMO(pmo);closeRelapse();updatePMOTodayStatus();renderPMODash();renderDash();renderPMOLog();showToast('Data relapse tersimpan. Terus maju!')}
+function selTrig(el,v){document.querySelectorAll('#trigger-sel .trig').forEach(e=>e.classList.remove('sel'));el.classList.add('sel');selTrigV=v;}
+function selAct(el,v){document.querySelectorAll('#action-sel .trig').forEach(e=>e.classList.remove('sel'));el.classList.add('sel');selActV=v;}
+function saveTrigger(){if(!selTrigV||!selActV){showToast('Pilih trigger dan tindakan');return;}const pmo=loadPMO();pmo.triggers.push({date:selKey(),trigger:selTrigV,action:selActV});savePMO(pmo);document.querySelectorAll('#trigger-sel .trig,#action-sel .trig').forEach(e=>e.classList.remove('sel'));selTrigV='';selActV='';renderPMOLog();renderPMODash();showToast('✅ Trigger tersimpan!')}
+function clearPMO(){const pmo={days:{},triggers:[],peLog:[]};savePMO(pmo);renderPMODash();renderPMOLog();updatePMOTodayStatus();renderDash();showToast('Data PMO direset.')}
+
+// ─── TIMERS ──────────────────────────────────────────────────────────────────
+const timers={};
+function startTimer(id,secs){if(timers[id])clearInterval(timers[id]);let rem=secs;const el=document.getElementById(id+'-num');timers[id]=setInterval(()=>{rem--;if(rem<=0){clearInterval(timers[id]);el.textContent='00:00';showToast('⏱ Timer selesai!');return;}const m=Math.floor(rem/60),s=rem%60;el.textContent=`${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;},1000);}
+function resetTimer(id,secs){if(timers[id])clearInterval(timers[id]);const m=Math.floor(secs/60),s=secs%60;document.getElementById(id+'-num').textContent=`${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;}
+let urgeTimer=null;
+function startUrgeSurf(){document.getElementById('urge-timer-box').style.display='block';if(urgeTimer)clearInterval(urgeTimer);let rem=1200;const el=document.getElementById('ut-num');urgeTimer=setInterval(()=>{rem--;if(rem<=0){clearInterval(urgeTimer);el.textContent='00:00';showToast('🌊 20 menit selesai — kamu berhasil!');return;}const m=Math.floor(rem/60),s=rem%60;el.textContent=`${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;},1000);}
+function stopUrgeSurf(){if(urgeTimer)clearInterval(urgeTimer);document.getElementById('urge-timer-box').style.display='none';document.getElementById('ut-num').textContent='20:00';}
+let cycleCount=0;
+function adjCycle(n){cycleCount=Math.max(0,cycleCount+n);document.getElementById('cycle-count').textContent=cycleCount;}
+
+// ─── NORWEGIAN GUIDED TIMER ──────────────────────────────────────────────────
+const NORW_DEF = {
+  '44': {
+    color:'#dc2626', sets:4, workSecs:240, recSecs:180,
+    workLabel:(i,n)=>`Set ${i}/${n} — KAYUH KERAS`,
+    recLabel:(i,n)=>`Recovery ${i}/${n}`,
+    setInfo:(n)=>`${n} set × 4 menit`,
+  },
+  '54': {
+    color:'#7c3aed', sets:5, workSecs:240, recSecs:180,
+    workLabel:(i,n)=>`Set ${i}/${n} — KAYUH KERAS`,
+    recLabel:(i,n)=>`Recovery ${i}/${n}`,
+    setInfo:(n)=>`${n} set × 4 menit`,
+  },
+};
+
+// Build phases for a Norwegian workout
+function buildNorwPhases(key){
+  const d=NORW_DEF[key];
+  const phases=[
+    {name:'Warm-up',sub:'Kayuh pelan, naikkan bertahap ke Z2',secs:600,cls:'wu-phase',isWork:false,isRec:false},
+  ];
+  for(let i=1;i<=d.sets;i++){
+    phases.push({name:d.workLabel(i,d.sets),sub:`HR target 90–95% | Resistance berat | Cadence 70–80 rpm`,secs:d.workSecs,cls:'work-phase',isWork:true,setIdx:i});
+    if(i<d.sets) phases.push({name:d.recLabel(i,d.sets),sub:'Kayuh SANGAT pelan, resistance 1. Jangan berhenti!',secs:d.recSecs,cls:'rec-phase',isRec:true,setIdx:i});
+  }
+  phases.push({name:'Cool-down',sub:'Kayuh pelan, turunkan HR ke <110 bpm',secs:600,cls:'cd-phase',isWork:false});
+  phases.push({name:'✅ SELESAI!',sub:'Luar biasa — sesi Norwegian selesai!',secs:0,cls:'done-phase',done:true});
+  return phases;
+}
+
+const norwState={};
+
+function norwInit(key){
+  if(norwState[key])return; // already initialized
+  norwState[key]={phases:buildNorwPhases(key),curIdx:0,timer:null,running:false};
+  norwRenderUI(key);
+}
+
+function norwRenderUI(key){
+  const st=norwState[key];
+  const ph=st.phases[st.curIdx];
+  const box=document.getElementById('norw'+key+'-box');
+  const nameEl=document.getElementById('n'+key+'-phase-name');
+  const setEl=document.getElementById('n'+key+'-set-info');
+  const numEl=document.getElementById('n'+key+'-timer-num');
+  const nxtEl=document.getElementById('n'+key+'-next-preview');
+  const btnEl=document.getElementById('n'+key+'-btn');
+  const dotsEl=document.getElementById('n'+key+'-dots');
+  if(!box)return;
+  // Update box class
+  box.className='bk-guided-box '+(ph.cls||'');
+  nameEl.textContent=ph.name;
+  setEl.textContent=ph.done?'Kamu berhasil! 🎉':NORW_DEF[key].setInfo(NORW_DEF[key].sets);
+  // Timer display
+  if(ph.done){numEl.textContent='✓';numEl.style.fontSize='48px';}
+  else{const m=Math.floor(ph.secs/60),s=ph.secs%60;numEl.textContent=`${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;numEl.style.fontSize='52px';}
+  // Next preview
+  const next=st.phases[st.curIdx+1];
+  nxtEl.textContent=next&&!ph.done?'Berikutnya: '+next.name:'';
+  // Button
+  if(ph.done){btnEl.textContent='↻ Ulangi';btnEl.onclick=()=>norwReset(key);}
+  else{btnEl.textContent=st.running?'⏸ Pause':'▶ '+(st.curIdx===0&&!st.running?'Mulai':'Lanjut');btnEl.onclick=()=>norwAction(key);}
+  // Dots — show work sets only
+  const workPhases=st.phases.filter(p=>p.isWork);
+  const curWorkIdx=st.phases.slice(0,st.curIdx+1).filter(p=>p.isWork).length;
+  dotsEl.innerHTML=workPhases.map((_,i)=>{
+    const done=i<curWorkIdx-(ph.isWork?0:0);
+    const active=ph.isWork&&i===curWorkIdx-1;
+    const rec=!ph.isWork&&!ph.done&&i===curWorkIdx-1;
+    return `<div class="bk-gdot${done?' done':active?' active':rec?' rec':''}"></div>`;
+  }).join('');
+}
+
+function norwAction(key){
+  norwInit(key);
+  const st=norwState[key];
+  const ph=st.phases[st.curIdx];
+  if(ph.done){norwReset(key);return;}
+  if(st.running){
+    clearInterval(st.timer);st.running=false;
+    const btn=document.getElementById('n'+key+'-btn');
+    if(btn)btn.textContent='▶ Lanjut';
+    return;
+  }
+  st.running=true;
+  let rem=ph.secs;
+  const numEl=document.getElementById('n'+key+'-timer-num');
+  st.timer=setInterval(()=>{
+    rem--;
+    if(rem<0){
+      clearInterval(st.timer);st.running=false;
+      st.curIdx++;
+      const nextPh=st.phases[st.curIdx];
+      if(nextPh.done){norwRenderUI(key);return;}
+      showToast('⏱ '+nextPh.name);
+      // vibrate if supported
+      if(navigator.vibrate)navigator.vibrate([200,100,200]);
+      norwRenderUI(key);
+      return;
+    }
+    const m=Math.floor(rem/60),s=rem%60;
+    if(numEl)numEl.textContent=`${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+  },1000);
+  norwRenderUI(key);
+}
+
+function norwReset(key){
+  if(norwState[key]){clearInterval(norwState[key].timer);}
+  norwState[key]={phases:buildNorwPhases(key),curIdx:0,timer:null,running:false};
+  norwRenderUI(key);
+}
+
+// Initialize timers when bike tab shown
+function initBikeTab(){
+  norwInit('44');
+  norwInit('54');
+}
+
+
+const HL_KEY='tracker_health_v1';
+function loadHL(){try{return JSON.parse(localStorage.getItem(HL_KEY))||{records:[]};}catch{return{records:[]};}}
+function saveHL(d){localStorage.setItem(HL_KEY,JSON.stringify(d));}
+
+// Status classification
+function hlStatus(type,v){
+  if(!v&&v!==0)return null;
+  const T={
+    chol: v<200?['Normal','good']:v<240?['Batas','warn']:['Tinggi','bad'],
+    ldl:  v<130?['Normal','good']:v<160?['Batas','warn']:['Tinggi','bad'],
+    hdl:  v>=60?['Optimal','good']:v>=40?['Cukup','warn']:['Rendah','bad'],
+    trig: v<150?['Normal','good']:v<200?['Batas','warn']:['Tinggi','bad'],
+    uric: v<=7.0?['Normal','good']:v<=9?['Tinggi','warn']:['Sangat Tinggi','bad'],
+    gdp:  v<100?['Normal','good']:v<126?['Pra-DM','warn']:['Tinggi','bad'],
+    gds:  v<140?['Normal','good']:v<200?['Pra-DM','warn']:['Tinggi','bad'],
+    bpS:  v<120?['Normal','good']:v<130?['Elevated','warn']:v<140?['High 1','warn']:['High 2','bad'],
+    bpD:  v<80?['Normal','good']:v<90?['High 1','warn']:['High 2','bad'],
+  };
+  return T[type]||null;
+}
+
+function bpLabel(sys,dia){
+  if(!sys&&!dia)return null;
+  if(sys<120&&dia<80)return['Normal','good'];
+  if(sys<130&&dia<80)return['Elevated','warn'];
+  if(sys<140||dia<90)return['High 1','warn'];
+  return['High 2','bad'];
+}
+
+// Live status hint as user types
+function liveStatus(targetId,v,type){
+  const el=document.getElementById(targetId);if(!el)return;
+  if(!v){el.textContent='';el.className='hl-live-st';return;}
+  const st=hlStatus(type,v);
+  if(st){el.textContent=st[0];el.className='hl-live-st '+st[1];}
+}
+
+// Update BP status combined
+function updateBPStatus(){
+  const s=+document.getElementById('hl-sys')?.value||0;
+  const d=+document.getElementById('hl-dia')?.value||0;
+  const el=document.getElementById('hl-bp-status');if(!el)return;
+  if(!s&&!d){el.textContent='';return;}
+  const st=bpLabel(s,d);
+  if(st){el.textContent=st[0];el.className='hl-status-tag hl-live-st '+st[1];}
+}
+// Attach BP listeners after DOM ready
+function initBPListeners(){
+  ['hl-sys','hl-dia'].forEach(id=>{
+    const el=document.getElementById(id);
+    if(el)el.addEventListener('input',updateBPStatus);
+  });
+}
+
+// Set today's date in input
+function initHLDate(){
+  const el=document.getElementById('hl-date');
+  if(el&&!el.value) el.value=selKey();
+}
+
+// Render "last measurement" info banner
+function renderHLLastInfo(){
+  const el=document.getElementById('hl-last-info');if(!el)return;
+  const hl=loadHL();
+  if(!hl.records.length){
+    el.innerHTML='<div class="hl-last-info" style="background:#fff0f6;border-color:#fbcfe8;color:#9d174d">📋 Belum ada data pengukuran. Isi form di bawah untuk mulai tracking.</div>';
+    return;
+  }
+  const last=hl.records[hl.records.length-1];
+  const lastDate=new Date(last.date);
+  const today=new Date();
+  const diffDays=Math.floor((today-lastDate)/86400000);
+  const dueIn=30-diffDays;
+  const isDue=diffDays>=28;
+  el.innerHTML=`<div class="hl-last-info" style="background:${isDue?'#fff0f6':'#f0fdf4'};border-color:${isDue?'#fbcfe8':'#86efac'};color:${isDue?'#9d174d':'#065f46'}">
+    ${isDue?'🔴':'✅'} Pengukuran terakhir: <strong>${dateStr(last.date)}</strong> (${diffDays} hari lalu)
+    ${isDue?'<br><strong>⏰ Sudah waktunya cek lagi!</strong>':'<br>Pengukuran berikutnya ~'+dueIn+' hari lagi'}
+  </div>`;
+}
+
+// Save record
+function saveHealth(){
+  const date=document.getElementById('hl-date')?.value;
+  if(!date){showToast('Pilih tanggal dulu');return;}
+  const rec={
+    id:Date.now(), date,
+    bpSys:+document.getElementById('hl-sys')?.value||null,
+    bpDia:+document.getElementById('hl-dia')?.value||null,
+    bpPulse:+document.getElementById('hl-pulse')?.value||null,
+    chol:+document.getElementById('hl-chol')?.value||null,
+    ldl:+document.getElementById('hl-ldl')?.value||null,
+    hdl:+document.getElementById('hl-hdl')?.value||null,
+    trig:+document.getElementById('hl-trig')?.value||null,
+    uric:+document.getElementById('hl-uric')?.value||null,
+    gdp:+document.getElementById('hl-gdp')?.value||null,
+    gds:+document.getElementById('hl-gds')?.value||null,
+    notes:document.getElementById('hl-notes')?.value||'',
+  };
+  const hasData=[rec.bpSys,rec.chol,rec.uric,rec.gdp,rec.gds].some(v=>v);
+  if(!hasData){showToast('Isi minimal satu nilai pengukuran');return;}
+  const hl=loadHL();
+  // Remove if same date exists, replace
+  hl.records=hl.records.filter(r=>r.date!==date);
+  hl.records.push(rec);
+  hl.records.sort((a,b)=>a.date.localeCompare(b.date));
+  saveHL(hl);
+  // Clear form
+  ['hl-sys','hl-dia','hl-pulse','hl-chol','hl-ldl','hl-hdl','hl-trig','hl-uric','hl-gdp','hl-gds','hl-notes'].forEach(id=>{
+    const el=document.getElementById(id);if(el)el.value='';
+  });
+  document.querySelectorAll('.hl-live-st').forEach(e=>{e.textContent='';e.className='hl-live-st';});
+  renderHLLastInfo();renderHLHist();renderReminders();
+  showToast('✅ Pengukuran tersimpan!');
+}
+
+function deleteHealth(id){
+  if(!confirm('Hapus data pengukuran ini?'))return;
+  const hl=loadHL();
+  hl.records=hl.records.filter(r=>r.id!==id);
+  saveHL(hl);renderHLHist();renderHLLastInfo();renderReminders();
+  showToast('Data dihapus');
+}
+
+function fmt(v,unit=''){return v?v+unit:'—'}
+
+function hlMiniCard(lbl,val,type,unit='',prev=null){
+  const st=val?hlStatus(type,val):null;
+  const cls=st?st[1]:'';
+  let trend='';
+  if(prev&&val){
+    const d=val-prev;
+    // For HDL, higher is better
+    const better=(type==='hdl')?d>0:d<0;
+    trend=d===0?'':'<span class="hl-trend">'+(better?'↓':'↑')+'</span>';
+    if(type==='hdl')trend=d===0?'':(d>0?'<span class="hl-trend">↑</span>':'<span class="hl-trend">↓</span>');
+  }
+  return `<div class="hl-hist-item">
+    <div class="hl-hist-lbl">${lbl}</div>
+    <div class="hl-hist-val ${cls}">${val?val+unit:'—'}${trend}</div>
+    ${st?`<div class="hl-hist-sub">${st[0]}</div>`:''}
+  </div>`;
+}
+
+function renderHLHist(){
+  const el=document.getElementById('hl-hist-list');if(!el)return;
+  const hl=loadHL();
+  const recs=[...hl.records].reverse();
+  if(!recs.length){el.innerHTML='<div class="alert alert-a">Belum ada data. Isi di tab Input.</div>';return;}
+  el.innerHTML=recs.map((r,i)=>{
+    const prev=recs[i+1]||null;
+    const bpSt=bpLabel(r.bpSys,r.bpDia);
+    return `<div class="hl-hist-card">
+      <div class="hl-hist-date">
+        <span>📅 ${dateStr(r.date)}</span>
+        <button class="hl-del-btn" onclick="deleteHealth(${r.id})" title="Hapus">🗑</button>
+      </div>
+      ${(r.bpSys||r.bpDia)?`<div class="card" style="margin-bottom:8px;padding:10px 12px;border-color:${bpSt?bpSt[1]==='good'?'#86efac':bpSt[1]==='warn'?'#fcd34d':'#fca5a5':'var(--bd)'}">
+        <div style="font-size:10px;font-weight:700;color:var(--mu);margin-bottom:5px">TEKANAN DARAH</div>
+        <div style="display:flex;align-items:baseline;gap:6px">
+          <span style="font-size:22px;font-weight:800">${r.bpSys||'—'}/${r.bpDia||'—'}</span>
+          <span style="font-size:11px;color:var(--mu)">mmHg</span>
+          ${r.bpPulse?`<span style="font-size:12px;color:var(--mu)">· ${r.bpPulse} /mnt</span>`:''}
+        </div>
+        ${bpSt?`<div class="hl-live-st ${bpSt[1]}" style="margin-top:3px">${bpSt[0]}</div>`:''}
+      </div>`:''}
+      <div class="hl-hist-grid">
+        ${hlMiniCard('Total Kolesterol',r.chol,'chol',' mg/dL',prev?.chol)}
+        ${hlMiniCard('LDL',r.ldl,'ldl',' mg/dL',prev?.ldl)}
+        ${hlMiniCard('HDL',r.hdl,'hdl',' mg/dL',prev?.hdl)}
+        ${hlMiniCard('Trigliserida',r.trig,'trig',' mg/dL',prev?.trig)}
+        ${hlMiniCard('Asam Urat',r.uric,'uric',' mg/dL',prev?.uric)}
+        ${hlMiniCard('GDP (Puasa)',r.gdp,'gdp',' mg/dL',prev?.gdp)}
+        ${hlMiniCard('GDS (Sewaktu)',r.gds,'gds',' mg/dL',prev?.gds)}
+      </div>
+      ${r.notes?`<div style="margin-top:8px;font-size:11px;color:var(--mu);padding:6px 8px;background:var(--bg);border-radius:6px">"${r.notes}"</div>`:''}
+    </div>`;
+  }).join('');
+}
+
+function renderHLInput(){renderHLLastInfo();initHLDate();initBPListeners();}
+
+// ─── REMINDERS ───────────────────────────────────────────────────────────────
+function renderReminders(){
+  const el=document.getElementById('dash-reminders');if(!el)return;
+  const items=[];
+
+  // 1. Health biomarker check
+  const hl=loadHL();
+  const lastRec=hl.records[hl.records.length-1];
+  if(!lastRec){
+    items.push({dot:'#e11d48',text:'Cek kesehatan bulanan',sub:'Belum ada data. Input pertama kali.',page:'health',nb:4,urgent:true});
+  } else {
+    const diffDays=Math.floor((new Date()-new Date(lastRec.date))/86400000);
+    if(diffDays>=28){
+      items.push({dot:'#e11d48',text:'Cek kesehatan bulanan',sub:`Terakhir ${diffDays} hari lalu — sudah waktunya cek!`,page:'health',nb:4,urgent:true});
+    }
+  }
+
+  // 2. PMO check-in
+  const pmo=loadPMO();
+  const todayKey=selKey();
+  if(!pmo.days[todayKey]){
+    items.push({dot:'#7c3aed',text:'PMO check-in hari ini',sub:'Belum dicatat — tandai status harianmu',page:'pmo',nb:5});
+  }
+
+  // 3. Nutrisi — food log
+  const nutDay=getNutDay(todayKey);
+  if(isSelToday()&&(!nutDay.foods||nutDay.foods.length<2)){
+    items.push({dot:'#059669',text:'Catat makanan hari ini',sub:nutDay.foods?.length?`Baru ${nutDay.foods.length} item — lengkapi log`:'Belum ada makanan dicatat',page:'nut',nb:3});
+  }
+
+  // 4. Habits
+  const habData=loadHabDay(todayKey);
+  const habDone=(habData?.completed||[]).length;
+  if(isSelToday()&&habDone<3){
+    items.push({dot:'#2563eb',text:'Checklist kebiasaan',sub:habDone?`${habDone}/5 selesai — lanjutkan`:'Belum ada kebiasaan yang dicentang',page:'habit',nb:1});
+  }
+
+  if(!items.length){
+    el.innerHTML='<div style="background:#f0fdf4;border:1px solid #86efac;border-radius:12px;padding:10px 14px;margin-bottom:10px;font-size:12px;color:#065f46;font-weight:600">✅ Semua checklist hari ini sudah terpenuhi. Kerja bagus!</div>';
+    return;
+  }
+
+  el.innerHTML=`<div class="reminder-card">
+    <div class="reminder-title">⏰ Pengingat</div>
+    ${items.map(it=>`<div class="reminder-item" onclick="showPage('${it.page}',document.querySelectorAll('.nb')[${it.nb}])">
+      <div class="reminder-dot" style="background:${it.dot}${it.urgent?';box-shadow:0 0 0 3px '+it.dot+'33':''}"></div>
+      <div style="flex:1">
+        <div class="reminder-text"${it.urgent?' style="color:#e11d48"':''}>${it.text}</div>
+        <div class="reminder-sub">${it.sub}</div>
+      </div>
+      <div class="reminder-arrow">›</div>
+    </div>`).join('')}
+  </div>`;
+}
+
+function loadHabDay(k){try{const s=localStorage.getItem('tracker_habits_v1');if(!s)return null;const d=JSON.parse(s);return d[k]||null;}catch{return null;}}
+
+
+const NUT_KEY='tracker_nut_v1';
+function loadNut(){try{return JSON.parse(localStorage.getItem(NUT_KEY))||{days:{}};}catch{return{days:{}};}}
+function saveNut(d){localStorage.setItem(NUT_KEY,JSON.stringify(d));}
+function getNutDay(k){return loadNut().days[k]||{foods:[],notes:''};}
+function setNutDay(k,d){const n=loadNut();n.days[k]=d;saveNut(n);}
+function nutTotals(foods){return foods.reduce((a,f)=>({cal:a.cal+(+f.cal||0),pro:a.pro+(+f.pro||0)}),{cal:0,pro:0});}
+
+// Phase targets
+function nutTarget(week){
+  const phases=[[0,1900,105],[3,1950,105],[4,1750,115],[7,1850,110],[8,1650,120],[11,1800,115]];
+  const phase=phases.reduce((a,p)=>week>=p[0]?p:a,phases[0]);
+  return{cal:phase[1],pro:phase[2]};
+}
+
+// Food database [name, cal, protein, portionLabel]
+const FOOD_DB=[
+  ['Nasi putih',175,3,'100g / 1 centong'],['Nasi merah',165,3.5,'100g'],['Nasi goreng',340,8,'1 porsi'],
+  ['Ayam goreng',230,27,'1 potong ~100g'],['Dada ayam rebus',165,31,'100g'],['Ayam rebus/kukus',155,29,'1 potong ~100g'],
+  ['Ikan goreng',180,25,'1 potong ~100g'],['Ikan bakar',150,26,'100g'],['Ikan kukus',130,27,'100g'],
+  ['Telur rebus',78,6,'1 butir'],['Telur goreng',90,6,'1 butir'],['Telur dadar',95,7,'1 butir'],
+  ['Tahu goreng',80,6,'50g / 1 potong'],['Tahu rebus',45,5,'50g'],
+  ['Tempe goreng',110,8,'50g / 1 potong'],['Tempe bacem',125,9,'50g'],
+  ['Sayur bening',25,1.5,'1 mangkuk'],['Sayur tumis',60,2,'1 porsi'],['Lalapan',15,0.5,'1 porsi'],
+  ['Sup ayam',200,18,'1 mangkuk'],['Soto ayam',200,18,'1 mangkuk'],['Bakso (5bh+kuah)',280,15,'1 porsi'],
+  ['Gado-gado',360,15,'1 porsi'],['Pecel',300,12,'1 porsi'],['Bubur ayam',250,15,'1 mangkuk'],
+  ['Mie goreng (masak sendiri)',380,10,'1 porsi'],['Indomie goreng',390,8,'1 bungkus'],['Indomie rebus',310,8,'1 bungkus'],
+  ['Roti tawar',75,3,'1 lembar'],['Roti gandum',80,4,'1 lembar'],
+  ['Oatmeal / overnight oats (plain)',150,5,'40g kering'],['Overnight oats (sesuai program)',420,32,'1 porsi dgn whey'],
+  ['Whey protein 1 scoop',120,25,'~30g'],['Susu skim',85,8,'200ml'],['Susu full cream',130,7,'200ml'],
+  ['Greek yogurt plain',100,10,'150g'],['Yogurt biasa',120,5,'150g'],
+  ['Munchys Oat Krunch 1 sachet',130,2,'1 sachet'],['Kerupuk',120,1,'5 buah'],
+  ['Almond',165,6,'30g / 1 genggam'],['Kacang tanah',180,8,'30g'],
+  ['Pisang',90,1,'1 buah sedang'],['Apel',72,0.4,'1 buah sedang'],
+  ['Jeruk',60,1,'1 buah sedang'],['Pepaya',45,0.5,'150g / 1 potong'],['Mangga',80,0.8,'100g'],
+  ['Cocoa powder tanpa gula',20,2,'1 sdm / 6g'],
+  ['Kopi hitam tanpa gula',5,0.3,'200ml / 1 cangkir'],['Kopi susu tanpa gula',50,3,'200ml'],
+  ['Teh tawar',2,0,'200ml / 1 cangkir'],['Teh manis',90,0,'200ml'],['Air putih',0,0,'1 gelas 250ml'],
+  ['Jus buah tanpa gula',60,0.5,'200ml'],['Susu kedelai',80,7,'200ml'],
+  ['Nasi padang (nasi+lauk)',650,35,'1 porsi standar'],['Makan siang kantin (estimasi)',450,25,'1 porsi'],
+];
+
+// Search autocomplete
+let foodSearchActive=false;
+function searchFood(q){
+  const dd=document.getElementById('food-dropdown');
+  if(!q||q.length<2){dd.style.display='none';return;}
+  const lq=q.toLowerCase();
+  const hits=FOOD_DB.filter(f=>f[0].toLowerCase().includes(lq)).slice(0,8);
+  if(!hits.length){dd.style.display='none';return;}
+  dd.innerHTML=hits.map(f=>`<div class="food-dd-item" onclick="selectFood('${f[0].replace(/'/g,"\\'")}',${f[1]},${f[2]})">
+    <div class="food-dd-name">${f[0]}</div>
+    <div class="food-dd-meta">${f[1]} kkal · ${f[2]}g protein · ${f[3]}</div>
+  </div>`).join('');
+  dd.style.display='block';
+  foodSearchActive=true;
+}
+function selectFood(name,cal,pro){
+  document.getElementById('food-search').value='';
+  document.getElementById('food-dropdown').style.display='none';
+  const nm=document.getElementById('food-name');
+  const cl=document.getElementById('food-cal');
+  const pr=document.getElementById('food-pro');
+  nm.value=name; cl.value=cal; pr.value=pro;
+  nm.classList.add('filled'); cl.classList.add('filled'); pr.classList.add('filled');
+  foodSearchActive=false;
+}
+function clearFoodSearch(){
+  document.getElementById('food-name').classList.remove('filled');
+  document.getElementById('food-cal').classList.remove('filled');
+  document.getElementById('food-pro').classList.remove('filled');
+}
+document.addEventListener('click',e=>{
+  if(!e.target.closest('.food-search-wrap')){
+    const dd=document.getElementById('food-dropdown');
+    if(dd)dd.style.display='none';
+  }
+});
+
+// Add food
+function addFood(){
+  const name=document.getElementById('food-name').value.trim();
+  const cal=parseFloat(document.getElementById('food-cal').value)||0;
+  const pro=parseFloat(document.getElementById('food-pro').value)||0;
+  if(!name){showToast('Tulis nama makanannya dulu');return;}
+  const k=selKey();const day=getNutDay(k);
+  day.foods.push({id:Date.now(),name,cal,pro});
+  setNutDay(k,day);
+  document.getElementById('food-name').value='';
+  document.getElementById('food-cal').value='';
+  document.getElementById('food-pro').value='';
+  document.getElementById('food-search').value='';
+  ['food-name','food-cal','food-pro'].forEach(id=>document.getElementById(id).classList.remove('filled'));
+  renderNutToday();renderNutHero();showToast('✅ '+name+' ditambahkan');
+}
+
+// Delete food
+function delFood(id){
+  const k=selKey();const day=getNutDay(k);
+  day.foods=day.foods.filter(f=>f.id!==id);
+  setNutDay(k,day);renderNutToday();renderNutHero();
+}
+
+// Save notes
+function saveNutNotes(){
+  const k=selKey();const day=getNutDay(k);
+  day.notes=document.getElementById('nut-notes').value;
+  setNutDay(k,day);
+}
+
+// Render hero (progress bars)
+function renderNutHero(){
+  const el=document.getElementById('nut-hero-card');if(!el)return;
+  const {week}=getProgramWeek();
+  const tgt=nutTarget(week);
+  const k=selKey();const day=getNutDay(k);
+  const tot=nutTotals(day.foods);
+  const calPct=Math.min(100,Math.round(tot.cal/tgt.cal*100));
+  const proPct=Math.min(100,Math.round(tot.pro/tgt.pro*100));
+  const calOver=tot.cal>tgt.cal;
+  const proOver=tot.pro>tgt.pro;
+  const lbl=isSelToday()?'Hari ini':dateStrShort(selKey());
+  el.innerHTML=`<div class="nut-hero">
+    <div class="nut-hero-top">
+      <div>
+        <div style="font-size:10px;opacity:.65;margin-bottom:2px">KALORI ${lbl.toUpperCase()}</div>
+        <div class="nut-cal-num">${tot.cal}<span style="font-size:14px;font-weight:400;opacity:.7"> kkal</span></div>
+        <div class="nut-cal-target">Target: ${tgt.cal} kkal</div>
+      </div>
+      <div style="text-align:right">
+        <div style="font-size:10px;opacity:.65;margin-bottom:2px">PROTEIN</div>
+        <div class="nut-cal-num">${tot.pro.toFixed(1)}<span style="font-size:14px;font-weight:400;opacity:.7">g</span></div>
+        <div class="nut-cal-target">Target: ${tgt.pro}g</div>
+      </div>
+    </div>
+    <div class="nut-bar-row">
+      <div class="nut-bar-lbl"><span>Kalori</span><span>${calPct}%${calOver?' ⚠️':''}</span></div>
+      <div class="nut-bar-track"><div class="nut-bar-fill ${calOver?'nut-bar-over':'nut-bar-cal'}" style="width:${calPct}%"></div></div>
+    </div>
+    <div class="nut-bar-row">
+      <div class="nut-bar-lbl"><span>Protein</span><span>${proPct}%</span></div>
+      <div class="nut-bar-track"><div class="nut-bar-fill nut-bar-pro" style="width:${proPct}%"></div></div>
+    </div>
+  </div>`;
+}
+
+// Render food list for today
+function renderNutFoodList(){
+  const el=document.getElementById('nut-food-list');if(!el)return;
+  const k=selKey();const day=getNutDay(k);
+  const foods=day.foods;
+  if(!foods.length){
+    el.innerHTML='<div style="font-size:12px;color:var(--mu);text-align:center;padding:12px 0">Belum ada makanan dicatat. Tambah lewat form di atas.</div>';
+    return;
+  }
+  const tot=nutTotals(foods);
+  let h=foods.map(f=>`<div class="food-item">
+    <div style="flex:1">
+      <div class="food-item-name">${f.name}</div>
+      <div class="food-item-sub">${f.cal} kkal · ${(+f.pro||0).toFixed(1)}g protein</div>
+    </div>
+    <button class="food-item-del" onclick="delFood(${f.id})" title="Hapus">×</button>
+  </div>`).join('');
+  h+=`<div class="nut-total-row">
+    <div class="nut-total-box">
+      <div class="nut-total-label">Total Kalori</div>
+      <div class="nut-total-val" style="color:#059669">${tot.cal}<span style="font-size:11px;font-weight:500"> kkal</span></div>
+    </div>
+    <div class="nut-total-box">
+      <div class="nut-total-label">Total Protein</div>
+      <div class="nut-total-val" style="color:var(--pmo)">${tot.pro.toFixed(1)}<span style="font-size:11px;font-weight:500">g</span></div>
+    </div>
+  </div>`;
+  el.innerHTML=h;
+}
+
+// Render notes
+function renderNutNotes(){
+  const el=document.getElementById('nut-notes');if(!el)return;
+  const day=getNutDay(selKey());
+  el.value=day.notes||'';
+}
+
+// Combined render
+function renderNutToday(){renderNutHero();renderNutFoodList();renderNutNotes();}
+
+// Render history
+// compact renderNutHist defined below
+
+
+// ─── SLEEP / RECOVERY TRACKING ───────────────────────────────────────────────
+const SLEEP_KEY='tracker_sleep_v1';
+function loadSleep(){try{return JSON.parse(localStorage.getItem(SLEEP_KEY))||{};}catch{return{};}}
+function saveSleepData(d){localStorage.setItem(SLEEP_KEY,JSON.stringify(d));}
+function saveSleep(){
+  const h=document.getElementById('sleep-hours')?.value;if(!h)return;
+  const d=loadSleep();d[selKey()]={...(d[selKey()]||{}),hours:+h};
+  saveSleepData(d);updateSleepStatus();renderReminders();
+}
+function saveEnergy(n){
+  const d=loadSleep();d[selKey()]={...(d[selKey()]||{}),energy:n};
+  saveSleepData(d);
+  for(let i=1;i<=5;i++){
+    const b=document.getElementById('nrg-'+i);
+    if(b){b.style.background=i<=n?'#2563eb':'';b.style.color=i<=n?'#fff':'';b.style.fontWeight=i<=n?'800':'700';}
+  }
+  updateSleepStatus();renderReminders();
+}
+function initSleepUI(){
+  const k=selKey();const d=loadSleep()[k]||{};
+  const hEl=document.getElementById('sleep-hours');if(hEl)hEl.value=d.hours||'';
+  // Reset energy buttons
+  for(let i=1;i<=5;i++){const b=document.getElementById('nrg-'+i);if(b){b.style.background='';b.style.color='';b.style.fontWeight='700';}}
+  if(d.energy){
+    for(let i=1;i<=5;i++){
+      const b=document.getElementById('nrg-'+i);
+      if(b){b.style.background=i<=d.energy?'#2563eb':'';b.style.color=i<=d.energy?'#fff':'';b.style.fontWeight=i<=d.energy?'800':'700';}
+    }
+  }
+  updateSleepStatus();
+}
+function updateSleepStatus(){
+  const el=document.getElementById('sleep-status');if(!el)return;
+  const d=loadSleep()[selKey()];
+  if(!d||(!d.hours&&!d.energy)){el.textContent='';return;}
+  const h=d.hours||0;
+  const hrMsg=h<6?'⚠️ Kurang tidur':h<7?'😐 Cukup minimal':'✅ Tidur cukup';
+  const nrgLabel=['','😫 Sangat rendah','😔 Rendah','😐 Sedang','😊 Baik','⚡ Prima'];
+  const nrgMsg=d.energy?(' · Energi: '+nrgLabel[d.energy]):'';
+  el.textContent=(h?hrMsg+' ('+h+' jam)':'')+nrgMsg;
+  if(h>0&&h<6){el.style.color='#dc2626';}
+  else if(h>=7){el.style.color='#059669';}
+  else{el.style.color='var(--mu)';}
+}
+// ─── GYM LOG ─────────────────────────────────────────────────────────────────
+const GL_KEY='tracker_gymlog_v1';
+function loadGL(){try{return JSON.parse(localStorage.getItem(GL_KEY))||[];}catch{return[];}}
+function saveGL(d){localStorage.setItem(GL_KEY,JSON.stringify(d));}
+const GL_EXERCISES=['Chest Press Machine','Incline Bench Press DB','Shoulder Press Machine','Lateral Raise Cable','Triceps Pushdown','Plank','Lat Pulldown','Seated Row','Rear Delt Fly','Dead Bug','Side Plank','RDL','Goblet Squat','Leg Press','Barbell Squat','Farmer\'s Carry','Treadmill Incline','Pull-up','Push-up','Lainnya'];
+let glRows=[];
+function initGymLog(){
+  const el=document.getElementById('gl-date');if(el&&!el.value)el.value=selKey();
+  glRows=[];renderGLRows();renderGLHistory();
+}
+function addGLRow(){glRows.push({ex:'',sets:'3',reps:'10',weight:''});renderGLRows();}
+function renderGLRows(){
+  const el=document.getElementById('gl-exercises');if(!el)return;
+  if(!glRows.length){el.innerHTML='<div style="font-size:12px;color:var(--mu);text-align:center;padding:8px 0">Ketuk + untuk tambah latihan.</div>';return;}
+  el.innerHTML=glRows.map((r,i)=>`<div style="display:grid;grid-template-columns:1fr 38px 38px 55px 26px;gap:4px;margin-bottom:6px;align-items:center">
+    <select style="padding:7px 5px;border:1px solid var(--bd);border-radius:7px;font-size:11px;font-family:inherit;color:var(--text)" onchange="glRows[${i}].ex=this.value">
+      <option value="">— pilih —</option>${GL_EXERCISES.map(e=>`<option${r.ex===e?' selected':''}>${e}</option>`).join('')}
+    </select>
+    <input type="number" placeholder="Set" value="${r.sets}" style="padding:7px 3px;border:1px solid var(--bd);border-radius:7px;font-size:12px;text-align:center;font-family:inherit" oninput="glRows[${i}].sets=this.value">
+    <input type="number" placeholder="Rep" value="${r.reps}" style="padding:7px 3px;border:1px solid var(--bd);border-radius:7px;font-size:12px;text-align:center;font-family:inherit" oninput="glRows[${i}].reps=this.value">
+    <input type="number" placeholder="kg" value="${r.weight}" style="padding:7px 3px;border:1px solid var(--bd);border-radius:7px;font-size:12px;text-align:center;font-family:inherit" oninput="glRows[${i}].weight=this.value">
+    <button onclick="glRows.splice(${i},1);renderGLRows()" style="background:none;border:none;color:var(--red);font-size:16px;cursor:pointer;padding:0">×</button>
+  </div>`).join('');
+}
+function saveGymLog(){
+  const date=document.getElementById('gl-date')?.value;
+  const type=document.getElementById('gl-type')?.value;
+  const notes=document.getElementById('gl-notes')?.value||'';
+  if(!date){showToast('Pilih tanggal dulu');return;}
+  const exercises=glRows.filter(r=>r.ex).map(r=>({ex:r.ex,sets:+r.sets||0,reps:+r.reps||0,weight:+r.weight||0}));
+  if(!exercises.length){showToast('Tambah minimal 1 latihan');return;}
+  const logs=loadGL();logs.push({id:Date.now(),date,type,exercises,notes});
+  logs.sort((a,b)=>b.date.localeCompare(a.date));saveGL(logs);
+  glRows=[];renderGLRows();if(document.getElementById('gl-notes'))document.getElementById('gl-notes').value='';
+  renderGLHistory();showToast('✅ Sesi gym tersimpan!');
+}
+function renderGLHistory(){
+  const el=document.getElementById('gl-history');if(!el)return;
+  const logs=loadGL().slice(0,20);
+  if(!logs.length){el.innerHTML='<div class="alert alert-a">Belum ada sesi dicatat.</div>';return;}
+  el.innerHTML=logs.map(s=>`<div style="background:#fff;border:1px solid var(--bd);border-radius:10px;padding:12px;margin-bottom:7px">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:7px">
+      <div><strong style="font-size:12px">${dateStr(s.date)}</strong> <span class="chip ca" style="margin-left:5px">${s.type}</span></div>
+      <button onclick="deleteGymLog(${s.id})" style="background:none;border:none;color:var(--red);cursor:pointer;font-size:14px;padding:0">🗑</button>
+    </div>
+    ${s.exercises.map(e=>`<div style="font-size:12px;color:var(--mu2);padding:3px 0;border-bottom:1px solid var(--border2)">${e.ex}${e.sets?' — '+e.sets+'×'+e.reps:''}${e.weight?' @ '+e.weight+'kg':''}</div>`).join('')}
+    ${s.notes?`<div style="font-size:11px;color:var(--mu);margin-top:6px">"${s.notes}"</div>`:''}
+  </div>`).join('');
+}
+function deleteGymLog(id){if(!confirm('Hapus?'))return;saveGL(loadGL().filter(s=>s.id!==id));renderGLHistory();}
+// ─── SETTINGS / EXPORT / IMPORT ──────────────────────────────────────────────
+const SETTINGS_KEY='tracker_settings_v1';
+function loadSettings(){try{return JSON.parse(localStorage.getItem(SETTINGS_KEY))||{};}catch{return{};}}
+function saveSettings(d){localStorage.setItem(SETTINGS_KEY,JSON.stringify(d));}
+function openSettings(){
+  const s=loadSettings();
+  const si=document.getElementById('settings-start');if(si)si.value=s.startDate||'2026-06-01';
+  const hi=document.getElementById('settings-hrmax');if(hi)hi.value=s.hrMax||186;
+  document.getElementById('settings-overlay').style.display='flex';
+}
+function closeSettings(){document.getElementById('settings-overlay').style.display='none';}
+function applyStartDate(){
+  const val=document.getElementById('settings-start')?.value;
+  if(!val){showToast('Pilih tanggal');return;}
+  const s=loadSettings();s.startDate=val;saveSettings(s);
+  const[y,m,d]=val.split('-');PROGRAM_START=new Date(+y,+m-1,+d);
+  const dayName=['Min','Sen','Sel','Rab','Kam','Jum','Sab'][PROGRAM_START.getDay()];
+  closeSettings();rerenderAll();
+  showToast('✅ Start: '+val+' ('+dayName+') · Jadwal shift diperbarui');
+}
+function applyHRMax(){
+  const val=+document.getElementById('settings-hrmax')?.value;
+  if(!val||val<140||val>220){showToast('HR max harus 140-220');return;}
+  const s=loadSettings();s.hrMax=val;saveSettings(s);
+  closeSettings();showToast('✅ HR max: '+val+' bpm');
+}
+function exportData(){
+  const keys=['tracker_habits_v1','tracker_pmo_v1','tracker_nut_v1','tracker_health_v1','tracker_sleep_v1','tracker_gymlog_v1','tracker_settings_v1'];
+  const all={version:2,exported:new Date().toISOString()};
+  keys.forEach(k=>{const v=localStorage.getItem(k);if(v)all[k]=v;});
+  const blob=new Blob([JSON.stringify(all,null,2)],{type:'application/json'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);
+  a.download=`tracker-backup-${new Date().toISOString().slice(0,10)}.json`;a.click();
+  showToast('✅ Data diekspor!');
+}
+function importData(e){
+  const file=e.target.files[0];if(!file)return;
+  const r=new FileReader();
+  r.onload=ev=>{
+    try{
+      const d=JSON.parse(ev.target.result);
+      ['tracker_habits_v1','tracker_pmo_v1','tracker_nut_v1','tracker_health_v1','tracker_sleep_v1','tracker_gymlog_v1','tracker_settings_v1'].forEach(k=>{if(d[k])localStorage.setItem(k,d[k]);});
+      closeSettings();rerenderAll();showToast('✅ Data berhasil diimport!');
+    }catch{showToast('❌ File tidak valid');}
+  };r.readAsText(file);
+}
+function resetAllData(){
+  if(!confirm('Reset SEMUA data? Tidak bisa dibatalkan.'))return;
+  ['tracker_habits_v1','tracker_pmo_v1','tracker_nut_v1','tracker_health_v1','tracker_sleep_v1','tracker_gymlog_v1'].forEach(k=>localStorage.removeItem(k));
+  closeSettings();rerenderAll();showToast('Data direset.');
+}
+// Apply saved start date on load
+(function(){try{const s=JSON.parse(localStorage.getItem('tracker_settings_v1')||'{}');if(s.startDate){const[y,m,d]=s.startDate.split('-');PROGRAM_START=new Date(+y,+m-1,+d);}}catch{}})();
+// Add CSS for energy buttons + nrg
+// nrg-btn CSS is in static stylesheet
+
+// ─── FITNESS DATA HISTORY + CHART ────────────────────────────────────────────
+const FD_KEY='tracker_fitdata_v1';
+function loadFD(){try{return JSON.parse(localStorage.getItem(FD_KEY))||[];}catch{return[];}}
+function saveFD(d){localStorage.setItem(FD_KEY,JSON.stringify(d));}
+
+function initFitData(){
+  const el=document.getElementById('fd-date');if(el&&!el.value)el.value=selKey();
+  renderFitDataHist();renderFitChart('weight');
+}
+
+function saveFitData(){
+  const date=document.getElementById('fd-date')?.value;
+  if(!date){showToast('Pilih tanggal');return;}
+  const rec={
+    date,
+    weight:+document.getElementById('fd-weight')?.value||null,
+    waist:+document.getElementById('fd-waist')?.value||null,
+    bfr:+document.getElementById('fd-bfr')?.value||null,
+    pushup:+document.getElementById('fd-pushup')?.value||null,
+    pullup:+document.getElementById('fd-pullup')?.value||null,
+    notes:document.getElementById('fd-notes')?.value||'',
+  };
+  if(!rec.weight&&!rec.waist&&!rec.bfr&&!rec.pushup){showToast('Isi minimal satu nilai');return;}
+  const data=loadFD().filter(r=>r.date!==date);
+  data.push(rec);data.sort((a,b)=>a.date.localeCompare(b.date));
+  saveFD(data);
+  // Clear form
+  ['fd-weight','fd-waist','fd-bfr','fd-pushup','fd-pullup','fd-notes'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
+  renderFitDataHist();renderFitChart('weight');
+  showToast('✅ Data tersimpan!');
+}
+
+function renderFitDataHist(){
+  const el=document.getElementById('fit-data-hist');if(!el)return;
+  const data=[...loadFD()].reverse();
+  if(!data.length){el.innerHTML='<div class="alert alert-a">Belum ada data. Isi form di atas.</div>';return;}
+  el.innerHTML=data.map(r=>`<div style="background:#fff;border:1px solid var(--bd);border-radius:10px;padding:10px 12px;margin-bottom:6px;display:flex;justify-content:space-between;align-items:flex-start;gap:8px">
+    <div>
+      <div style="font-size:11px;font-weight:700;color:var(--mu)">${dateStr(r.date)}</div>
+      <div style="font-size:12px;margin-top:3px;display:flex;gap:8px;flex-wrap:wrap">
+        ${r.weight?`<span>⚖️ <strong>${r.weight}kg</strong></span>`:''}
+        ${r.waist?`<span>📏 <strong>${r.waist}cm</strong></span>`:''}
+        ${r.bfr?`<span>💪 <strong>${r.bfr}%</strong></span>`:''}
+        ${r.pushup?`<span>🏋️ <strong>${r.pushup}rep</strong></span>`:''}
+        ${r.pullup?`<span>🤸 <strong>${r.pullup}rep</strong></span>`:''}
+      </div>
+      ${r.notes?`<div style="font-size:10px;color:var(--mu);margin-top:3px">"${r.notes}"</div>`:''}
+    </div>
+    <button onclick="deleteFitData('${r.date}')" style="background:none;border:none;color:var(--red);cursor:pointer;font-size:14px;padding:0;flex-shrink:0">🗑</button>
+  </div>`).join('');
+}
+
+function deleteFitData(date){
+  if(!confirm('Hapus data?'))return;
+  saveFD(loadFD().filter(r=>r.date!==date));
+  renderFitDataHist();renderFitChart('weight');
+}
+
+function renderFitChart(metric){
+  const data=loadFD().filter(r=>r[metric]);
+  const area=document.getElementById('fit-chart-area');if(!area)return;
+  // Highlight active button
+  ['weight','waist','bfr','pushup'].forEach(m=>{
+    const b=document.getElementById('fc-btn-'+m);
+    if(b){b.style.background=m===metric?'#1d4ed8':'';b.style.color=m===metric?'#fff':'';}
+  });
+  if(data.length<2){area.innerHTML='<div style="font-size:12px;color:var(--mu);text-align:center;padding:16px">Butuh minimal 2 titik data untuk grafik.</div>';return;}
+  const labels={weight:'Berat (kg)',waist:'Lingkar Pinggang (cm)',bfr:'% Lemak Tubuh',pushup:'Push-up Max (rep)'};
+  const W=Math.max(320,data.length*50);const H=140;
+  const vals=data.map(r=>r[metric]);
+  const mn=Math.min(...vals);const mx=Math.max(...vals);
+  const pad=16;const range=mx-mn||1;
+  const toY=v=>H-pad-((v-mn)/range*(H-pad*2));
+  const toX=(_,i)=>pad+(i/(data.length-1))*(W-pad*2);
+  const pts=data.map((r,i)=>({x:toX(r,i),y:toY(r[metric]),v:r[metric],d:r.date.slice(5)}));
+  const path='M'+pts.map(p=>`${p.x},${p.y}`).join(' L');
+  area.innerHTML=`<svg viewBox="0 0 ${W} ${H}" style="width:100%;min-width:${W}px;display:block">
+    <polyline points="${pts.map(p=>`${p.x},${p.y}`).join(' ')}" fill="none" stroke="#2563eb" stroke-width="2" stroke-linejoin="round"/>
+    ${pts.map(p=>`<circle cx="${p.x}" cy="${p.y}" r="4" fill="#2563eb"/>
+    <text x="${p.x}" y="${p.y-7}" text-anchor="middle" font-size="9" fill="#2563eb" font-weight="700">${p.v}</text>
+    <text x="${p.x}" y="${H-2}" text-anchor="middle" font-size="8" fill="#999">${p.d}</text>`).join('')}
+    <text x="${pad}" y="${pad+2}" font-size="9" fill="#999">${labels[metric]}</text>
+  </svg>`;
+}
+
+// ─── PMO PROGRAM RENDER ───────────────────────────────────────────────────────
+function renderPMOProgram(){
+  const el=document.getElementById('pmo-prog-content');if(!el)return;
+  const{week}=getProgramWeek();
+  const w=PMO_WDATA[week];
+  const pmoStreak=calcPMOStreak(loadPMO());
+  let h=`<div class="alert" style="background:${w.ph===0?'#d1fae5':'#eff6ff'};border:1px solid #93c5fd;border-radius:10px;padding:11px 13px;margin-bottom:10px;font-size:12px">
+    <strong>Minggu ${week+1} — ${w.nm}</strong><br>${w.goal}
+  </div>
+  <div class="sl">Program PMO minggu ini</div>
+  <div class="card">
+    <div style="font-size:12px;line-height:1.7">${w.pmo}</div>
+    <div style="margin-top:8px;padding:8px 10px;background:#fef3c7;border-radius:8px;font-size:11px;color:#92400e">💡 ${w.tip}</div>
+  </div>
+  <div class="sl">Program PE minggu ini</div>
+  <div class="card">
+    <div style="font-size:12px;line-height:1.7">${w.pe}</div>
+    <button class="btn btn-o btn-sm" style="margin-top:8px" onclick="showPage('health',document.querySelectorAll('.nb')[4]);setTimeout(()=>document.querySelector('#page-health button.tab:has-text(\"Latihan PE\")')?.click(),200)">→ Log Latihan PE</button>
+  </div>
+  <div class="sl">Semua minggu program PMO/PE</div>`;
+  h+=PMO_WDATA.map((wd,i)=>{
+    const isNow=i===week;
+    return `<div style="background:${isNow?'#eff6ff':'#fff'};border:1px solid ${isNow?'#93c5fd':'var(--bd)'};border-radius:9px;padding:9px 12px;margin-bottom:6px;cursor:pointer" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'block':'none'">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <span style="font-size:12px;font-weight:700">Mgg ${i+1} — ${wd.nm}</span>
+        <span style="font-size:10px;padding:2px 8px;border-radius:20px;background:${wd.ph===0?'#d1fae5':wd.ph===1?'#eff6ff':'#fef3c7'};color:${wd.fc}">${wd.goal.substring(0,28)}...</span>
+      </div>
+    </div>
+    <div style="display:none;background:#f8f7f3;border-radius:0 0 9px 9px;padding:10px 12px;margin-top:-6px;margin-bottom:6px;font-size:12px">
+      <strong>PMO:</strong> ${wd.pmo}<br><br><strong>PE:</strong> ${wd.pe}
+    </div>`;
+  }).join('');
+  el.innerHTML=h;
+}
+
+// ─── COMPACT NUTRITION HISTORY ────────────────────────────────────────────────
+function renderNutHist(){
+  const el=document.getElementById('nut-hist-list');if(!el)return;
+  const nut=loadNut();
+  const keys=Object.keys(nut.days).sort().reverse().slice(0,21);
+  if(!keys.length){el.innerHTML='<div class="alert alert-a">Belum ada data nutrisi.</div>';return;}
+  el.innerHTML=`<table style="width:100%;border-collapse:collapse;font-size:12px">
+    <tr style="border-bottom:2px solid var(--bd)">
+      <th style="text-align:left;padding:5px 4px;font-size:9px;color:var(--mu)">TANGGAL</th>
+      <th style="text-align:right;padding:5px 4px;font-size:9px;color:var(--mu)">KKAL</th>
+      <th style="text-align:right;padding:5px 4px;font-size:9px;color:var(--mu)">PROTEIN</th>
+      <th style="text-align:center;padding:5px 4px;font-size:9px;color:var(--mu)">🍫</th>
+      <th style="text-align:right;padding:5px 4px;font-size:9px;color:var(--mu)">ITEM</th>
+    </tr>
+    ${keys.map(k=>{
+      const day=nut.days[k];
+      const tot=nutTotals(day.foods||[]);
+      const{week}=getProgramWeek(new Date(k));
+      const tgt=nutTarget(week);
+      const calOk=tot.cal>=tgt.cal*0.9&&tot.cal<=tgt.cal*1.1;
+      const calColor=tot.cal>tgt.cal*1.1?'#dc2626':tot.cal>=tgt.cal*0.85?'#059669':'#d97706';
+      return `<tr style="border-bottom:1px solid var(--border2);cursor:pointer" onclick="jumpToDate('${k}')">
+        <td style="padding:6px 4px;font-size:11px">${dateStrShort(k)}</td>
+        <td style="padding:6px 4px;text-align:right;font-weight:700;color:${calColor}">${tot.cal}</td>
+        <td style="padding:6px 4px;text-align:right;color:var(--pmo);font-weight:600">${tot.pro.toFixed(0)}g</td>
+        <td style="padding:6px 4px;text-align:center">${day.cocoa||0}×</td>
+        <td style="padding:6px 4px;text-align:right;color:var(--mu)">${(day.foods||[]).length}</td>
+      </tr>`;
+    }).join('')}
+  </table>`;
+}
+
+// ─── COCOA / COKLAT RENDER ────────────────────────────────────────────────────
+function renderNutCocoa(){
+  const d=loadCocoa();const checked=d.checked||false;
+  // Dashboard
+  const cb=document.getElementById('dash-cocoa-cb');
+  if(cb){cb.classList.toggle('on',checked);cb.textContent=checked?'✓':'';}
+  const detail=document.getElementById('dash-cocoa-detail');
+  if(detail)detail.style.display=checked?'block':'none';
+  const typeD=document.getElementById('dash-cocoa-type');
+  if(typeD&&d.type)typeD.value=d.type;
+  // Nutrisi tab
+  const nutCb=document.getElementById('nut-cocoa-cb');
+  if(nutCb){nutCb.classList.toggle('on',checked);nutCb.textContent=checked?'✓':'';}
+  const nutDetail=document.getElementById('nut-cocoa-detail');
+  if(nutDetail)nutDetail.style.display=checked?'block':'none';
+  const nutType=document.getElementById('nut-cocoa-type');
+  if(nutType&&d.type)nutType.value=d.type;
+  // 7-day history
+  const hist=document.getElementById('nut-cocoa-hist');
+  if(hist){
+    const days=[6,5,4,3,2,1,0].map(i=>{
+      const k=daysAgo(i);const n=loadNut();const c=(n.days[k]||{}).cocoa||{};
+      return c.checked?'🍫':'○';
+    });
+    hist.textContent='7 hari terakhir: '+days.join(' ');
+  }
+}
+
+let toastT;
+function showToast(msg){const el=document.getElementById('toast');el.textContent=msg;el.classList.add('show');clearTimeout(toastT);toastT=setTimeout(()=>el.classList.remove('show'),2500);}
+
+// ─── INIT ─────────────────────────────────────────────────────────────────────
+renderDateBar();
+buildFitSched();
+renderDash();
+renderHabit();initSleepUI();
+renderPMODash();
+renderNutToday();
+renderHLInput();
+</script>
+</body>
+</html>
